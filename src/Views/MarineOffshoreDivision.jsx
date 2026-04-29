@@ -88,6 +88,7 @@ const MarineOffshoreDivision = () => {
                   <li>Welding & Fabrication</li>
                   <li>Abrasive Blasting & Painting</li>
                   <li>Dismantling & Demolition</li>
+                  <li>Scaffolding Services for Ships, Vessels & Offshore Rigs</li>
                 </ul>
               </div>
             </div>

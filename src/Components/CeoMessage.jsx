@@ -1,27 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion";
-import sustainability from "../Assets/Images/ceomessage1.jpg";
 
 const CeoMessage = () => {
   return (
     <div className="container mx-auto">
-      <div className="flex flex-col gap-32 px-8 md:flex-row md:justify-between md:pl-12 lg:pl-12 mt-16 mb-16">
-        {/* Left Section - Animate on scroll repeatedly */}
+      <div className="px-8 md:px-12 mt-16 mb-16">
         <motion.div
-          className="md:w-2/2 mb-6 md:mb-0"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
           viewport={{ once: false, amount: 0.3 }}
         >
           <h1
-            className="text-4xl font-bold mb-6 text-center md:text-left"
+            className="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left"
             style={{ color: "#20376D" }}
           >
             CEO Message
           </h1>
           <div
-            className="text-lg text-justify space-y-4"
+            className="text-sm md:text-base text-justify space-y-4 leading-relaxed"
             style={{ color: "#20376D" }}
           >
             <p>
@@ -50,22 +47,6 @@ const CeoMessage = () => {
               <strong>Chief Executive Officer</strong>
             </p>
           </div>
-        </motion.div>
-
-        {/* Right Section - Image animate on scroll repeatedly */}
-        <motion.div
-          className="md:w-4/5 flex justify-center md:justify-end mr-2"
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.3 }}
-        >
-          <img
-            src={sustainability}
-            alt="CEO"
-            className="w-full shadow-lg"
-            style={{ objectFit: "cover" }}
-          />
         </motion.div>
       </div>
     </div>

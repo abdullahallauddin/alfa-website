@@ -8,6 +8,7 @@ import Sustainability from "./Views/OurStatement.jsx";
 import OurValues from "./Views/CoreValues.jsx";
 import Navbar from "./Components/Navbar.jsx";
 import ScrollToTopButton from "./Components/ScrollToTopButton.jsx";
+import WhatsAppButton from "./Components/WhatsAppButton.jsx";
 import Loader from "./Components/Loader.jsx";
 import Footer from "./Components/Footer.jsx"
 // Lazy load views
@@ -62,6 +63,7 @@ function App() {
         <div className="App">
           <Navbar />
           <ScrollToTopButton />
+          <WhatsAppButton />
           <Suspense fallback={<Loader />}>
             <Routes>
               {/* Who We are */}
