@@ -21,7 +21,7 @@ const DownloadCenter = () => {
       icon: <FaFilePdf className="text-green-500 text-3xl mt-1" />,
       buttons: [
         {
-          label: "Download PDF",
+          label: "Download brochure",
           // file: "/Downloads/profile.pdf",
           className: "bg-[#20376D]",
         },
