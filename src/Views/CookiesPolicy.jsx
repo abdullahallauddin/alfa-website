@@ -1,119 +1,119 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import Seo from "../Components/Seo";
 import backgroundImage from "../Assets/Images/about-us.png";
-import contactuscall from "../Assets/Icons/callus.svg";
-import contactusemail from "../Assets/Icons/emailus.svg";
 
-// import AboutUSComp from '../Components/AboutUSComp';
 const CookiesPolicy = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
-    <>
-      <div
-        className="bg-cover bg-center h-[110vh] flex items-center justify-center"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        {/* Overlay Content */}
-        <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-5xl font-bold mb-4 text-center">
-            Cookies Policy
-          </h1>
+    <main className="policy-page">
+      <Seo
+        title="Cookie Policy | ALFA Marine & Industrial Services"
+        description="ALFA cookie policy explaining essential preferences, third-party embeds, forms, maps, analytics status, and user choices."
+        path="/cookies-policy"
+      />
+
+      <section className="inner-hero" style={{ "--inner-hero-image": `url(${backgroundImage})` }}>
+        <div className="section-shell inner-hero__content">
+          <p className="eyebrow">Cookie Policy</p>
+          <h1>Clear choices for cookies and embeds.</h1>
+          <p>
+            This page explains how the website uses browser storage and how
+            third-party embeds or forms may use cookies when you choose to load
+            them.
+          </p>
         </div>
-      </div>
-      <div className="w-full p-4 md:p-24">
-        <h1
-          className="text-4xl font-bold mb-4 text-center md:text-left"
-          style={{ color: "#20376D" }}
-        >
-          Alfa Cookies Policy
-        </h1>
-        <ul
-          className="list-disc text-lg mt-8 list-inside text-sm space-y-1"
-          style={{ color: "#20376D" }}
-        >
-          <p className="font-medium text-2xl">Cookies Policy</p>
-          <p className="text-lg mt-4" style={{ color: "#20376D" }}>
-            This Cookies Policy explains what cookies are and how we use them.
-            For further information on how we use, store and keep your personal
-            data secure, see our Privacy Policy.
+      </section>
+
+      <section className="section-shell section-pad policy-layout">
+        <aside className="policy-sidebar">
+          <p>
+            Last updated: April 29, 2026. The cookie notice is designed to
+            support Saudi PDPL transparency requirements for website visitors.
           </p>
-        </ul>
-        <ul
-          className="list-disc text-lg mt-4 list-inside text-sm space-y-1"
-          style={{ color: "#20376D" }}
-        >
-          <p className="font-medium text-2xl">What are Cookies?</p>
-          <p className="text-lg mt-4" style={{ color: "#20376D" }}>
-            Cookies are small text files that are stored on the browser or hard
-            drive of your computer or mobile device when you visit a webpage.
-            Cookies work to make your experience browsing the site as smooth as
-            possible. They can remember your preferences, so you don’t have to
-            repeatedly insert your details, and they can also help the owners of
-            the website to analyze how their site is being used.
-            <br />
-            <br />
-            There are different types of cookies. Some cookies come directly
-            from the website you are browsing and others come from third parties
-            which place cookies on the site. Cookies can be stored for varying
-            lengths of time on your browser or device. Session cookies are
-            deleted from your computer or device when you close your browser.
-            Persistent cookies will remain stored on your computer or device
-            until deleted or until they reach their expiry date.
-          </p>
-        </ul>
-        <ul
-          className="list-disc text-lg mt-4 list-inside text-sm space-y-1"
-          style={{ color: "#20376D" }}
-        >
-          <p className="font-medium text-2xl">How do we use Cookies?</p>
-          <p className="text-lg mt-4" style={{ color: "#20376D" }}>
-            Session cookies enable us to keep track of you while you are on the
-            site and to help you navigate the site better and faster. Persistent
-            cookies enable the site to recognize you when you visit and keep
-            track of your preferences in relation to your use of the site.
-          </p>
-        </ul>
-        <ul
-          className="list-disc text-lg mt-4 list-inside text-sm space-y-1"
-          style={{ color: "#20376D" }}
-        >
-          <p className="font-medium text-2xl">Third-Party Cookies</p>
-          <p className="text-lg mt-4" style={{ color: "#20376D" }}>
-            We use Google Analytics to analyze the use of our website. Google
-            Analytics generates statistical and other information about website
-            use by means of cookies which are stored on the users’ computers.
-            <br />
-            <br />
-            We may also use other third-party cookies from time to time and for
-            more information on these you can contact us at the email below:
-            <br />
-            <br />
-            <p className="font-bold">
-            info@alfamrinesa.com
+          <a href="mailto:info@alfamarinesa.com?subject=Cookie%20Privacy%20Request">Ask About Cookies</a>
+        </aside>
+
+        <div className="policy-content">
+          <article className="policy-card">
+            <h2>What Cookies Are</h2>
+            <p>
+              Cookies are small files stored by a website or third-party service
+              in your browser. Similar browser technologies, such as local
+              storage, can remember preferences or support website features.
             </p>
-          </p>
-        </ul>
-        <ul
-          className="list-disc text-lg mt-4 list-inside text-sm space-y-1"
-          style={{ color: "#20376D" }}
-        >
-          <p className="font-medium text-2xl">Opting Out & Disabling Cookies</p>
-          <p className="text-lg mt-4" style={{ color: "#20376D" }}>
-            You may disable cookies by changing the cookie preferences settings on your browser. However, if you do, this may affect your enjoyment of the website and it may not work as it should.
-          </p>
-        </ul>
-        <ul
-          className="list-disc text-lg mt-4 list-inside text-sm space-y-1"
-          style={{ color: "#20376D" }}
-        >
-          <p className="font-medium text-2xl">Changes to this Cookie Policy</p>
-          <p className="text-lg mt-4" style={{ color: "#20376D" }}>
-            We may update this policy periodically and you are advised check it regularly so as to be aware of the latest version.
-          </p>
-        </ul>  
-      </div>
-    </>
+          </article>
+
+          <article className="policy-card">
+            <h2>Essential Browser Storage</h2>
+            <p>
+              This website stores your cookie notice preference in browser local
+              storage under an ALFA preference key. This is used only to remember
+              whether you selected essential-only or accepted all cookies, so
+              the notice does not repeatedly appear.
+            </p>
+          </article>
+
+          <article className="policy-card">
+            <h2>Third-Party Forms and Embeds</h2>
+            <p>
+              The website uses or links to third-party services for the contact
+              form, career form submissions, supplier portal, maps, and social
+              links. These providers may set cookies, collect IP/device data, or
+              process usage metadata when you load an embed, submit a form, or
+              open an external portal.
+            </p>
+            <ul>
+              <li>Bigin embedded contact form may process inquiry submission data and technical metadata.</li>
+              <li>Getform may process career form submissions and uploaded CV files.</li>
+              <li>Google Maps may set cookies or collect usage data when the map is loaded.</li>
+              <li>Zoho supplier portal may set cookies and process supplier account or registration data.</li>
+              <li>External social links may use their own cookies after you leave the ALFA website.</li>
+            </ul>
+          </article>
+
+          <article className="policy-card">
+            <h2>Analytics and Tracking Pixels</h2>
+            <p>
+              The current source code does not include a first-party analytics
+              script or tracking pixel. If analytics, advertising pixels, or
+              similar technologies are added later, this policy and the cookie
+              notice should be updated before those tools are used.
+            </p>
+          </article>
+
+          <article className="policy-card">
+            <h2>Your Choices</h2>
+            <p>
+              You can choose essential-only or accept all in the cookie notice.
+              You can also avoid loading the Google Map or embedded contact form
+              and use the published phone, email, and office address instead.
+              Browser settings can be used to delete cookies or local storage at
+              any time.
+            </p>
+          </article>
+
+          <article className="policy-card">
+            <h2>How to Reset the Notice</h2>
+            <p>
+              To reset your ALFA cookie notice choice, clear this website's site
+              data in your browser settings. The notice will appear again on
+              your next visit.
+            </p>
+          </article>
+
+          <article className="policy-card">
+            <h2>Contact</h2>
+            <p>
+              For cookie or privacy questions, email <a href="mailto:info@alfamarinesa.com">info@alfamarinesa.com</a> with
+              the subject line "Cookie Privacy Request".
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
   );
 };
 

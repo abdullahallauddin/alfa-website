@@ -1,63 +1,94 @@
-import React from 'react';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Form = () => {
+  const [consent, setConsent] = useState(false);
+
   return (
-    <div className="container mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold text-center mb-12">Have Any Questions? Let's Answer Them</h1>
-      <form className="max-w-3xl mx-auto space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-              Name
-            </label>
-            <input 
-              type="text" 
-              id="name" 
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+    <section className="section-shell section-pad">
+      <div className="consent-panel modern-form">
+        <p className="eyebrow">Get In Touch</p>
+        <h2>Have a question? Send a short note.</h2>
+        <p className="privacy-helper">
+          ALFA uses the details you submit only to respond to your inquiry. Avoid
+          sharing sensitive personal data. Read the{" "}
+          <Link to="/privacy-policy">Privacy Policy</Link> before submitting.
+        </p>
+
+        <form
+          className="modern-form__grid"
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <div className="form-grid">
+            <div className="form-field">
+              <label htmlFor="contact-name">Full name</label>
+              <input
+                id="contact-name"
+                name="user_name"
+                type="text"
+                autoComplete="name"
+                required
+              />
+            </div>
+            <div className="form-field">
+              <label htmlFor="contact-email">Email address</label>
+              <input
+                id="contact-email"
+                name="user_email"
+                type="email"
+                autoComplete="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-field">
+            <label htmlFor="contact-subject">Subject</label>
+            <input
+              id="contact-subject"
+              name="user_subject"
+              type="text"
+              required
             />
           </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              Email
-            </label>
-            <input 
-              type="email" 
-              id="email" 
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+
+          <div className="form-field">
+            <label htmlFor="contact-message">Your message</label>
+            <textarea
+              id="contact-message"
+              name="user_message"
+              rows="5"
+              required
             />
           </div>
-        </div>
-        <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="subject">
-            Subject
+
+          <label className="consent-checkbox" htmlFor="contact-consent">
+            <input
+              id="contact-consent"
+              type="checkbox"
+              checked={consent}
+              onChange={(event) => setConsent(event.target.checked)}
+              required
+            />
+            <span>
+              I agree to the <Link to="/privacy-policy">Privacy Policy</Link> and
+              consent to the processing of my personal data for responding to my
+              inquiry.
+            </span>
           </label>
-          <input 
-            type="text" 
-            id="subject" 
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
-            Your Message
-          </label>
-          <textarea 
-            id="message" 
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-            rows="4"
-          ></textarea>
-        </div>
-        <div className="flex justify-start">
-          <button 
-            type="submit" 
-            className="bg-sky-500 mt-6 text-lg font-bold text-white px-6 py-3 rounded-bl-3xl rounded-tr-3xl border-2 border-sky-500 hover:border-2 hover:border-sky-500 hover:text-sky-500 hover:transition hover:duration-500 hover:from-transparent hover:bg-transparent hover:to-sky-500"
+
+          <button
+            type="submit"
+            className="form-submit"
+            disabled={!consent}
+            aria-disabled={!consent}
           >
-            Send Your Message
+            Send Message
           </button>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </section>
   );
-}
+};
 
 export default Form;

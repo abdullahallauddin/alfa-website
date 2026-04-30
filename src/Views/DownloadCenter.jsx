@@ -1,126 +1,104 @@
-import React, { useEffect } from "react";
-import backgroundImage from "../Assets/Images/download-center.png";
-import { FaFilePdf } from "react-icons/fa";
-import SectionWrapperReverse from "../Components/SectionWrapperReverse";
-// import AlfaPDF from "../../public/profile.pdf";
-// import AlfaSVG from "../../public/logo.svg";
-// import AlfaPNG from "../../public/logo.png";
-import { motion } from "framer-motion";
-const cardAnimation = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Seo from "../Components/Seo";
+import HeroImage from "../Assets/Images/facility/downloads-hero.webp";
+
+const DOWNLOADS = [
+  {
+    title: "ALFA Company Profile",
+    description:
+      "Group profile and divisions overview in PDF format. Suitable for procurement teams and pre-qualification submissions.",
+    file: "/Downloads/profile.pdf",
+    fileType: "PDF",
+    sizeNote: "Updated 2025",
+  },
+  {
+    title: "ALFA Logo (SVG)",
+    description: "Vector logo for high-resolution print and digital use.",
+    file: "/Downloads/logo.svg",
+    fileType: "SVG",
+    sizeNote: "Vector",
+  },
+  {
+    title: "ALFA Logo (PNG)",
+    description: "Raster logo for general digital use.",
+    file: "/Downloads/logo.png",
+    fileType: "PNG",
+    sizeNote: "Raster",
+  },
+];
+
 const DownloadCenter = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const downloads = [
-    {
-      title: "Profile",
-      description: "ALFA & Offshore Division Company Profile",
-      icon: <FaFilePdf className="text-green-500 text-3xl mt-1" />,
-      buttons: [
-        {
-          label: "Download brochure",
-          // file: "/Downloads/profile.pdf",
-          className: "bg-[#20376D]",
-        },
-      ],
-    },
-    {
-      title: "Logo",
-      description: "Logo",
-      icon: <FaFilePdf className="text-green-500 text-3xl mt-1" />,
-      buttons: [
-        {
-          label: "Download SVG",
-          file: "/Downloads/logo.svg",
-          className: "bg-[#20376D]",
-        },
-        {
-          label: "Download PNG",
-          file: "/Downloads/logo.png",
-          className: "bg-[#20376D]",
-        },
-      ],
-    },
-  ];
 
   return (
-    <>
-      <SectionWrapperReverse>
-        <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
-          <div className="absolute inset-0 bg-black/40 h-[90vh]"></div>
-          <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
-            <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-              viewport={{ once: false, amount: 0.3 }}
-            >
-              <h1 className="text-5xl font-bold text-center">
-                Download Center
-              </h1>
-            </motion.div>
-          </div>
-        </div>
-      </SectionWrapperReverse>
-      <motion.div
-        variants={cardAnimation}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+    <main className="company-overview downloads-page">
+      <Seo
+        title="Downloads | ALFA Marine & Industrial Services"
+        description="Download ALFA's company profile and brand assets. Files are provided as PDF, SVG, and PNG."
+        path="/download-center"
+      />
+
+      <section
+        className="inner-hero inner-hero--compact"
+        style={{ "--inner-hero-image": `url(${HeroImage})` }}
       >
-        <div className="w-full p-4 md:p-24">
-          <h1
-            className="text-4xl font-bold mb-4 text-center md:text-left"
-            style={{ color: "#20376D" }}
-          >
-            Download Center
-          </h1>
-          <p className="text-lg mt-4 text-justify" style={{ color: "#20376D" }}>
-            ALFA is a prominent player in the marine, offshore, oil & gas,
-            renewable energy, and defense sectors within Saudi Arabia and
-            beyond, renowned for its expertise and commitment to excellence.
-            Discover more about our innovative approach, diverse range of
-            services, and forward-looking vision by accessing the latest
-            reports, insights, and updates from the ALFA team.
+        <div className="section-shell inner-hero__content">
+          <p className="eyebrow">Downloads</p>
+          <h1>ALFA company profile and brand assets.</h1>
+          <p>
+            Pre-prepared resources for procurement teams, partners, and
+            communications use.
           </p>
-          <h1
-            className="mt-12 text-4xl font-bold mb-4 text-center md:text-left"
-            style={{ color: "#20376D" }}
-          >
-            Digital Media Toolkit
-          </h1>
-          <div className="space-y-6 p-4 max-w-md">
-            {downloads.map((item, idx) => (
-              <div key={idx} className="flex items-start space-x-4">
-                <div>{item.icon}</div>
-                <div className="flex-1">
-                  <h2 className="font-bold text-lg text-[#20376D]">{item.title}</h2>
-                  <p className="font-poppins text-sm text-[#20376D]">{item.description}</p>
-                  <div className="mt-2 space-x-2">
-                    {item.buttons.map((btn, bIdx) => (
-                      <a
-                        href={btn.file}
-                        download
-                        className="text-sm text-white px-3 py-1 rounded bg-[#20376D]"
-                      >
-                        {btn.label}
-                      </a>
-                    ))}
-                  </div>
+        </div>
+      </section>
+
+      <section className="section-shell section-pad">
+        <div className="company-overview__section-header">
+          <p className="eyebrow">Available Resources</p>
+          <h2>Click to download.</h2>
+        </div>
+        {DOWNLOADS.length === 0 ? (
+          <div className="downloads-empty">
+            <p>Download resources will be added soon.</p>
+            <p>
+              In the meantime, contact ALFA to request a copy of the company
+              profile.
+            </p>
+            <Link className="btn btn-primary" to="/contact">
+              Request Profile
+            </Link>
+          </div>
+        ) : (
+          <div className="downloads-grid">
+            {DOWNLOADS.map((item) => (
+              <article key={item.title} className="download-card">
+                <div className="download-card__head">
+                  <span className="download-card__type">{item.fileType}</span>
+                  <small>{item.sizeNote}</small>
                 </div>
-              </div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <a
+                  href={item.file}
+                  className="btn btn-primary download-card__action"
+                  download
+                  rel="noopener"
+                >
+                  Download {item.fileType}
+                </a>
+              </article>
             ))}
           </div>
-        </div>
-      </motion.div>
-    </>
+        )}
+        <p className="downloads-helper">
+          Need something else? <Link to="/contact">Contact ALFA</Link> for
+          additional documentation.
+        </p>
+      </section>
+    </main>
   );
 };
 

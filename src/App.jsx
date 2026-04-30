@@ -1,23 +1,20 @@
 import {
   BrowserRouter as Router,
+  Navigate,
   Route,
   Routes,
 } from "react-router-dom";
-import React, { useEffect, Suspense, lazy } from "react";
-import Sustainability from "./Views/OurStatement.jsx";
-import OurValues from "./Views/CoreValues.jsx";
+import React, { Suspense, lazy } from "react";
 import Navbar from "./Components/Navbar.jsx";
 import ScrollToTopButton from "./Components/ScrollToTopButton.jsx";
 import WhatsAppButton from "./Components/WhatsAppButton.jsx";
 import Loader from "./Components/Loader.jsx";
-import Footer from "./Components/Footer.jsx"
+import Footer from "./Components/Footer.jsx";
+import CookieNotice from "./Components/CookieNotice.jsx";
 // Lazy load views
 const Home = lazy(() => import("./Views/Home"));
 const Services = lazy(() => import("./Views/Services"));
-const GroupOverview = lazy(() => import("./Views/GroupOverview"));
-const OurStatement = lazy(() => import("./Views/OurStatement"));
-const CoreValues = lazy(() => import("./Views/CoreValues"));
-const Strategy = lazy(() => import("./Views/Strategy"));
+const CompanyOverview = lazy(() => import("./Views/CompanyOverview"));
 const Leadership = lazy(() => import("./Views/Leadership"));
 const OurCulture = lazy(() => import("./Views/OurCulture"));
 const Facility = lazy(() => import("./Views/Facility"));
@@ -69,10 +66,13 @@ function App() {
               {/* Who We are */}
               <Route exact path="/" element={<Home />} />
               <Route exact path="/services" element={<Services />} />
-              <Route exact path="/groupoverview" element={<GroupOverview />} />
-              <Route exact path="/our-statement" element={<OurStatement />} />
-              <Route exact path="/core-values" element={<CoreValues />} />
-              <Route exact path="/our-strategy" element={<Strategy />} />
+              <Route exact path="/group-overview" element={<CompanyOverview />} />
+              {/* Legacy About routes redirect into the consolidated page */}
+              <Route exact path="/company-overview" element={<Navigate to="/group-overview" replace />} />
+              <Route exact path="/groupoverview" element={<Navigate to="/group-overview" replace />} />
+              <Route exact path="/our-statement" element={<Navigate to="/group-overview#mission" replace />} />
+              <Route exact path="/core-values" element={<Navigate to="/group-overview#values" replace />} />
+              <Route exact path="/our-strategy" element={<Navigate to="/group-overview#strategy" replace />} />
               <Route
                 exact
                 path="/meet-our-leadership"
@@ -174,6 +174,7 @@ function App() {
             </Routes>
           </Suspense>
           <Footer />
+          <CookieNotice />
         </div>
       </Router>
     </>
