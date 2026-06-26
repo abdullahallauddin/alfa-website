@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { motion } from "framer-motion";
 import businesselectricitybg from "../Assets/Images/businesselectricitybg.png";
 import electricityimage1 from "../Assets/Images/electricityimage1.png";
 import electricityimage2 from "../Assets/Images/electricityimage2.png";
@@ -190,7 +191,7 @@ const ReadMore = () => {
   const service = services.find(service => service.link === serviceName);
 
   if (!service) {
-    return <div>Service not found</div>;
+    return <div className="text-white p-24">Service not found</div>;
   }
 
 
@@ -206,36 +207,66 @@ const ReadMore = () => {
       </div>
       <div className="container mx-auto p-4">
 
-        <div className="flex flex-col gap-16 md:flex-row md:justify-between p-6 mt-24 mb-16">
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col gap-16 md:flex-row md:justify-between p-6 mt-24 mb-16"
+        >
           <div className="md:w-1/2 mb-6 md:mb-0">
-            <h1 className="text-4xl font-bold mb-4">{service.title1}</h1>
-            <p className="text-lg" dangerouslySetInnerHTML={{ __html: service.description1 }}></p>
+            <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title1}</h1>
+            <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: service.description1 }}></p>
           </div>
           <div className="md:w-1/2 mt-8 flex justify-center md:justify-end md:mt-24">
-            <img src={service.generalimage1} alt="About Us" className="w-auto h-auto" />
+            <div className="group overflow-hidden rounded-2xl ring-1 ring-white/10">
+              <img src={service.generalimage1} alt="About Us" className="w-auto h-auto transition-transform duration-500 group-hover:scale-105" />
+            </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-16 md:flex-row md:justify-between p-6 mt-24 mb-16">
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col gap-16 md:flex-row md:justify-between p-6 mt-24 mb-16"
+        >
           <div className="md:w-1/2 mb-6 md:mb-0">
-            <h1 className="text-4xl font-bold mb-4">{service.title2}</h1>
-            <p className="text-lg" dangerouslySetInnerHTML={{ __html: service.description2 }}></p>
+            <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title2}</h1>
+            <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: service.description2 }}></p>
           </div>
           <div className="md:w-1/2 mt-8 flex justify-center md:justify-end md:mt-24">
-            <img src={service.generalimage2} alt="About Us" className="w-auto h-auto" />
+            <div className="group overflow-hidden rounded-2xl ring-1 ring-white/10">
+              <img src={service.generalimage2} alt="About Us" className="w-auto h-auto transition-transform duration-500 group-hover:scale-105" />
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="w-full p-4 md:p-24">
-        <div className="w-full mb-6">
-          <h1 className="text-4xl font-bold mb-4">{service.title3}</h1>
-          <p className="text-lg w-full" dangerouslySetInnerHTML={{ __html: service.description3 }}></p>
-        </div>
-        <div className="w-full mb-6">
-          <h1 className="text-4xl font-bold mb-4">{service.title4}</h1>
-          <p className="text-lg w-full" dangerouslySetInnerHTML={{ __html: service.description4 }}></p>
-        </div>
+      <div className="w-full py-6 md:py-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full mb-6"
+        >
+          <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title3}</h1>
+          <p className="text-lg w-full text-white/75" dangerouslySetInnerHTML={{ __html: service.description3 }}></p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="w-full mb-6"
+        >
+          <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title4}</h1>
+          <p className="text-lg w-full text-white/75" dangerouslySetInnerHTML={{ __html: service.description4 }}></p>
+        </motion.div>
       </div>
 
       <div
@@ -249,10 +280,16 @@ const ReadMore = () => {
         </div>
       </div>
 
-      <div className="w-full p-4 md:p-24">
-        <h1 className="text-4xl font-bold mb-4" dangerouslySetInnerHTML={{ __html: service.title5 }}></h1>
-        <p className="text-lg" dangerouslySetInnerHTML={{ __html: service.description5 }}></p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="w-full py-6 md:py-10"
+      >
+        <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }} dangerouslySetInnerHTML={{ __html: service.title5 }}></h1>
+        <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: service.description5 }}></p>
+      </motion.div>
     </>
 
   );

@@ -17,8 +17,8 @@ const Portfolio = () => {
 
         {/* Overlay Content */}
         <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-5xl font-bold mt-24 mb-4">Portfoio</h1>
-          <p className="text-xl mb-20">Home / Portfolio</p>
+          <h1 className="text-5xl font-roboto font-light mt-24 mb-4 text-white" style={{ letterSpacing: "-0.02em" }}><span className="text-[#2C95D2]">Portfoio</span></h1>
+          <p className="text-xl mb-20 text-white/75">Home / Portfolio</p>
         </div>
       </div>
       <div className='mt-12 mb-20' >

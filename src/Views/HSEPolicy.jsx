@@ -22,18 +22,20 @@ const cardAnimation = {
   visible: { opacity: 1, y: 0 },
 };
 // import AboutUSComp from '../Components/AboutUSComp';
-const HSEPolicy = () => {
+const HSEPolicy = ({ embedded }) => {
   useEffect(() => {
+    if (embedded) return;
     window.scrollTo(0, 0);
-  }, []);
+  }, [embedded]);
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-          <div className="absolute inset-0 h-110 bg-black/70 h-[90vh]"></div>
+          <div className="absolute inset-0 h-110 bg-black/70 h-[clamp(18rem,46vh,30rem)]"></div>
           {/* Overlay Content */}
           <div className="relative flex flex-col items-center justify-center h-full text-white">
             <motion.div
@@ -43,14 +45,15 @@ const HSEPolicy = () => {
               viewport={{ once: false, amount: 0.3 }}
             >
               <div className="flex items-center lg:mt-120 md:mt-90 justify-center min-h-screen text-center sm:block">
-                <h1 className="text-5xl font-bold">
-                  HSE Policy
+                <h1 className="text-5xl font-bold text-white font-roboto font-light" style={{ letterSpacing: "-0.02em" }}>
+                  HSE <span className="text-[#2C95D2]">Policy</span>
                 </h1>
               </div>
             </motion.div>
           </div>
         </div>
       </SectionWrapperReverse>
+      )}
       <motion.div
         variants={cardAnimation}
         initial="hidden"
@@ -58,14 +61,14 @@ const HSEPolicy = () => {
         viewport={{ once: false, amount: 0.3 }}
         transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
       >
-        <div className="w-full p-4 md:p-24">
+        <div className="w-full py-6 md:py-10 max-w-6xl mx-auto">
           <h1
-            className="text-4xl font-bold mb-4 text-center md:text-left"
-            style={{ color: "#20376D" }}
+            className="text-4xl font-bold mb-4 text-center md:text-left text-white font-roboto font-light"
+            style={{ letterSpacing: "-0.02em" }}
           >
             Health, Safety & Environmental (HSE) Policy
           </h1>
-          <p className="text-lg mt-4 text-justify" style={{ color: "#20376D" }}>
+          <p className="text-lg mt-4 text-justify text-white/75">
             ALFA is dedicated to providing a safe and secure workplace for
             employees, clients, contractors, suppliers/vendors, and visitors
             across all facilities and project sites. We believe that through
@@ -76,7 +79,7 @@ const HSEPolicy = () => {
             for safety, health, and environmental sustainability in all its
             operations.
           </p>
-          <p className="text-lg mt-4 font-bold" style={{ color: "#20376D" }}>
+          <p className="text-lg mt-4 font-bold text-white">
             To achieve this, the Company pledges to:
           </p>
 
@@ -153,19 +156,18 @@ const HSEPolicy = () => {
                   <img src={icon} alt={title} className="w-9 h-9 mt-1" />
                   <div>
                     <h3
-                      className="font-semibold text-lg mb-1"
-                      style={{ color: "#20376D" }}
+                      className="font-semibold text-lg mb-1 text-white font-roboto font-light"
                     >
                       {title}
                     </h3>
-                    <ul className="text-gray-600 text-sm space-y-1">
+                    <ul className="text-white/75 text-sm space-y-1">
                       {bullets.map((text, i) => (
                         <li key={i} className="flex items-start">
                           <CheckCircle
                             size={20}
                             className="text-green-500 mr-2 mt-1"
                           />
-                          <span style={{ color: "#20376D" }}>{text}</span>
+                          <span className="text-white/75">{text}</span>
                         </li>
                       ))}
                     </ul>

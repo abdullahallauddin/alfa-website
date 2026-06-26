@@ -66,7 +66,7 @@ const SectionWrapper = ({
           opacity: 0,
         }}
         animate={controls}
-        className="absolute top-0 left-0 w-full h-full bg-[#20376D] z-20 pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full bg-[#0a1428] z-20 pointer-events-none"
       />
       <div
         className="relative z-10"

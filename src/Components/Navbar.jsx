@@ -1,391 +1,378 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../Assets/Icons/white-logo.svg";
 import ColorLogo from "../Assets/Icons/alfa-color-logo.svg";
-import { FaChevronDown } from "react-icons/fa";
-import { IoCloseSharp } from "react-icons/io5";
-import { FaLinkedinIn, FaInstagram, FaUser, FaGlobe } from "react-icons/fa";
+import {
+  FaSearch,
+  FaChevronDown,
+  FaLinkedinIn,
+  FaInstagram,
+  FaUser,
+} from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
-import ReactCountryFlag from "react-country-flag";
-import layoutbg from "../Assets/Images/layoutbg.png";
-import linee from "../Assets/Icons/linee.svg";
+import menuBg from "../Assets/Images/main-background.jpg";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
-  const [isLangOpen, setIsLangOpen] = useState(false);
-  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [overlayMenu, setOverlayMenu] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
   React.useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsSticky(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
 
+  React.useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const toggleMenu = () => setIsOpen((v) => !v);
   const closeMenu = () => {
     setIsOpen(false);
+    setOverlayMenu(null);
   };
 
-  const handleNavigation = (path, section) => {
-    navigate(path);
+  // Logo → always return to the home #banner, from any page
+  const goHome = (e) => {
+    e.preventDefault();
     closeMenu();
-    setTimeout(() => {
-      document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    const toBanner = () => {
+      const el = document.getElementById("banner");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    if (location.pathname !== "/") {
+      navigate("/");
+      // let the lazy-loaded home mount, then settle at the banner
+      setTimeout(toBanner, 400);
+    } else {
+      toBanner();
+    }
   };
 
   const links = [
     {
       name: "WHO WE ARE",
-      // path: "/who-we-are",
+      path: "/who-we-are",
       submenu: [
-        // { name: "About Us", path: "/readmoreaboutcompany" },
-        { name: "Group Overview", path: "/groupoverview" },
-        { name: "Mission, Vision & Goals", path: "/our-statement" },
-        { name: "Core Values", path: "/core-values" },
-        { name: "Our Strategy", path: "/our-strategy" },
-        // { name: "Meet Our Leadership", path: "/meet-our-leadership" },
-        { name: "Meet Our Leadership" },
-        { name: "Our Culture", path: "/our-culture" },
-        { name: "Our Facilities", path: "/our-facilities" },
-        { name: "Our Capabilities", path: "/our-capabilities" },
-        { name: "Accreditations", path: "/accreditations" },
+        { name: "Group Overview", path: "/who-we-are#group-overview" },
+        { name: "Mission, Vision & Goals", path: "/who-we-are#mission-vision-goals" },
+        { name: "Core Values", path: "/who-we-are#core-values" },
+        { name: "Our Strategy", path: "/who-we-are#our-strategy" },
+        { name: "Our Culture", path: "/who-we-are#our-culture" },
+        { name: "Our Facilities", path: "/who-we-are#our-facilities" },
+        { name: "Our Capabilities", path: "/who-we-are#our-capabilities" },
+        { name: "Accreditations", path: "/who-we-are#accreditations" },
       ],
     },
     {
       name: "WHAT WE DO",
-      // path: "/our-divisions",
+      path: "/what-we-do",
       submenu: [
         {
           name: "Marine & Offshore Division",
-          path: "/marine-and-offshore-division",
+          path: "/what-we-do#marine-offshore",
         },
-        { name: "Construction Division", path: "/construction-division" },
+        { name: "Construction Division", path: "/what-we-do#construction" },
         {
           name: "Fabrication & Machining Division",
-          path: "/fabrication-and-machining-division",
+          path: "/what-we-do#fabrication-machining",
         },
-        { name: "Trading Division", path: "/trading-division" },
-        { name: "ICT Division", path: "/ict-division" },
+        { name: "Trading Division", path: "/what-we-do#trading" },
+        { name: "ICT Division", path: "/what-we-do#ict" },
         {
           name: "Facility Management Division",
-          path: "/facility-management-division",
+          path: "/what-we-do#facility-management",
         },
-        { name: "Joinery Division", path: "/joinery-division" },
+        { name: "Joinery Division", path: "/what-we-do#joinery" },
       ],
     },
     {
       name: "SUSTAINABILITY",
-      // path: "/sustainability",
+      path: "/sustainability",
       submenu: [
         {
           name: "Environmental Responsibility",
-          path: "/environmental-responsibility",
+          path: "/sustainability#environmental-responsibility",
         },
         {
           name: "Health, Safety & Environmental Policy",
-          path: "/health-safety-and-environmental-policy",
+          path: "/sustainability#hse-policy",
         },
-        { name: "Quality Assurance Policy", path: "/quality-assurance-policy" },
-        { name: "Ethics and Compliance", path: "/ethics-and-compliance" },
+        { name: "Quality Assurance Policy", path: "/sustainability#quality-assurance" },
+        { name: "Ethics and Compliance", path: "/sustainability#ethics-compliance" },
       ],
     },
     {
       name: "MEDIA CENTER",
-      // path: "/media",
+      path: "/media-center",
       submenu: [
-        { name: "News" },
-        { name: "Download Center", path: "/download-center" },
+        { name: "News", path: "/media-center#news" },
+        { name: "Download Center", path: "/media-center#downloads" },
       ],
     },
     {
       name: "GET IN TOUCH",
-      // path: "/contact",
+      path: "/get-in-touch",
       submenu: [
-        { name: "Commercial Inquiries", path: "/commercial-inquiries" },
-        { name: "Contact us", path: "/contact" },
-        { name: "Careers", path: "/careers" },
-        { name: "Become a Supplier", path: "/become-a-supplier" },
-        { name: "Whistleblowing", path: "/whistle-blowing" },
+        { name: "Commercial Inquiries", path: "/get-in-touch#commercial-inquiries" },
+        { name: "Contact us", path: "/get-in-touch#contact" },
+        { name: "Careers", path: "/get-in-touch#careers" },
+        { name: "Become a Supplier", path: "/get-in-touch#become-a-supplier" },
+        { name: "Whistleblowing", path: "/get-in-touch#whistleblowing" },
       ],
     },
   ];
 
+  const topTextColor = isSticky ? "text-[#11234B]" : "text-white";
+  // line color for the hamburger / X icon
+  const lineColor = isOpen
+    ? "bg-white"
+    : isSticky
+    ? "bg-[#11234B]"
+    : "bg-white";
+  const iconColor = isOpen ? "text-white" : topTextColor;
+
   return (
     <>
-      {!isOpen && (
-        <div
-          className={`fixed w-full z-50 h-16 px-8 py-9 flex justify-between items-center ${
-            isSticky ? "bg-white" : "bg-transparent"
-          }`}
-        >
-          {/* Logo Column */}
-          <div className="flex items-center justify-center">
-            <Link to="/" className="flex items-center">
+      {/* ===== Persistent Top Bar (stays mounted so the icon can morph) ===== */}
+      <header
+        className={`fixed top-0 left-0 w-full z-[1001] transition-colors duration-300 ${
+          isOpen
+            ? "bg-transparent"
+            : isSticky
+            ? "bg-white shadow-sm"
+            : "bg-transparent"
+        }`}
+      >
+        <nav className="flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] px-5 md:px-9 h-[76px]">
+          {/* Left: logo (colored at home-page size when overlay is open) */}
+          <div className="flex items-center justify-self-start">
+            <Link
+              to="/"
+              onClick={goHome}
+              className="flex items-center shrink-0"
+            >
               <img
-                src={isSticky || window.innerWidth < 768 ? ColorLogo : logo}
-                alt="Logo"
-                  className="h-auto w-38 transition-transform duration-300 ease-in-out hover:scale-95"
+                src={isOpen || isSticky ? ColorLogo : logo}
+                alt="Alfa Group"
+                className="h-auto w-32 md:w-36 transition-transform duration-300 ease-in-out hover:scale-95"
               />
             </Link>
           </div>
 
-          {/* Navigation Column */}
-          <div className="hidden md:flex flex items-center justify-center">
-            <nav className="text-center">
-              <ul
-                className={`inline-flex font-poppins space-x-6 uppercase text-sm p-0 m-0 ${
-                  isSticky ? "text-black" : "text-white"
-                }`}
-              >
-                {links.map((menu, idx) => (
-                  <li
-                    key={idx}
-                    className="relative group cursor-pointer"
-                    onMouseEnter={() => setOpenMenu(menu.name)}
-                  >
-                    <div className="py-2">
-                      <Link
-                        to={menu.path}
-                        className={`hover:text-blue-400 ${
-                          openMenu === menu.name
-                            ? "text-blue-400 border-b-2 border-blue-400"
-                            : ""
-                        }`}
-                      >
-                        {menu.name}
-                        {menu.submenu && (
-                          <FaChevronDown className="inline ml-1 text-xs" />
-                        )}
-                      </Link>
-                    </div>
-                    {openMenu === menu.name && (
-                      <ul
-                        className={`absolute ${
-                          menu.name === "GET IN TOUCH" ? "right-0" : "left-0"
-                        } ${
-                          isSticky
-                            ? "bg-[#11234B]/90"
-                            : "bg-white/20 backdrop-blur-md"
-                        } text-white py-4 shadow-xl space-y-2 z-50 ${
-                          menu.name === "WHAT WE DO"
-                            ? "w-74"
-                            : menu.name === "SUSTAINABILITY"
-                            ? "w-88"
-                            : "w-64"
-                        }`}
-                        onMouseLeave={() => setOpenMenu(null)}
-                      >
-                        {menu.submenu.map((sub, subIdx) => (
-                          <li key={subIdx}>
-                            <Link
-                              to={sub.path}
-                              className="block w-full py-3 px-4 text-left hover:bg-[#2C95D2] hover:text-white transition-all duration-50"
-                            >
-                              <span className=" text-left whitespace-nowrap">
-                                {sub.name}
-                              </span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          {/* Social Icons + Language + Menu Column */}
-          <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-4">
-              <a
-                href="https://www.linkedin.com/company/afla-marine/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn
-                  className={`hidden md:flex ${
-                    isSticky ? "text-black" : "text-white"
-                  } hover:text-[#2C95D2]`}
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/alfa_marine_sa/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram
-                  className={`hidden md:flex ${
-                    isSticky ? "text-black" : "text-white"
-                  } hover:text-[#2C95D2]`}
-                />
-              </a>
-              <a
-                href="https://x.com/alfamarinesa"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaXTwitter
-                  className={`hidden md:flex ${
-                    isSticky ? "text-black" : "text-white"
-                  } hover:text-[#2C95D2]`}
-                />
-              </a>
-              <span
-                className={`w-px h-5 bg-current md:inline-block hidden ${
-                  isSticky ? "bg-black" : "bg-white"
-                }`}
-              />
-              <a href="https://outlook.com/alfamarinesa.com">
-                <FaUser
-                  className={`hidden md:flex ${
-                    isSticky ? "text-black" : "text-white"
-                  } hover:text-blue-400 cursor-pointer`}
-                />
-              </a>
-              <FaSearch
-                className={`hidden md:flex ${
-                  isSticky ? "text-black" : "text-white"
-                } hover:text-blue-400 cursor-pointer`}
-              />
-              <div
-                onMouseEnter={() => setLangDropdownOpen(true)}
-                className="relative cursor-pointer inline-block"
-              >
-                <div
-                  className={`flex items-center space-x-1 ${
-                    isSticky || window.innerWidth < 768 ? "text-black" : "text-white"
-                  } hover:text-blue-400`}
+          {/* Center: inline menu (hidden while overlay is open) */}
+          {!isOpen && (
+            <ul className="hidden lg:flex items-center justify-center gap-9 font-roboto font-normal text-[15px] tracking-[0.3px] p-0 m-0 justify-self-center">
+              {links.map((menu, idx) => (
+                <li
+                  key={idx}
+                  className="relative flex items-center h-[76px]"
+                  onMouseEnter={() => setOpenMenu(menu.name)}
+                  onMouseLeave={() => setOpenMenu(null)}
                 >
-                  <FaGlobe />
-                  <IoIosArrowDown />
-                </div>
-                {langDropdownOpen && (
-                  <div
-                    className={`absolute right-0 mt-2 text-white ${
-                      isSticky ? "bg-[#11234B]/90" : "bg-white/20"
+                  <Link
+                    to={menu.path || "#"}
+                    onClick={closeMenu}
+                    className={`flex items-center gap-1 cursor-pointer capitalize whitespace-nowrap transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2] ${
+                      openMenu === menu.name ? "text-[#2C95D2]" : ""
                     }`}
-                    onMouseLeave={() => setLangDropdownOpen(false)}
                   >
-                    <ul className="w-16 sm:w-12 md:w-16 lg:w-16 xl:w-22">
-                      <li className="hover:bg-[#2C95D2] pl-4 py-2 cursor-pointer">
-                        EN
-                      </li>
-                      <li className="hover:bg-[#2C95D2] pl-4 py-2 cursor-pointer">
-                        AR
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-              <button onClick={toggleMenu} className="group cursor-pointer">
-                {
-                  !isOpen ? (
-                    <div className="flex z-[9999] flex-col space-y-1 relative">
-                      {/* Top Line */}
-                      <span
-                        className={`block w-4 h-[3px] ${
-                          isSticky || window.innerWidth < 768 ? "bg-black" : "bg-white"
-                        } group-hover:bg-[#2C95D2]`}
-                      />
-                      {/* <span
-                        className={`block w-4 h-[3px] ${
-                          isSticky || window.innerWidth < 768 ? "bg-black" : "bg-white"
-                        } group-hover:bg-[#2C95D2]`}
-                      /> */}
+                    {menu.name.toLowerCase()}
+                  </Link>
 
-                      {/* Bottom Line with dot */}
-                      <span className="relative block w-3 h-[3px]">
-                        <span
-                          className={`absolute top-0 left-0 w-full h-full ${
-                            isSticky || window.innerWidth < 768 ? "bg-black" : "bg-white"
-                          } group-hover:bg-[#2C95D2] animate-wiggle-right`}
-                        />
-                        <span
-                          className={`absolute right-[-6px] top-1/2 -translate-y-1/2 w-1 h-1 rounded-full ${
-                            isSticky || window.innerWidth < 768 ? "bg-black" : "bg-white"
-                          } group-hover:bg-[#2C95D2] animate-dot-wiggle`}
-                        />
-                      </span>
-                    </div>
-                  ) : (
-                    ""
-                  )
-                }
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-[#20376D]/90 text-gray-200 z-[999] bg-cover bg-center overflow-hidden animate-fadeScaleIn"
-            style={{ backgroundImage: `url(${layoutbg})` }}
-          >
-            {/* Header: Logo left, Close right */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4">
-              <div className="flex w-full justify-between items-center">
-                <Link to="/" className="flex items-center">
-                  <img src={logo} alt="Logo" className="h-auto w-28" />
-                </Link>
-                <IoCloseSharp
-                  onClick={closeMenu}
-                  className="cursor-pointer text-white text-2xl transition-transform duration-50 hover:rotate-90 hover:scale-110"
+                  <ul
+                    className={`absolute left-1/2 -translate-x-1/2 top-full min-w-[230px] bg-[#11234B]/70 backdrop-blur-xl ring-1 ring-white/10 text-white font-light shadow-2xl origin-top transition-all duration-200 ${
+                      openMenu === menu.name
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-1"
+                    }`}
+                  >
+                    {menu.submenu.map((sub, subIdx) => (
+                      <li key={subIdx}>
+                        <Link
+                          to={sub.path || "#"}
+                          onClick={closeMenu}
+                          className="block whitespace-nowrap px-5 py-3 text-[14px] hover:bg-[#2C95D2] transition-colors duration-150"
+                        >
+                          {sub.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          )}
+          {isOpen && <span className="justify-self-center" />}
+
+          {/* Right: socials + login + search + morphing hamburger/close */}
+          <div className="flex items-center gap-4 justify-self-end">
+            {!isOpen && (
+              <div className="hidden md:flex items-center gap-4">
+                <a
+                  href="https://www.linkedin.com/company/afla-marine/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedinIn
+                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                  />
+                </a>
+                <a
+                  href="https://www.instagram.com/alfa_marine_sa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
+                  <FaInstagram
+                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                  />
+                </a>
+                <a
+                  href="https://x.com/alfamarinesa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X"
+                >
+                  <FaXTwitter
+                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                  />
+                </a>
+                <span
+                  className={`w-px h-5 ${
+                    isSticky ? "bg-[#11234B]/40" : "bg-white/40"
+                  }`}
                 />
+                <a
+                  href="https://outlook.com/alfamarinesa.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Login"
+                >
+                  <FaUser
+                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                  />
+                </a>
               </div>
-            </div>
+            )}
+            <FaSearch
+              className={`text-[16px] cursor-pointer transition-colors duration-200 ${iconColor} hover:text-[#2C95D2]`}
+            />
+            <button
+              onClick={toggleMenu}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              className="group relative w-7 h-[18px] cursor-pointer"
+            >
+              <span
+                className={`absolute left-0 h-[2px] w-7 rounded-full transition-all duration-300 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
+                  isOpen
+                    ? "top-1/2 -translate-y-1/2 rotate-45"
+                    : "top-0 rotate-0"
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-1/2 -translate-y-1/2 h-[2px] w-7 rounded-full transition-all duration-200 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
+                  isOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
+                }`}
+              />
+              <span
+                className={`absolute left-0 h-[2px] w-7 rounded-full transition-all duration-300 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
+                  isOpen
+                    ? "top-1/2 -translate-y-1/2 -rotate-45"
+                    : "bottom-0 rotate-0"
+                }`}
+              />
+            </button>
+          </div>
+        </nav>
+      </header>
 
-            {/* Menu Items */}
-            <div className="flex-1 justify-center items-center overflow-y-auto max-h-[90vh] pt-10 pb-10 sm:pt-0 sm:pb-0 sm:overflow-visible sm:max-h-none">
-              <div className="grid lg:ml-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 px-4 sm:px-16 py-1 h-fit w-full">
-                {links.map((menu, idx) => (
+      {/* ===== Full-screen Overlay Menu ===== */}
+      {isOpen && (
+        <div className="fixed inset-0 z-[999] bg-black animate-fadeScaleIn overflow-y-auto">
+          {/* Background image */}
+          <div
+            className="fixed inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${menuBg})` }}
+          />
+          {/* Gradient on top of the image for readability */}
+          <div className="fixed inset-0 bg-gradient-to-br from-[#0a1428]/95 via-[#11234B]/80 to-black/90" />
+
+          {/* Menu: accordion on mobile, grid + hover on desktop */}
+          <div className="relative min-h-screen flex items-start lg:items-center px-6 md:px-10 lg:px-16 pt-24 lg:pt-32 pb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-10 lg:gap-y-28 w-full max-w-6xl mx-auto">
+              {links.map((menu, idx) => {
+                const active = overlayMenu === menu.name;
+                const anyActive = overlayMenu !== null;
+                return (
                   <div
                     key={idx}
-                    onMouseEnter={() => setOpenMenu(menu.name)}
-                    onMouseLeave={() => setOpenMenu(null)}
-                    className="group"
+                    className="relative border-b border-white/10 lg:border-0"
+                    onMouseEnter={() => setOverlayMenu(menu.name)}
+                    onMouseLeave={() => setOverlayMenu(null)}
                   >
-                    <div className="flex items-center cursor-pointer text-xl font-semibold mb-2 text-white hover:text-[#2C95D2]">
-                      <span className="font-bold font-poppins text-[#2C95D2] sm:text-white sm:group-hover:text-[#2C95D2]">
-                        {menu.name}
-                      </span>
-                    </div>
+                    {/* Top-level option */}
+                    <button
+                      type="button"
+                      onClick={() => setOverlayMenu(active ? null : menu.name)}
+                      className="w-full flex items-center justify-between gap-3 py-4 text-left lg:w-auto lg:py-0 lg:cursor-default"
+                    >
+                      <h3
+                        className={`font-roboto capitalize whitespace-nowrap text-2xl lg:text-[38px] leading-tight transition-all duration-300 text-white ${
+                          active
+                            ? "text-[#2C95D2] lg:text-white lg:font-normal"
+                            : anyActive
+                            ? "lg:text-white/10 lg:blur-[3px] font-light"
+                            : "lg:text-white/60 font-light"
+                        }`}
+                      >
+                        {menu.name.toLowerCase()}
+                      </h3>
+                      <FaChevronDown
+                        className={`lg:hidden shrink-0 text-base transition-all duration-300 ${
+                          active
+                            ? "rotate-180 text-[#2C95D2]"
+                            : "text-white/50"
+                        }`}
+                      />
+                    </button>
 
-                    <img
-                      src={linee}
-                      alt=""
-                      className="w-35 h-auto mb-2 opacity-10 group-hover:opacity-100 transition duration-50"
-                    />
-
-                    <ul
-                      className={`grid gap-1 ${
-                        (menu.name === "WHO WE ARE" &&
-                          menu.submenu.length > 6) ||
-                        (menu.name === "WHAT WE DO" &&
-                          menu.submenu.length > 6) ||
-                        (menu.name === "GET IN TOUCH" &&
-                          menu.submenu.length > 2)
-                          ? "grid-cols-2"
-                          : "grid-cols-1"
+                    {/* Underline (desktop, on hover) */}
+                    <div
+                      className={`hidden lg:block mt-3 w-44 transition-opacity duration-300 ${
+                        active ? "opacity-100" : "opacity-0"
                       }`}
                     >
-                      {menu.submenu?.map((sub, subIdx) => (
+                      <span className="block h-[1px] w-full bg-white/50" />
+                    </div>
+
+                    {/* Submenu: accordion on mobile, absolute reveal on desktop */}
+                    <ul
+                      className={`overflow-hidden pl-1 space-y-3 transition-all duration-300 ease-in-out lg:pl-0 lg:overflow-visible lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-72 ${
+                        active
+                          ? "max-h-[600px] opacity-100 pb-5"
+                          : "max-h-0 opacity-0"
+                      } lg:max-h-none lg:pb-0 ${
+                        active
+                          ? "lg:opacity-100 lg:visible lg:translate-y-0"
+                          : "lg:opacity-0 lg:invisible lg:-translate-y-2"
+                      }`}
+                    >
+                      {menu.submenu.map((sub, subIdx) => (
                         <li key={subIdx}>
                           <Link
-                            to={sub.path}
+                            to={sub.path || "#"}
                             onClick={closeMenu}
-                            className={`block py-1 px-1 rounded transition-all duration-50 text-white sm:text-white lg:text-white ${openMenu === menu.name ? "lg:opacity-100" : "lg:opacity-10"} lg:hover:opacity-100 lg:hover:text-[#2C95D2]`}
+                            className="block font-roboto font-light text-[15px] text-white/75 hover:text-[#2C95D2] transition-colors duration-200"
                           >
                             {sub.name}
                           </Link>
@@ -393,11 +380,11 @@ const Navbar = () => {
                       ))}
                     </ul>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );

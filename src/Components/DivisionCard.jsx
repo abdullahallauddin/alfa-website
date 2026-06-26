@@ -106,4 +106,4 @@ const DivisionCard = ({
   );
 };
 
-export default DivisionCard;
+export default React.memo(DivisionCard);

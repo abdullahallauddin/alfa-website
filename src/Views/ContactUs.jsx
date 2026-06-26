@@ -31,7 +31,7 @@ const countryOptions = [
   { code: "+62", label: "🇮🇩 Indonesia (+62)" },
 ];
 
-const ContactUs = () => {
+const ContactUs = ({ embedded }) => {
   const [selectedCode, setSelectedCode] = useState("+966"); // ✅ Default to +966
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -54,9 +54,10 @@ const ContactUs = () => {
 
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${Markup})` }}
         >
           <motion.div
@@ -69,6 +70,7 @@ const ContactUs = () => {
           </motion.div>
         </div>
       </SectionWrapperReverse>
+      )}
       <motion.div
         className="md:w-2/2 mb-6 md:mb-0"
         initial={{ opacity: 0, y: 100 }}
@@ -76,10 +78,10 @@ const ContactUs = () => {
         transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         viewport={{ once: false, amount: 0.3 }}
       >
-        <div className="w-full p-4 md:p-24">
+        <div className="w-full py-6 md:py-10">
           <h1
-            className="text-4xl font-bold mb-4 text-center md:text-left"
-            style={{ color: "#20376D" }}
+            className="text-4xl font-roboto font-light mb-4 text-center md:text-left text-white"
+            style={{ letterSpacing: "-0.02em" }}
           >
             CONTACT US
           </h1>
@@ -87,16 +89,16 @@ const ContactUs = () => {
           {/* Main Flex Layout */}
           <div className="flex flex-col md:flex-row items-stretch gap-6">
             {/* Left Image Column */}
-            <div className="hidden md:block md:w-[30%]">
+            <div className="hidden md:block md:w-[30%] rounded-2xl overflow-hidden ring-1 ring-white/10">
               <img
                 src={ContactUsInside}
                 alt="Contact Illustration"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover transition duration-500 hover:scale-105"
               />
             </div>
 
             {/* Right Form Column */}
-            <div className="w-full md:w-[70%] bg-gray-100 p-6">
+            <div className="w-full md:w-[70%] rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm text-white p-6 hover:bg-white/[0.08] hover:border-[#2C95D2]/50 transition">
               <iframe
                 title="Contact Us Form"
                 src="https://us.bigin.online/org886525305/forms/contact-us"
@@ -112,12 +114,12 @@ const ContactUs = () => {
       {/* map */}
       <div className="w-full mt-16">
         <h2
-          className="text-3xl font-bold mb-6 text-center"
-          style={{ color: "#20376D" }}
+          className="text-3xl font-roboto font-light mb-6 text-center text-white"
+          style={{ letterSpacing: "-0.02em" }}
         >
           Our Office Location
         </h2>
-        <div className="w-full mt-8 -mb-20">
+        <div className="w-full mt-8 -mb-20 rounded-2xl overflow-hidden ring-1 ring-white/10">
           <iframe
             title="Alfa Marine Location"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7716012845244!2d50.1077281!3d26.4345218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49fb6d8a3e52d5%3A0x36ad5b73c9d39550!2sAlfa%20Marine%20%26%20Industrial%20Services%20Company!5e0!3m2!1sen!2s!4v1717356840000!5m2!1sen!2s"

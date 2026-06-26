@@ -7,20 +7,22 @@ import OurDivisionsComponent from "../Components/OurDivisionsComponent";
 // import Form from '../Components/Form';
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import { motion } from "framer-motion";
-const GroupOverview = () => {
+const GroupOverview = ({ embedded }) => {
   useEffect(() => {
+    if (embedded) return;
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${GroupOverviewImage})` }}
         >
           {/* Dark Overlay */}
-          <div className="absolute h-[110vh] inset-0 bg-black opacity-70 z-0"></div>
+          <div className="absolute h-[clamp(18rem,46vh,30rem)] inset-0 bg-black opacity-70 z-0"></div>
           <div className="relative flex flex-col items-center justify-center h-full text-white">
             <motion.div
             initial={{ opacity: 0, y: 100 }}
@@ -29,11 +31,12 @@ const GroupOverview = () => {
             viewport={{ once: false, amount: 0.3 }}
           >
 
-            <h1 className="text-5xl font-bold">Group Overview</h1>
+            <h1 className="text-5xl font-roboto font-light text-white" style={{ letterSpacing: "-0.02em" }}>Group <span className="text-[#2C95D2]">Overview</span></h1>
           </motion.div>
           </div>
         </div>
       </SectionWrapperReverse>
+      )}
 
       <div id="ourdivisions">
         <OurDivisionsComponent />

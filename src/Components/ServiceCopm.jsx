@@ -8,8 +8,8 @@ const ServiceCopm = () => {
                 <div className="container mx-auto px-4 md:px-8 flex flex-col items-center justify-center">
                     <div className="md:w-2/3 text-center">
                         {/* <h5 className="text-lg text-custom-blue font-bold mb-2">OUR SERVICES</h5> */}
-                        <h3 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h3>
-                        <p className="text-lg text-gray-700">
+                        <h3 className="font-roboto text-3xl md:text-[2.75rem] font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>Our Services</h3>
+                        <p className="font-roboto font-light text-lg text-white/70">
                             At London Tradex, we prioritize saving our clients' valuable time and hard-earned money. We understand that securing the most competitive rates for business utilities is crucial.
                         </p>
                     </div>

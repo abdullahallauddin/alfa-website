@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import React, { useEffect } from "react";
 
-const SectionWrapperReverse = ({ children, bgColor = "#fff" }) => {
+const SectionWrapperReverse = ({ children, bgColor = "#0a1428" }) => {
   const controls = useAnimation();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const SectionWrapperReverse = ({ children, bgColor = "#fff" }) => {
   }, [controls]);
 
   return (
-    <div className="relative h-[90vh] overflow-hidden">
+    <div className="relative h-[clamp(18rem,46vh,30rem)] overflow-hidden">
       <motion.div
         initial={{
           y: 0,
@@ -24,9 +24,9 @@ const SectionWrapperReverse = ({ children, bgColor = "#fff" }) => {
           opacity: 1,
         }}
         animate={controls}
-        className="absolute bottom-0 left-0 w-full h-[90vh] bg-[#20376D] z-20 pointer-events-none"
+        className="absolute bottom-0 left-0 w-full h-[clamp(18rem,46vh,30rem)] bg-[#0a1428] z-20 pointer-events-none"
       />
-      <div className="relative z-10 h-[90vh]" style={{ backgroundColor: bgColor }}>
+      <div className="relative z-10 h-[clamp(18rem,46vh,30rem)]" style={{ backgroundColor: bgColor }}>
         {children}
       </div>
     </div>

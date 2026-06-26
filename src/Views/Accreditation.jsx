@@ -7,15 +7,17 @@ const cardAnimation = {
 hidden: { opacity: 0, y: 40 },
 visible: { opacity: 1, y: 0 },
 };
-const Accreditation = () => {
+const Accreditation = ({ embedded }) => {
   useEffect(() => {
+    if (embedded) return;
     window.scrollTo(0, 0);
   }, []);
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           {/* Overlay Content */}
@@ -33,7 +35,8 @@ const Accreditation = () => {
           </div>
         </div>
       </SectionWrapperReverse>
-      <div className="max-w-4xl mx-auto px-6 py-10 text-[#2C2C2C]">
+      )}
+      <div className="max-w-6xl mx-auto px-6 py-10 text-white">
         <motion.div
           variants={cardAnimation}
           initial="hidden"
@@ -41,7 +44,7 @@ const Accreditation = () => {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
         >
-          <p className="mb-6 text-justify text-sm sm:text-base text-[#20376D]">
+          <p className="mb-6 text-justify text-sm sm:text-base text-white/75">
             We are fully committed to maintaining compliance with industry
             standards and best practices. ALFA Group is proud to hold multiple
             ISO certifications and adhere to global quality standards across all
@@ -53,12 +56,12 @@ const Accreditation = () => {
             efficiency and safety.
           </p>
         </motion.div>
-        {/* Centered Image */}
-        <div className="flex justify-center mt-24">
+        {/* Logo wall on a white surface so the dark logos stay visible */}
+        <div className="mt-12 rounded-2xl bg-white p-8 sm:p-12 ring-1 ring-white/10">
           <img
             src={AccrediationsImage}
             alt="Accreditation Certificates"
-            className="max-w-full h-auto"
+            className="mx-auto h-auto max-w-full"
           />
         </div>
       </div>

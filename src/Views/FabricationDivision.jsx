@@ -2,20 +2,23 @@ import React, { useEffect } from "react";
 import marineImage from "../Assets/Images/fabrication2a.png";
 import backgroundImage from "../Assets/Images/main5a.png";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
+import { Accordion, AccordionItem } from "../Components/Accordion";
 import { motion } from "framer-motion";
 const cardAnimation = {
 hidden: { opacity: 0, y: 40 },
 visible: { opacity: 1, y: 0 },
 };
-const FabricationDivision = () => {
+const FabricationDivision = ({ embedded }) => {
   useEffect(() => {
+    if (embedded) return;
     window.scrollTo(0, 0);
-  }, []);
+  }, [embedded]);
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           {/* Overlay Content */}
@@ -33,7 +36,8 @@ const FabricationDivision = () => {
           </div>
         </div>
       </SectionWrapperReverse>
-      <div className="relative bg-[#20376D] text-white">
+      )}
+      <div className="relative text-white">
           {/* Text Section */}
           <motion.div
             variants={cardAnimation}
@@ -42,15 +46,18 @@ const FabricationDivision = () => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           >
-        <div className="max-w-9xl mx-auto px-2 py-16 grid md:grid-cols-2 gap-6 items-start">
-            <div>
-              <h2 className="text-sm ml-6 font-semibold text-[#2C95D2] uppercase mb-2">
+        <div className="max-w-9xl mx-auto py-12 grid md:grid-cols-2 gap-6 items-stretch">
+            <div className="">
+              <h2 className="text-sm font-semibold text-[#2C95D2] uppercase mb-2">
                 What We Do
               </h2>
-              <h1 className="text-2xl ml-6 sm:text-3xl font-bold uppercase mb-4">
-                Fabrication & Machining Division
+              <h1
+                className="text-2xl sm:text-3xl font-roboto font-light uppercase mb-4"
+                style={{ letterSpacing: "-0.02em" }}
+              >
+                Fabrication & Machining <span className="text-[#2C95D2]">Division</span>
               </h1>
-              <div className="space-y-4 ml-6 text-sm leading-relaxed text-justify">
+              <div className="space-y-4 text-sm leading-relaxed text-justify text-white/80">
                 <p>
                   <span className="font-bold">
                     ALFA’s Fabrication & Machining Division
@@ -73,57 +80,59 @@ const FabricationDivision = () => {
               </div>
 
               {/* Core Services */}
-              <div className="mt-6 ml-6">
+              <div className="mt-6">
                 <h3 className="font-semibold text-white mb-2">
                   Our Core Services
                 </h3>
-                <ul className="list-disc list-inside text-sm space-y-1">
-                  <li>
-                    <span className="font-bold">Fabrication : </span>Steel
+                <Accordion defaultOpen={[0]}>
+                  <AccordionItem id={0} title={<span className="font-bold">Fabrication : </span>}>
+                    Steel
                     structures, custom metal components.
-                  </li>
-                  <li>
-                    <span className="font-bold">Welding : </span>MIG, TIG, Stick
+                  </AccordionItem>
+                  <AccordionItem id={1} title={<span className="font-bold">Welding : </span>}>
+                    MIG, TIG, Stick
                     Welding, custom solutions for high-strength joints
-                  </li>
-                  <li>
-                    <span className="font-bold">Machining : </span>CNC Cutting,
+                  </AccordionItem>
+                  <AccordionItem id={2} title={<span className="font-bold">Machining : </span>}>
+                    CNC Cutting,
                     Steel Bending, Milling & Drilling, Laser & Plasma Cutting,
                     Turning (Turret Lathe), Line Boring, Broaching, Surface &
                     Blanchard Grinding.
-                  </li>
-                  <li>
-                    <span className="font-bold">
-                      Replacement & Spare Parts:
-                    </span>
+                  </AccordionItem>
+                  <AccordionItem
+                    id={3}
+                    title={
+                      <span className="font-bold">
+                        Replacement & Spare Parts:
+                      </span>
+                    }
+                  >
                     Shafts, Rollers, Bearings, Trunnions, Housings, Custom Parts
-                  </li>
-                  <li>
-                    <span className="font-bold">Blasting and Painting : </span>
+                  </AccordionItem>
+                  <AccordionItem id={4} title={<span className="font-bold">Blasting and Painting : </span>}>
                     Surface preparation, epoxy coatings, corrosion-resistant
                     coatings
-                  </li>
-                  <li>
-                    <span className="font-bold">Hydraulic Repair : </span>Mobile
+                  </AccordionItem>
+                  <AccordionItem id={5} title={<span className="font-bold">Hydraulic Repair : </span>}>
+                    Mobile
                     and industrial services, troubleshooting, repair, and
                     maintenance
-                  </li>
-                  <li>
-                    <span className="font-bold">Inspection Services : </span>
+                  </AccordionItem>
+                  <AccordionItem id={6} title={<span className="font-bold">Inspection Services : </span>}>
                     Welding Inspection (VT, PT, MT, UT, RT, MPI), Material
                     Testing, Dimensional Inspection, Surface Roughness Testing,
                     Non-Destructive Testing (NDT)
-                  </li>
-                </ul>
+                  </AccordionItem>
+                </Accordion>
               </div>
             </div>
 
           {/* Image Section */}
-          <div className="flex justify-center items-end mt-9">
+          <div className="relative flex">
             <img
               src={marineImage}
               alt="Marine & Offshore"
-              className="max-w-full h-auto object-contain"
+              className="w-full h-full object-cover rounded-2xl ring-1 ring-white/10 min-h-[16rem] md:min-h-[20rem]"
               />
           </div>
         </div>

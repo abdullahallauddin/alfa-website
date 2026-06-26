@@ -18,12 +18,12 @@ const GetStarted = () => {
   return (
     <>
       <div
-        className="bg-cover bg-center h-[140vh] flex items-center justify-center"
+        className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
 
         <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-5xl font-bold mt-24 mb-4">Get Started</h1>
+          <h1 className="text-5xl font-roboto font-light mt-24 mb-4" style={{ letterSpacing: "-0.02em" }}>Get <span className="text-[#2C95D2]">Started</span></h1>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ const GetStarted = () => {
           {contactusdetails.map(contactusdetail => (
             <div key={contactusdetail.id} className="flex justify-center w-full md:w-auto">
               <div
-                className="bg-gradient-to-r w-96 from-gradient-start to-gradient-end p-4 rounded-lg shadow-xl rounded-bl-3xl rounded-tr-3xl"
+                className="group w-96 p-4 rounded-lg shadow-xl rounded-bl-3xl rounded-tr-3xl border border-white/10 bg-white/5 backdrop-blur-sm text-white hover:bg-white/[0.08] hover:border-[#2C95D2]/50 hover:-translate-y-1 transition duration-300"
               >
                 <div className="mb-8 flex align-left ml-4 mt-4">
                   <img

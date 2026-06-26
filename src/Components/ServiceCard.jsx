@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Marine from "../Assets/Icons/Marine.svg";
 import Construction from "../Assets/Icons/Construction.svg";
 import Fabrication from "../Assets/Icons/Fabrication.svg";
@@ -8,7 +9,17 @@ import ICT from "../Assets/Icons/ICT.svg";
 import Facility from "../Assets/Icons/Facility.svg";
 import Joinery from "../Assets/Icons/Joinery.svg";
 
-const ServiceCard = () => {
+const ServiceCard = ({ carousel = false }) => {
+  const trackRef = useRef(null);
+
+  const scrollByCard = (dir) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector("[data-card]");
+    const amount = card ? card.offsetWidth + 24 : 320;
+    track.scrollBy({ left: dir * amount, behavior: "smooth" });
+  };
+
   const cards = [
     {
       id: 1,
@@ -68,42 +79,63 @@ const ServiceCard = () => {
     },
   ];
 
+  const renderCard = (card, inCarousel) => (
+    <div
+      key={card.id}
+      data-card
+      className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 transition-colors duration-300 hover:bg-white/[0.08] hover:border-[#2C95D2]/50 ${
+        inCarousel ? "snap-start shrink-0 w-[82vw] sm:w-[20rem]" : ""
+      }`}
+    >
+      <div className="mb-5 grid">
+        <img
+          src={card.logo}
+          alt={card.title}
+          className="justify-items-start h-14 w-14 brightness-0 invert"
+        />
+      </div>
+      <h3 className="font-roboto text-xl font-medium mb-2 text-white">
+        {card.title}
+      </h3>
+      <p className="font-roboto font-light leading-relaxed text-white/70">
+        {card.description}
+      </p>
+    </div>
+  );
+
+  if (carousel) {
+    return (
+      <div className="relative mt-6">
+        <div
+          ref={trackRef}
+          className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-1 py-2"
+        >
+          {cards.map((card) => renderCard(card, true))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => scrollByCard(-1)}
+          aria-label="Previous divisions"
+          className="absolute -left-2 top-1/2 hidden -translate-y-1/2 sm:flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-[#0a1428]/70 text-white backdrop-blur transition-colors duration-200 hover:border-[#2C95D2] hover:bg-[#2C95D2]"
+        >
+          <FaChevronLeft className="text-sm" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollByCard(1)}
+          aria-label="Next divisions"
+          className="absolute -right-2 top-1/2 hidden -translate-y-1/2 sm:flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-[#0a1428]/70 text-white backdrop-blur transition-colors duration-200 hover:border-[#2C95D2] hover:bg-[#2C95D2]"
+        >
+          <FaChevronRight className="text-sm" />
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-12 container mx-auto mb-16 px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-      {cards.map((card) => (
-        <div
-          key={card.id}
-          className="bg-transparent border border-custom-green p-4 rounded-lg shadow-xl"
-        >
-          <div className="mb-4 grid ">
-            <img
-              src={card.logo}
-              alt={card.title}
-              className="justify-items-start h-16 w-16  group-hover:filter group-hover:brightness-0 group-hover:invert"
-            />
-          </div>
-          <h3
-            className="text-xl font-bold mb-2 group-hover:text-white"
-            style={{ color: "#20376D" }}
-          >
-            {card.title}
-          </h3>
-          <p
-            className="mb-4 group-hover:text-white"
-            style={{ color: "#20376D" }}
-          >
-            {card.description}
-          </p>
-          {/* <Link to={`/${card.link}`}>
-            <button
-              className="text-white text-md font-bold px-8 py-2 rounded-bl-3xl rounded-tr-3xl"
-              style={{ backgroundColor: "#20376D" }}
-            >
-              Read More
-            </button>
-          </Link> */}
-        </div>
-      ))}
+      {cards.map((card) => renderCard(card, false))}
     </div>
   );
 };

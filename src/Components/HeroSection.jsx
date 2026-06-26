@@ -5,10 +5,11 @@ const HeroSection = () => {
   return (
     <>
       <div
-        className="relative overflow-hidden 
-                 bg-transparent lg:bg-[#20376D] 
-                 w-full 
-                 h-[60vh] sm:h-[65vh] md:h-[100vh] lg:min-h-screen"
+        id="banner"
+        className="snap-section relative overflow-hidden
+                 bg-transparent lg:bg-[#20376D]
+                 w-full
+                 h-screen"
       >
         <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
           <video

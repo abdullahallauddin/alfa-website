@@ -55,25 +55,34 @@ const ChooseUsCard = () => {
   ];
 
   return (
-    <div className="container mx-auto mb-8 px-2 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <ul className="divide-y divide-white/10 border-y border-white/10">
       {cards.map((card, index) => (
-        <motion.div
+        <motion.li
           key={card.id}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: index * 0.1, ease: "easeInOut" }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="bg-transparent border border-custom-green p-4 rounded-lg shadow-md text-center flex flex-col items-center transition-all duration-300 hover:shadow-2xl hover:scale-105"
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: index * 0.07,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          viewport={{ once: false, amount: 0.4 }}
+          className="group flex items-center gap-4 py-4"
         >
-          <div className="mb-3">
-            <img src={card.logo} alt={card.title} className="h-6 w-6" />
-          </div>
-          <h3 className="text-base font-semibold mb-1 text-[#20376D]">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#2C95D2]/10 ring-1 ring-[#2C95D2]/30 transition-colors duration-300 group-hover:bg-[#2C95D2]/20">
+            <img
+              src={card.logo}
+              alt=""
+              aria-hidden="true"
+              className="h-5 w-5 brightness-0 invert"
+            />
+          </span>
+          <h3 className="font-roboto font-light text-lg text-white/85 transition-colors duration-300 group-hover:text-white">
             {card.title}
           </h3>
-        </motion.div>
+        </motion.li>
       ))}
-    </div>
+    </ul>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import DivisionCard from "../Components/DivisionCard";
 import Marine from "../Assets/Icons/Marine.svg";
 import Construction from "../Assets/Icons/Construction.svg";
@@ -15,6 +15,7 @@ import Ict2a from "../Assets/Images/ict2a.png";
 import Facility2a from "../Assets/Images/facility2a.png";
 import Joinery2a from "../Assets/Images/joinery2a.png";
 import { motion } from "framer-motion";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 // Original cards
 const cards = [
@@ -125,184 +126,191 @@ const cards = [
   },
 ];
 
-// Clone for infinite scroll
-const loopedCards = [...cards.slice(-3), ...cards, ...cards.slice(0, 3)];
+// Three copies so the track can loop seamlessly in both directions
+const SETS = 3;
+const slides = Array.from({ length: SETS }, () => cards).flat();
+const N = cards.length;
 
 function OurDivisions() {
-  const containerRef = useRef(null);
-  const [centerIndex, setCenterIndex] = useState(3); 
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
+  const trackRef = useRef(null);
+  const rafId = useRef(0);
+  const settleTimer = useRef(null);
+  const resetting = useRef(false);
+  const [active, setActive] = useState(0);
 
-  const startDrag = (e) => {
-    isDragging.current = true;
-    startX.current = e.pageX || e.touches[0].pageX;
-    scrollLeft.current = containerRef.current.scrollLeft;
-  };
-  const scrollByAmount = () => {
-    const containerWidth = containerRef.current.offsetWidth;
-    const cardWidth =
-      containerRef.current.querySelector("div")?.offsetWidth ||
-      containerWidth / 3;
-    return cardWidth * 1.05; // Smooth scroll per card
-  };
-  const scrollLeftFunc = () => {
-    containerRef.current.scrollBy({
-      left: -scrollByAmount(),
-      behavior: "smooth",
-    });
-  };
+  const getSlideEls = useCallback(
+    () => Array.from(trackRef.current?.querySelectorAll("[data-slide]") || []),
+    []
+  );
 
-  const scrollRightFunc = () => {
-    containerRef.current.scrollBy({
-      left: scrollByAmount(),
-      behavior: "smooth",
-    });
-  };
-  const endDrag = () => {
-    isDragging.current = false;
-  };
-
-  const onDrag = (e) => {
-    if (!isDragging.current) return;
-    const x = e.pageX || e.touches[0].pageX;
-    const walk = (x - startX.current) * 1.5;
-    containerRef.current.scrollLeft = scrollLeft.current - walk;
-  };
-
-  const handleScroll = () => {
-    const container = containerRef.current;
-    const scrollLeftVal = container.scrollLeft;
-    const width = container.offsetWidth;
-    const cardWidth = container.querySelector("div")?.offsetWidth || width / 3;
-    const index = Math.round(scrollLeftVal / cardWidth);
-    setCenterIndex(index);
-
-    const totalCards = cards.length;
-    if (index <= 2) {
-      container.scrollLeft = cardWidth * (totalCards + index);
-      setCenterIndex(totalCards + index);
-    } else if (index >= totalCards + 3) {
-      container.scrollLeft = cardWidth * (index - totalCards);
-      setCenterIndex(index - totalCards);
-    }
-  };
-
-  useEffect(() => {
-    const container = containerRef.current;
-    container.scrollLeft = (container.offsetWidth / 3) * 3;
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+  const centerOnEl = useCallback((el, smooth) => {
+    const track = trackRef.current;
+    if (!track || !el) return;
+    const left = el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2;
+    track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
   }, []);
 
+  const findClosest = useCallback(() => {
+    const track = trackRef.current;
+    const center = track.scrollLeft + track.clientWidth / 2;
+    let best = null;
+    let bestIdx = 0;
+    let min = Infinity;
+    getSlideEls().forEach((el, i) => {
+      const elCenter = el.offsetLeft + el.offsetWidth / 2;
+      const d = Math.abs(elCenter - center);
+      if (d < min) {
+        min = d;
+        best = el;
+        bestIdx = i;
+      }
+    });
+    return { best, bestIdx };
+  }, [getSlideEls]);
+
+  const markCenter = useCallback(
+    (centerEl) => {
+      getSlideEls().forEach((el) => {
+        const shouldCenter = el === centerEl;
+        // Only write when the value actually changes to avoid style thrash
+        if ((el.getAttribute("data-center") === "true") !== shouldCenter) {
+          el.setAttribute("data-center", String(shouldCenter));
+        }
+      });
+    },
+    [getSlideEls]
+  );
+
+  // Start centered on the first card of the middle copy
+  useEffect(() => {
+    const els = getSlideEls();
+    if (!els.length) return;
+    centerOnEl(els[N], false);
+    markCenter(els[N]);
+    setActive(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleScroll = useCallback(() => {
+    // Ignore scroll events caused by our own (instant) loop recenter
+    if (resetting.current) return;
+
+    cancelAnimationFrame(rafId.current);
+    rafId.current = requestAnimationFrame(() => {
+      const { best, bestIdx } = findClosest();
+      markCenter(best);
+      const logical = bestIdx % N;
+      // Bail out if unchanged so we don't re-render the cards every frame
+      setActive((prev) => (prev === logical ? prev : logical));
+    });
+
+    // Once scrolling settles, if we're in the first or last copy, recenter on
+    // the equivalent card in the middle copy. Centering on the actual element
+    // lands exactly on a snap point, so mandatory snapping can't bounce us.
+    clearTimeout(settleTimer.current);
+    settleTimer.current = setTimeout(() => {
+      const els = getSlideEls();
+      if (!els.length) return;
+      const { bestIdx } = findClosest();
+      if (bestIdx >= N && bestIdx < 2 * N) return; // already in middle copy
+
+      const target = els[(bestIdx % N) + N];
+      resetting.current = true;
+      centerOnEl(target, false);
+      markCenter(target);
+      // Release the guard after the browser has applied the jump + re-snap
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          resetting.current = false;
+        })
+      );
+    }, 140);
+  }, [findClosest, markCenter, getSlideEls, centerOnEl]);
+
+  const step = useCallback(
+    (dir) => {
+      const els = getSlideEls();
+      const { bestIdx } = findClosest();
+      const target = els[bestIdx + dir];
+      if (target) centerOnEl(target, true);
+    },
+    [getSlideEls, findClosest, centerOnEl]
+  );
+
   return (
-    <>
-      <div className="mt-24 flex items-center justify-center ">
-        <div className="container mx-auto px-4 md:px-8 flex flex-col items-center justify-center">
-          <motion.div
-            className="md:w-2/2 mb-6 md:mb-0"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.3 }}
-          >
-            <div className="md:w-full text-center">
-              <h3
-                className="text-3xl md:text-4xl font-bold mb-6"
-                style={{ color: "#20376D" }}
-              >
-                ALFA Divisions
-              </h3>
-              <p className="text-lg text-gray-700 mb-6" style={{ color: "#20376D" }}>
-                Expert teams and robust systems drive each division to deliver
-                projects that are timely, safe, and value-packed.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+    <section
+      id="divisions"
+      className="snap-section relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#0a1428] via-[#11234B] to-[#0a1428] py-20"
+    >
       <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.6 }}
-        variants={{
-          hidden: { opacity: 0, x: 120 },
-          visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-        }}
+        className="mx-auto w-full max-w-6xl px-6 text-center mb-10"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: false, amount: 0.3 }}
       >
-        <div className="overflow-hidden sm:px-0 md:px-4 lg:px-6 mt-2">
-          <div className="max-w-[1600px] mx-auto">
-            <div
-              ref={containerRef}
-              className="flex gap-6 sm:gap-2 md:gap-14 overflow-x-scroll scroll-smooth no-scrollbar select-none sm:px-0 md:px-4 lg:px-6"
-              onMouseDown={startDrag}
-              onMouseLeave={endDrag}
-              onMouseUp={endDrag}
-              onMouseMove={onDrag}
-              onTouchStart={startDrag}
-              onTouchMove={onDrag}
-              onTouchEnd={endDrag}
-              style={{ cursor: "grab" }}
-            >
-              {loopedCards.map((card, index) => {
-                const isCenter = index === centerIndex;
-                return (
-                  <div
-                    key={index}
-                    className={`w-[85vw] sm:w-1/2 md:w-2/3 lg:w-1/3 xl:max-w-[450px] flex-shrink-0 transition-transform duration-300 ease-in-out ${
-                      isCenter ? "scale-105" : "scale-95"
-                    }`}
-                  >
-                    <DivisionCard {...card} isCenter={isCenter} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="flex justify-center mt-4 gap-6 md:hidden">
-            <button
-              onClick={scrollLeftFunc}
-              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
-            >
-              <svg
-                xmlns="https://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={scrollRightFunc}
-              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
-            >
-              <svg
-                xmlns="https://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
+        <h3
+          className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] mb-4 text-white"
+          style={{ letterSpacing: "-0.02em" }}
+        >
+          <span className="text-[#2C95D2]">ALFA</span> Divisions
+        </h3>
+        <span className="mx-auto mb-6 block h-px w-16 bg-[#2C95D2]" />
+        <p className="font-roboto font-light text-lg text-white/70 max-w-2xl mx-auto">
+          Expert teams and robust systems drive each division to deliver
+          projects that are timely, safe, and value-packed.
+        </p>
       </motion.div>
-    </>
+
+      <div className="relative">
+        {/* Track */}
+        <div
+          ref={trackRef}
+          onScroll={handleScroll}
+          className="div-track no-scrollbar flex gap-6 md:gap-8 overflow-x-auto px-[calc(50%-9rem)] sm:px-[calc(50%-10rem)] md:px-[calc(50%-11rem)] py-8"
+        >
+          {slides.map((card, i) => (
+            <div
+              key={i}
+              data-slide
+              className="div-slide shrink-0 w-[18rem] sm:w-[20rem] md:w-[22rem]"
+            >
+              <DivisionCard {...card} isCenter />
+            </div>
+          ))}
+        </div>
+
+        {/* Arrows */}
+        <button
+          type="button"
+          onClick={() => step(-1)}
+          aria-label="Previous division"
+          className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-[#0a1428]/50 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-[#2C95D2] hover:border-[#2C95D2]"
+        >
+          <FaChevronLeft className="text-sm" />
+        </button>
+        <button
+          type="button"
+          onClick={() => step(1)}
+          aria-label="Next division"
+          className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-[#0a1428]/50 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-[#2C95D2] hover:border-[#2C95D2]"
+        >
+          <FaChevronRight className="text-sm" />
+        </button>
+      </div>
+
+      {/* Dots */}
+      <div className="mt-8 flex justify-center gap-2">
+        {cards.map((_, i) => (
+          <span
+            key={i}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              active === i ? "w-6 bg-[#2C95D2]" : "w-1.5 bg-white/25"
+            }`}
+          />
+        ))}
+      </div>
+    </section>
   );
 }
 

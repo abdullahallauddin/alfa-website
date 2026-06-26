@@ -1,25 +1,33 @@
 import React from "react";
 import { motion } from "framer-motion";
+import ceoImg from "../Assets/Images/ceo-image1.jpg";
+
+const EASE = [0.22, 1, 0.36, 1];
 
 const CeoMessage = () => {
   return (
-    <div className="container mx-auto">
-      <div className="px-8 md:px-12 mt-16 mb-16">
+    <section
+      id="ceo"
+      className="snap-section relative min-h-screen w-full flex items-center overflow-hidden bg-gradient-to-br from-[#0a1428] via-[#11234B] to-[#0a1428]"
+    >
+      <div className="mx-auto w-full max-w-6xl px-6 md:px-10 py-24 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        {/* Text column */}
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.9, ease: EASE }}
           viewport={{ once: false, amount: 0.3 }}
         >
           <h1
-            className="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left"
-            style={{ color: "#20376D" }}
+            className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] text-white text-balance"
+            style={{ letterSpacing: "-0.02em" }}
           >
-            CEO Message
+            CEO <span className="text-[#2C95D2]">Message</span>
           </h1>
+          <span className="mt-5 mb-8 block h-px w-16 bg-[#2C95D2]" />
           <div
-            className="text-sm md:text-base text-justify space-y-4 leading-relaxed"
-            style={{ color: "#20376D" }}
+            className="font-roboto font-light text-base md:text-[1.05rem] space-y-5 leading-relaxed text-white/75 max-w-[62ch]"
+            style={{ textWrap: "pretty" }}
           >
             <p>
               At ALFA Group, we are driven by a simple yet powerful vision: to
@@ -41,15 +49,36 @@ const CeoMessage = () => {
               ensuring that ALFA Group continues to be a trusted partner for
               businesses across the globe.
             </p>
-            <p>
+            <p className="pt-2 text-white/90">
               Sincerely,
               <br />
-              <strong>Chief Executive Officer</strong>
+              <strong className="font-medium text-white">
+                Chief Executive Officer
+              </strong>
             </p>
           </div>
         </motion.div>
+
+        {/* Image column */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.04 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: EASE }}
+          viewport={{ once: false, amount: 0.3 }}
+          className="relative hidden lg:block"
+        >
+          <div className="relative aspect-[4/5] w-full max-w-md ml-auto overflow-hidden">
+            <img
+              src={ceoImg}
+              alt="ALFA Group leadership"
+              className="absolute inset-0 h-full w-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a1428] via-[#0a1428]/15 to-transparent" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -2,14 +2,14 @@ import React from 'react';
 
 const SustainabilityComp = ({ title, description, icon }) => {
   return (
-    <div className="bg-[#f5f5f5] py-12 px-6 md:px-24">
-      <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
+    <div className="py-10 px-6 md:px-24">
+      <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
         {/* Text Content */}
         <div className="flex-1">
-          <div className="inline-block bg-[#20376D] text-white text-sm font-bold px-4 py-1 rounded-md mb-4">
+          <div className="inline-block bg-[#2C95D2] text-white text-sm font-medium tracking-wide px-4 py-1 rounded-md mb-4 font-roboto">
             {title.toUpperCase()}
           </div>
-          <p className="text-gray-700 text-justify text-lg leading-relaxed" style={{ color: "#20376D" }}>
+          <p className="font-roboto font-light text-white/80 text-justify text-lg leading-relaxed">
             {description}
           </p>
         </div>

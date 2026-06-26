@@ -3,14 +3,16 @@ import { motion } from "framer-motion";
 import profileImg from "../Assets/Images/ceo-image1.jpg";
 import SustainbilityBG from "../Assets/Images/cultureImage.png";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
+import { Accordion, AccordionItem } from "../Components/Accordion";
 
 const cardAnimation = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
 };
 
-const OurCulture = () => {
+const OurCulture = ({ embedded }) => {
   useEffect(() => {
+    if (embedded) return;
     window.scrollTo(0, 0);
   }, []);
 
@@ -35,9 +37,10 @@ const OurCulture = () => {
 
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${SustainbilityBG})` }}
         >
           <motion.div
@@ -46,31 +49,30 @@ const OurCulture = () => {
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h1 className="text-5xl text-white font-bold">Our Culture</h1>
+            <h1 className="text-5xl text-white font-roboto font-light" style={{ letterSpacing: "-0.02em" }}>Our <span className="text-[#2C95D2]">Culture</span></h1>
           </motion.div>
         </div>
       </SectionWrapperReverse>
+      )}
 
-      {contentSections.map((section, index) => (
-        <motion.div
-          key={index}
-          variants={cardAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-          className="flex items-center justify-center bg-white p-8 mb-12 rounded-xl shadow-lg max-w-5xl mx-auto mt-12 text-center"
-        >
-          <div className="flex flex-col">
-            <h3 className="text-2xl font-bold text-[#20376D]">
-              {section.heading}
-            </h3>
-            <p className="text-[#20376D] text-justify mt-4 text-base leading-relaxed whitespace-pre-line">
-              {section.text}
-            </p>
-          </div>
-        </motion.div>
-      ))}
+      <motion.div
+        variants={cardAnimation}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+        className="max-w-6xl mx-auto px-6 py-16"
+      >
+        <Accordion defaultOpen={[0]}>
+          {contentSections.map((section, index) => (
+            <AccordionItem key={index} id={index} title={section.heading}>
+              <p className="text-white/75 text-justify text-base leading-relaxed whitespace-pre-line">
+                {section.text}
+              </p>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </motion.div>
     </>
   );
 };

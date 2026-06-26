@@ -1,248 +1,187 @@
 import React from "react";
-import { Link as ScrollLink } from "react-scroll"; // Import ScrollLink from react-scroll
+import { Link } from "react-router-dom";
 import logo from "../Assets/Icons/white-logo.svg";
-import Footerphone from "../Assets/Icons/footer-phone.svg";
-// import { ReactComponent as PhoneIcon } from "../Assets/Icons/footer-phone.svg";
-import Footeremail from "../Assets/Icons/footer-email.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
   faPhoneAlt,
   faEnvelope,
-  faClock,
   faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+
+const columns = [
+  {
+    title: "Company",
+    links: [
+      { label: "Home", to: "/" },
+      { label: "About Us", to: "/groupoverview" },
+      { label: "Core Values", to: "/core-values" },
+      { label: "Our Facilities", to: "/our-facilities" },
+      { label: "Sustainability", to: "/environmental-responsibility" },
+    ],
+  },
+  {
+    title: "Divisions",
+    links: [
+      { label: "Marine & Offshore", to: "/marine-and-offshore-division" },
+      { label: "Construction", to: "/construction-division" },
+      { label: "Fabrication", to: "/fabrication-and-machining-division" },
+      { label: "Facility Management", to: "/facility-management-division" },
+    ],
+  },
+  {
+    title: "Governance",
+    links: [
+      { label: "Ethics & Compliance", to: "/ethics-and-compliance" },
+      { label: "HSE Policy", to: "/health-safety-and-environmental-policy" },
+      { label: "Accreditations", to: "/accreditations" },
+      { label: "Become a Supplier", to: "/become-a-supplier" },
+      { label: "Contact Us", to: "/contact" },
+    ],
+  },
+];
+
+const socials = [
+  {
+    Icon: FaLinkedinIn,
+    href: "https://www.linkedin.com/company/afla-marine/",
+    label: "LinkedIn",
+  },
+  {
+    Icon: FaInstagram,
+    href: "https://www.instagram.com/alfa_marine_sa/",
+    label: "Instagram",
+  },
+  { Icon: FaXTwitter, href: "https://x.com/alfamarinesa", label: "X" },
+];
+
+const legal = [
+  { label: "Privacy Policy", to: "/privacy-policy" },
+  { label: "Cookies Policy", to: "/cookies-policy" },
+  { label: "Terms & Conditions", to: "/terms-and-conditions" },
+];
+
+const FooterLink = ({ to, children }) => (
+  <Link
+    to={to}
+    className="group inline-flex items-center gap-1 text-[15px] text-white/60 transition-colors duration-200 hover:text-white"
+  >
+    <span className="relative">
+      {children}
+      <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#2C95D2] transition-all duration-300 group-hover:w-full" />
+    </span>
+  </Link>
+);
 
 const Footer = () => {
   return (
-    <footer className="relative" style={{ backgroundColor: "#20376D" }}>
-      <div className="relative mx-auto max-w-screen-xl space-y-8 px-8 py-16 sm:px-12 lg:space-y-16 lg:px-16">
-        <div className="grid grid-cols-1 gap-32 lg:grid-cols-3">
+    <footer className="snap-section relative overflow-hidden bg-[#0a1428] text-white">
+      {/* top hairline + accent sheen */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2C95D2]/40 to-transparent" />
+      {/* ambient glow */}
+      <div className="pointer-events-none absolute -top-24 right-0 h-[40vh] w-[40vh] rounded-full bg-[#2C95D2]/[0.06] blur-[120px]" />
+
+      <div className="relative z-10 mx-auto max-w-screen-xl px-6 sm:px-10 lg:px-16 pt-20 pb-10">
+        <div className="grid gap-14 lg:grid-cols-[1.05fr_1.35fr] lg:gap-16">
+          {/* Brand + contact */}
           <div>
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="image1" className="w-44 text-white" />
+            <Link to="/" className="inline-flex items-center">
+              <img src={logo} alt="ALFA Group" className="w-40" />
             </Link>
-            <p className="mt-8 max-w-xs text-white text-lg">
+
+            <p className="mt-7 flex max-w-xs items-start gap-3 text-[15px] leading-relaxed text-white/60">
+              <FontAwesomeIcon
+                icon={faMapMarkerAlt}
+                className="mt-1 text-[#2C95D2]"
+              />
               Prince Muhammad Ibn Saud Dist, Dammam, Kingdom of Saudi Arabia
             </p>
-            <div className="mt-6">
-              {/* Contact Info */}
-              <div className="flex items-center flex-wrap sm:flex-nowrap gap-2 sm:gap-4">
-                <a
-                  href="tel:+966138052528"
-                  className="flex items-center gap-1 whitespace-nowrap text-[#2C95D2] hover:text-white"
-                >
-                  <img src={Footerphone} alt="Phone" className="w-4 h-4" />
-                  +966 13 805 2528
-                </a>
-                <span className="whitespace-nowrap text-white ml-2">|</span>
-                <a
-                  href="mailto:info@alfamarinesa.com"
-                  className="flex items-center gap-1 -ml-1 whitespace-nowrap text-[#2C95D2] hover:text-white cursor-pointer"
-                >
-                  <img src={Footeremail} alt="Email" className="mt-1 w-4 h-4" />
-                  info@alfamarinesa.com
-                </a>
-              </div>
 
-              {/* Horizontal Gray Line */}
-              <div className="w-full border-t border-white my-4"></div>
-
-              {/* Social Media Icons */}
-              <div className="flex gap-4">
-                <a
-                  href="https://www.linkedin.com/company/afla-marine/"
-                  className="group bg-transparent border border-white rounded-full p-2 transition duration-300 hover:bg-white hover:translate-x-1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaLinkedinIn className="hover:scale-110 text-white transition-colors duration-300 group-hover:text-[#20376D]" />
-                </a>
-                <a
-                  href="https://www.instagram.com/alfa_marine_sa/"
-                  className="group bg-transparent border border-white rounded-full p-2 transition duration-300 hover:bg-white hover:translate-x-1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaInstagram className="hover:scale-110 text-white transition-colors duration-300 group-hover:text-[#20376D]" />
-                </a>
-                <a
-                  href="https://x.com/alfamarinesa"
-                  className="group bg-transparent border border-white rounded-full p-2 transition duration-300 hover:bg-white hover:translate-x-1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaXTwitter className="hover:scale-110 text-white transition-colors duration-300 group-hover:text-[#20376D]" />
-                </a>
-              </div>
+            <div className="mt-7 space-y-3">
+              <a
+                href="tel:+966138052528"
+                className="group flex items-center gap-3 text-[15px] text-white/80 transition-colors hover:text-white"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] ring-1 ring-white/10 transition-colors duration-200 group-hover:bg-[#2C95D2] group-hover:ring-[#2C95D2]">
+                  <FontAwesomeIcon icon={faPhoneAlt} className="text-xs" />
+                </span>
+                +966 13 805 2528
+              </a>
+              <a
+                href="mailto:info@alfamarinesa.com"
+                className="group flex items-center gap-3 text-[15px] text-white/80 transition-colors hover:text-white"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] ring-1 ring-white/10 transition-colors duration-200 group-hover:bg-[#2C95D2] group-hover:ring-[#2C95D2]">
+                  <FontAwesomeIcon icon={faEnvelope} className="text-xs" />
+                </span>
+                info@alfamarinesa.com
+              </a>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-3">
-            <div>
-              <p className="font-semibold text-white text-2xl pb-1 cursor-pointer">
-                <span className="border-b-2 border-[#2C95D2] inline-block">
-                  Quick Links
-                </span>
-              </p>
-              <ul className="mt-6 space-y-4 text-lg">
-                <li>
-                  <Link
-                    to="/"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/groupoverview"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/core-values"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Core Values
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/our-facilities"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Our Facilities
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/environmental-responsibility"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Sustainability
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <ul className="mt-14 space-y-4 text-lg">
-                <li>
-                  <Link
-                    to="/marine-and-offshore-division"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Marine & Offshore
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/construction-division"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Construction
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/fabrication-and-machining-division"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Fabrication
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link
-                    to="/trading-division"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Information Technology
-                  </Link>
-                </li> */}
-                <li>
-                  <Link
-                    to="/facility-management-division"
-                    className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                  >
-                    Facility Management
-                  </Link>
-                </li>
-                
-              </ul>
-            </div>
-            <ul className="mt-14 space-y-4 text-lg">
-              <li>
-                <Link
-                  to="/ethics-and-compliance"
-                  className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                >
-                  Ethics & Compliance
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/health-safety-and-environmental-policy"
-                  className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                >
-                  HSE Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/accreditations"
-                  className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                >
-                  Accreditations
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/become-a-supplier"
-                  className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                >
-                  Become a Supplier
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer"
-                >
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
+
+          {/* Link columns */}
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
+            {columns.map((col) => (
+              <nav key={col.title} aria-label={col.title}>
+                <h3 className="font-roboto text-sm font-medium text-white">
+                  {col.title}
+                </h3>
+                <span className="mt-3 mb-5 block h-px w-8 bg-[#2C95D2]/60" />
+                <ul className="space-y-3.5">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <FooterLink to={l.to}>{l.label}</FooterLink>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
           </div>
         </div>
-        <div className="flex justify-between items-center w-full">
-          <div>
-            <p className="text-xs text-white">
-              Copyright © 2025 ALFA Technologies. all rights reserved.
-            </p>
+
+        {/* divider */}
+        <div className="mt-16 border-t border-white/10 pt-7">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            {/* socials */}
+            <div className="order-2 flex items-center gap-3 md:order-1">
+              {socials.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-white/70 ring-1 ring-white/15 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2C95D2] hover:text-white hover:ring-[#2C95D2]"
+                >
+                  <Icon className="text-sm" />
+                </a>
+              ))}
+            </div>
+
+            {/* legal */}
+            <div className="order-3 flex flex-wrap items-center gap-x-5 gap-y-2 md:order-2">
+              {legal.map((l) => (
+                <FooterLink key={l.label} to={l.to}>
+                  {l.label}
+                </FooterLink>
+              ))}
+            </div>
           </div>
-          <div className="flex items-center gap-x-2">
-            <Link to="/privacy-policy">
-              <p className="text-xs text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer">
-                Privacy Policy |
-              </p>
-            </Link>
-            <Link to="/cookies-policy">
-              <p className="text-xs text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer">
-                Cookies Policy |
-              </p>
-            </Link>
-            <Link to="/terms-and-conditions">
-              <p className="text-xs text-white transition hover:text-[#2C95D2] hover:border-b-2 border-[#2C95D2] pb-1 cursor-pointer">
-                Terms & Conditions
-              </p>
-            </Link>
-          </div>
+
+          <p className="mt-7 text-[13px] text-white/40">
+            Copyright © 2025 ALFA Technologies. all rights reserved.
+          </p>
         </div>
       </div>
+
+      {/* oversized brand wordmark */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -translate-x-1/2 select-none font-roboto font-bold leading-none tracking-[-0.04em] text-white/[0.035] text-[26vw]"
+      >
+        ALFA
+      </span>
     </footer>
   );
 };

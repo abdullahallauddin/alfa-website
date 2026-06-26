@@ -5,18 +5,20 @@ import { motion } from "framer-motion";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 
 // import AboutUSComp from '../Components/AboutUSComp';
-const CommercialInquiries = () => {
+const CommercialInquiries = ({ embedded }) => {
   useEffect(() => {
+    if (embedded) return;
     window.scrollTo(0, 0);
-  }, []);
+  }, [embedded]);
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-          <div className="absolute inset-0 h-110 bg-black/40 h-[90vh]"></div>
+          <div className="absolute inset-0 h-110 bg-black/40 h-[clamp(18rem,46vh,30rem)]"></div>
 
           {/* Overlay Content */}
           <div className="relative flex flex-col items-center justify-center h-full text-white">
@@ -34,6 +36,7 @@ const CommercialInquiries = () => {
           </div>
         </div>
       </SectionWrapperReverse>
+      )}
       <motion.div
         className="md:w-2/2 mb-6 md:mb-0"
         initial={{ opacity: 0, y: 100 }}
@@ -41,14 +44,15 @@ const CommercialInquiries = () => {
         transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         viewport={{ once: false, amount: 0.3 }}
       >
-        <div className="w-full p-4 md:p-24">
+        <div className="w-full py-6 md:py-10">
           <h1
-            className="text-4xl font-bold mb-4 text-center md:text-left"
-            style={{ color: "#20376D" }}
+            className="text-4xl font-roboto font-light mb-4 text-center md:text-left text-white"
+            style={{ letterSpacing: "-0.02em" }}
           >
             Commercial Inquiries
           </h1>
-          <p className="text-lg mt-4 text-justify" style={{ color: "#20376D" }}>
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/[0.08] hover:border-[#2C95D2]/50 transition">
+          <p className="text-lg mt-4 text-justify text-white/75">
             We welcome your commercial inquiries and value your interest in our
             services. Please feel free to reach out to us directly via email or
             phone, and our dedicated team will respond promptly to assist with
@@ -66,7 +70,7 @@ const CommercialInquiries = () => {
               Email Us
             </span>
             <svg
-              xmlns="https://www.w3.org/2000/svg"s
+              xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4 relative z-10 group-hover:text-[#2196F3] transition duration-500"
               fill="none"
               viewBox="0 0 24 24"
@@ -81,6 +85,7 @@ const CommercialInquiries = () => {
             </svg>
             <span className="absolute inset-0 bg-[#20376D] transition-all duration-500 transform -translate-x-full group-hover:translate-x-0 z-0"></span>
           </a>
+          </div>
         </div>
       </motion.div>
       {/* <ContactUs /> */}

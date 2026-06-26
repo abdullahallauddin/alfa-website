@@ -39,43 +39,58 @@ const logos = [
   logo19,
 ];
 
+const EASE = [0.22, 1, 0.36, 1];
+
 const OurClients = () => {
   return (
-    <div className="w-full bg-white py-10 overflow-hidden">
-      <motion.div
-        className="text-3xl font-bold text-center text-blue-900 mb-8 mt-18"
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut" }}
-        viewport={{ once: false, amount: 0.5 }}
-      >
-        <h1 className="text-4xl font-bold mb-8 mt-24">
-            <span className="text-[#2C95D2] font-semibold mr-2">OUR</span>
-            <span className="text-[#20376D] font-bold mr-2">CLIENTS</span>
-          </h1>
-      </motion.div>
-
-      <div className="relative w-full mt-18">
+    <section
+      id="clients"
+      className="snap-section relative min-h-screen w-full flex items-center overflow-hidden bg-[#eef2f7] py-24"
+    >
+      <div className="relative mx-auto w-full max-w-6xl px-6 md:px-10">
         <motion.div
-          className="flex gap-16 w-max"
-          animate={{ x: ["0%", "-50%"] }} // Already in motion
-          transition={{
-            duration: 25, // slower than 90% over half the distance
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: EASE }}
+          viewport={{ once: false, amount: 0.5 }}
         >
-          {[...logos, ...logos].map((logo, index) => (
-            <img
-              key={index}
-              src={logo}
-              alt={`Client ${index + 1}`}
-              className="h-16 w-auto object-contain"
-            />
-          ))}
+          <h1
+            className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] text-[#13294a]"
+            style={{ letterSpacing: "-0.02em" }}
+          >
+            <span className="text-[#2C95D2]">OUR</span> CLIENTS
+          </h1>
+          <span className="mt-5 mx-auto block h-px w-16 bg-[#2C95D2]" />
         </motion.div>
+
+        {/* Ruled logo grid — natural logos, grayscale → colour on hover, no boxes */}
+        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border-t border-l border-[#13294a]/10 rounded-2xl overflow-hidden">
+          {logos.map((logo, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: (index % 4) * 0.06 + Math.floor(index / 4) * 0.04,
+                ease: EASE,
+              }}
+              viewport={{ once: false, amount: 0.2 }}
+              className="group flex items-center justify-center border-b border-r border-[#13294a]/10 px-6 py-9 sm:py-11 transition-colors duration-300 hover:bg-white"
+            >
+              <img
+                src={logo}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="max-h-10 md:max-h-12 w-auto object-contain grayscale opacity-75 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+              />
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

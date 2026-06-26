@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import backgroundImage from "../Assets/Images/main-background.jpg"
 import ServiceCopm from '../Components/ServiceCopm';
+import { motion } from "framer-motion";
 // import ServiceCard from '../Components/ServiceCard';
 
 const Services = () => {
@@ -16,12 +17,27 @@ const Services = () => {
 
         {/* Overlay Content */}
         <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-5xl font-bold mt-24 mb-4">Our Services</h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-5xl font-roboto font-light mt-24 mb-4"
+            style={{ letterSpacing: "-0.02em" }}
+          >
+            Our <span className="text-[#2C95D2]">Services</span>
+          </motion.h1>
         </div>
       </div>
-      <div className='mt-12 mb-20' >
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className='mt-12 mb-20'
+      >
         <ServiceCopm />
-      </div>
+      </motion.div>
     </>
   );
 }

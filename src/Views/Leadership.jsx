@@ -5,15 +5,17 @@ import BoardMembers from "../Components/BoardMembers";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import { motion } from "framer-motion";
 
-const Leadership = () => {
+const Leadership = ({ embedded }) => {
   useEffect(() => {
+    if (embedded) return;
     window.scrollTo(0, 0);
   }, []);
   return (
     <>
+      {!embedded && (
       <SectionWrapperReverse>
         <div
-          className="bg-cover bg-center h-[90vh] flex items-center justify-center"
+          className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
           style={{ backgroundImage: `url(${SustainbilityBG})` }}
         >
           <motion.div
@@ -26,9 +28,16 @@ const Leadership = () => {
           </motion.div>
         </div>
       </SectionWrapperReverse>
-      <div className="py-24 px-24">
+      )}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.15 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="py-24 px-24"
+      >
         <BoardMembers />
-      </div>
+      </motion.div>
     </>
   );
 };
