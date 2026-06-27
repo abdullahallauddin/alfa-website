@@ -7,6 +7,7 @@ import OurPresence from "../Components/OurPresence";
 import OurClients from "../Components/OurClient";
 import OurDivisions from "./OurDivisions";
 import ParallaxSection from "../Components/ParallexSection";
+import NewsInsights from "../Components/NewsInsights";
 
 const Home = () => {
   // Enable full-page section snapping only on the home page
@@ -29,6 +30,7 @@ const Home = () => {
       "presence",
       "reach",
       "clients",
+      "news",
     ];
     const observer = new IntersectionObserver(
       (entries) => {
@@ -57,6 +59,7 @@ const Home = () => {
       <OurPresence />
       <ParallaxSection />
       <OurClients />
+      <NewsInsights />
     </>
   );
 };
