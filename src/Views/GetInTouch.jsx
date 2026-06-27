@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import heroImage from "../Assets/Images/contactus1.jpg";
 import PageBanner from "../Components/PageBanner";
 import SectionNav from "../Components/SectionNav";
@@ -58,6 +58,14 @@ const GetInTouch = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Sync the active tab when the URL hash changes (e.g. navbar dropdown
+  // links while already on this page).
+  useEffect(() => {
+    const hash = (location.hash || "").replace(/^#/, "");
+    const i = TABS.findIndex((t) => t.key === hash);
+    if (i >= 0) setActive(i);
+  }, [location.hash]);
+
   const selectTab = (i) => {
     setActive(i);
     // Update the hash without forcing a scroll jump.
@@ -94,19 +102,16 @@ const GetInTouch = () => {
         onSelect={(key) => selectTab(TABS.findIndex((t) => t.key === key))}
       />
 
-      {/* Active panel */}
+      {/* Active panel — keyed remount (no exit) so heavy tabs switch instantly */}
       <div className="max-w-6xl mx-auto px-6 md:px-10 pt-6" data-no-reveal>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={TABS[active].key}
-            initial={prefersReduced ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={prefersReduced ? { opacity: 1 } : { opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {TABS[active].content}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key={TABS[active].key}
+          initial={prefersReduced ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {TABS[active].content}
+        </motion.div>
       </div>
     </div>
   );

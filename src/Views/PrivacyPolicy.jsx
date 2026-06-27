@@ -1,323 +1,348 @@
 import React, { useEffect } from "react";
 import backgroundImage from "../Assets/Images/about-us.png";
-import contactuscall from "../Assets/Icons/callus.svg";
-import contactusemail from "../Assets/Icons/emailus.svg";
 import { Accordion, AccordionItem } from "../Components/Accordion";
 
-// import AboutUSComp from '../Components/AboutUSComp';
+const LAST_UPDATED = "27 June 2026";
+
 const PrivacyPolicy = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
       <div
         className="bg-cover bg-center h-[clamp(18rem,46vh,30rem)] flex items-center justify-center"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        {/* Overlay Content */}
         <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-5xl font-bold mb-4 text-center text-white font-roboto font-light" style={{ letterSpacing: "-0.02em" }}>
+          <h1
+            className="text-5xl font-light mb-4 text-center text-white font-roboto"
+            style={{ letterSpacing: "-0.02em" }}
+          >
             Privacy <span className="text-[#2C95D2]">Policy</span>
           </h1>
         </div>
       </div>
+
       <div className="mx-auto max-w-6xl px-6 md:px-10 py-16">
-        <h1
-          className="text-4xl font-bold mb-4 text-center md:text-left text-white font-roboto font-light"
+        <p className="text-sm text-white/45">Last updated: {LAST_UPDATED}</p>
+        <h2
+          className="text-3xl md:text-4xl font-light mt-3 mb-4 text-white font-roboto"
           style={{ letterSpacing: "-0.02em" }}
         >
-          Alfa Privacy Policy
-        </h1>
-        <p className="text-lg mt-4 max-w-6xl text-white/75">
-          ALFA (“we,” “our,” or “us”) is committed to protecting your privacy.
-          This Privacy Policy explains how your personal information is
-          collected, used, and disclosed by ALFA. This Privacy Policy applies to
-          our website and its associated subdomains (collectively, our
-          “Service”) alongside our application, ALFA. By accessing or using our
-          Service, you signify that you have read, understood, and agree to our
-          collection, storage, use, and disclosure of your personal information
-          as described in this Privacy Policy and our Terms of Service.
+          Privacy Policy
+        </h2>
+        <p className="text-lg mt-4 text-white/75 leading-relaxed">
+          ALFA Marine Industrial Services Company (“ALFA”, “we”, “our” or “us”)
+          respects your privacy and is committed to protecting your personal
+          data. This Privacy Policy explains how we collect, use, disclose, store
+          and protect personal data when you visit our website or interact with
+          us, and the rights available to you. We process personal data in
+          accordance with the Personal Data Protection Law of the Kingdom of
+          Saudi Arabia (Royal Decree No. M/19 of 1443H) and its Implementing
+          Regulations (“PDPL”).
         </p>
+
+        {/* Data controller summary */}
+        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 className="font-roboto text-lg font-medium text-white">
+            Data Controller
+          </h3>
+          <span className="mt-3 mb-4 block h-px w-10 bg-[#2C95D2]" />
+          <dl className="grid gap-x-8 gap-y-3 sm:grid-cols-2 text-[15px] text-white/75">
+            <div>
+              <dt className="text-white/45">Entity</dt>
+              <dd className="text-white/85">
+                ALFA Marine Industrial Services Company
+              </dd>
+            </div>
+            <div>
+              <dt className="text-white/45">Unified National / CR Number</dt>
+              <dd className="text-white/85">7028203037</dd>
+            </div>
+            <div>
+              <dt className="text-white/45">VAT Registration Number</dt>
+              <dd className="text-white/85">312214760200003</dd>
+            </div>
+            <div>
+              <dt className="text-white/45">Registered Address</dt>
+              <dd className="text-white/85">
+                Building 4855, Prince Mansour Street, Prince Muhammad Ibn Saud
+                District, Dammam 32241, Kingdom of Saudi Arabia
+              </dd>
+            </div>
+            <div>
+              <dt className="text-white/45">Email</dt>
+              <dd>
+                <a
+                  href="mailto:info@alfamarinesa.com"
+                  className="text-[#2C95D2] hover:underline"
+                >
+                  info@alfamarinesa.com
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-white/45">Phone</dt>
+              <dd>
+                <a
+                  href="tel:+966138052528"
+                  className="text-[#2C95D2] hover:underline"
+                >
+                  +966 13 805 2528
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
         <div className="mt-8">
           <Accordion allowMultiple defaultOpen={[0]}>
-            <AccordionItem id={0} title="Definitions and Key Terms">
-              <p className="text-lg mt-4 text-white/75">
-                To help explain things as clearly as possible in this Privacy
-                Policy, every time any of these terms are referenced, they are
-                strictly defined as:
+            <AccordionItem id={0} title="1. Scope of this Policy">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                This Policy applies to personal data we process about visitors to
+                our website, individuals who contact us or submit enquiries,
+                prospective clients, suppliers, job applicants, and other
+                individuals whose personal data we handle. It covers our website
+                and its subdomains. Third-party websites linked from our site are
+                governed by their own privacy policies.
               </p>
             </AccordionItem>
-            <AccordionItem id={1} title="Cookies">
-              <p className="text-lg mt-4 text-white/75">
-                A small amount of data generated by a website and saved by your web
-                browser. It is used to identify your browser, provide analytics,
-                remember information about you such as your language preference or
-                login information.
+
+            <AccordionItem id={1} title="2. Personal Data We Collect">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                Depending on how you interact with us, we may collect:
+              </p>
+              <ul className="list-disc list-inside mt-3 space-y-1 text-white/75 marker:text-[#2C95D2]">
+                <li>
+                  Identity &amp; contact data — name, email address, phone
+                  number, company/organization name.
+                </li>
+                <li>
+                  Enquiry &amp; correspondence data — the content of messages,
+                  inquiries, applications, supplier registrations, or complaints
+                  you send us.
+                </li>
+                <li>
+                  Technical &amp; usage data — IP address, device and browser
+                  type, pages visited, and similar information collected through
+                  cookies and analytics.
+                </li>
+              </ul>
+              <p className="text-lg mt-3 text-white/75 leading-relaxed">
+                We do not intentionally collect sensitive personal data through
+                our website. Please do not submit such data unless specifically
+                requested and necessary.
               </p>
             </AccordionItem>
-            <AccordionItem id={2} title="Company">
-              <p className="text-lg mt-4 text-white/75">
-                When this policy mentions “Company,” “we,” “us,” or “our,” it refers
-                to ALFA, located at Prince Mansour Street, Dammam, Eastern Province,
-                Saudi Arabia, that is responsible for your information under this
-                Privacy Policy.
+
+            <AccordionItem id={2} title="3. How We Collect Personal Data">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                We collect personal data: (a) directly from you when you complete
+                a form, email us, call us, or otherwise communicate with us; and
+                (b) automatically through cookies and similar technologies when
+                you use our website. See our{" "}
+                <a href="/cookies-policy" className="text-[#2C95D2] hover:underline">
+                  Cookies Policy
+                </a>{" "}
+                for details.
               </p>
             </AccordionItem>
-            <AccordionItem id={3} title="Country">
-              <p className="text-lg mt-4 text-white/75">
-                Where ALFA or the owners/founders of ALFA are based, in this case,
-                Saudi Arabia.
+
+            <AccordionItem id={3} title="4. Purposes of Processing">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                We process personal data to:
               </p>
-            </AccordionItem>
-            <AccordionItem id={4} title="Customer">
-              <p className="text-lg mt-4 text-white/75">
-                Refers to the company, organization, or person that signs up to use
-                the ALFA Service to manage relationships with their consumers or
-                service users.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={5} title="Device">
-              <p className="text-lg mt-4 text-white/75">
-                Any internet-connected device such as a phone, tablet, computer, or
-                any other device that can be used to visit ALFA and use the
-                services.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={6} title="IP Address">
-              <p className="text-lg mt-4 text-white/75">
-                Every device connected to the Internet is assigned a number known as
-                an Internet Protocol (IP) address. These numbers are usually
-                assigned to geographic blocks. An IP address can often be used to
-                identify the location from which a device is connecting to the
-                Internet.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={7} title="Personnel">
-              <p className="text-lg mt-4 text-white/75">
-                Refers to those individuals who are employed by ALFA or are under
-                contract to perform a service on behalf of one of the parties.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={8} title="Personal Data">
-              <p className="text-lg mt-4 text-white/75">
-                Any information that directly, indirectly, or in connection with
-                other information—including a personal identification number—allows
-                for the identification or identifiability of a natural person.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={9} title="Service">
-              <p className="text-lg mt-4 text-white/75">
-                Refers to the service provided by ALFA as described in the relative
-                terms (if available) and on this platform.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={10} title="Third-party Service">
-              <p className="text-lg mt-4 text-white/75">
-                Refers to advertisers, contest sponsors, promotional and marketing
-                partners, and others who provide our content or whose products or
-                services we think may interest you.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={11} title="You">
-              <p className="text-lg mt-4 text-white/75">
-                A person or entity that is registered with ALFA to use the Services.
-              </p>
-            </AccordionItem>
-            <AccordionItem id={12} title="What Information Do We Collect?">
-              <p className="text-lg mt-4 text-white/75">
-                We collect information from you when you visit our website, register
-                on our site, place an order, subscribe to our newsletter, respond to
-                a survey, or fill out a form.
-              </p>
-              <ul className="list-disc text-lg mt-4 list-inside text-sm space-y-1 text-white/75 marker:text-[#2C95D2]">
-                <li className="text-lg mt-2">Name / Username</li>
-                <li className="text-lg mt-2">Phone Numbers</li>
-                <li className="text-lg mt-2">Email Addresses</li>
-                <li className="text-lg mt-2">Mailing Addresses</li>
+              <ul className="list-disc list-inside mt-3 space-y-1 text-white/75 marker:text-[#2C95D2]">
+                <li>Respond to your enquiries, requests and complaints.</li>
+                <li>
+                  Provide, manage and improve our services and our relationship
+                  with clients and suppliers.
+                </li>
+                <li>
+                  Evaluate job applications and supplier registrations.
+                </li>
+                <li>
+                  Operate, secure, maintain and improve our website and analyze
+                  its usage.
+                </li>
+                <li>
+                  Comply with legal, regulatory and contractual obligations.
+                </li>
               </ul>
             </AccordionItem>
-            <AccordionItem id={13} title="When Does ALFA Use End User Information from Third Parties?">
-              <p className="text-lg mt-4 text-white/75">
-                ALFA will collect End User Data necessary to provide the ALFA
-                services to our customers. End users may voluntarily provide us with
-                information they have made available on social media websites. If
-                you provide us with any such information, we may collect publicly
-                available information from the social media websites you have
-                indicated. You can control how much of your information social media
-                websites make public by visiting these websites and changing your
-                privacy settings.{" "}
+
+            <AccordionItem id={4} title="5. Legal Basis for Processing">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                Under the PDPL, we rely on one or more of the following legal
+                bases: your consent; the processing being necessary to enter into
+                or perform a contract to which you are or intend to be a party;
+                compliance with a legal obligation; and our legitimate interests
+                (where these are not overridden by your rights and interests),
+                such as responding to enquiries and securing our website. Where we
+                rely on consent, you may withdraw it at any time as described
+                below.
               </p>
             </AccordionItem>
-            <AccordionItem id={14} title="When Does ALFA Use Customer Information from Third Parties?">
-              <p className="text-lg mt-4 text-white/75">
-                We receive some information from third parties when you contact us.
-                For example, when you submit your email address to us to show
-                interest in becoming an ALFA customer, we receive information from a
-                third party that provides automated fraud detection services to
-                ALFA. We also occasionally collect information that is made publicly
-                available on social media websites. You can control how much of your
-                information social media websites make public by visiting these
-                websites and changing your privacy settings.
+
+            <AccordionItem id={5} title="6. Cookies & Analytics">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                We use strictly necessary cookies to operate the website and,
+                with your consent, analytics cookies to understand how the site is
+                used. You can accept or reject non-essential cookies through our
+                cookie banner and manage your preferences at any time. For full
+                details, see our{" "}
+                <a href="/cookies-policy" className="text-[#2C95D2] hover:underline">
+                  Cookies Policy
+                </a>
+                .
               </p>
             </AccordionItem>
-            <AccordionItem id={15} title="Do We Share the Information We Collect with Third Parties?">
-              <p className="text-lg mt-4 text-white/75">
-                We may share the information that we collect, both personal and
-                non-personal, with third parties such as advertisers, contest
-                sponsors, promotional and marketing partners, and others who provide
-                our content or whose products or services we think may interest you.
-                We may also share it with our current and future affiliated
-                companies and business partners. If we are involved in a merger,
-                asset sale, or other business reorganization, we may also share or
-                transfer your personal and non-personal information to our
-                successors-in-interest.
-                <br /><br /> We may engage trusted third-party service providers to
-                perform functions and provide services to us, such as hosting and
-                maintaining our servers and the website, database storage and
-                management, email management, storage marketing, credit card
-                processing, customer service, and fulfilling orders for products and
-                services you may purchase through the website. We will likely share
-                your personal information, and possibly some non-personal
-                information, with these third parties to enable them to perform
-                these services for us and for you.
-                <br /><br /> While we strive to partner only with reputable third parties,
-                ALFA is not responsible for any unauthorized actions, data misuse,
-                or breaches that occur as a result of third-party negligence or
-                factors beyond ALFA’s direct control. Users are encouraged to review
-                the privacy policies of any third-party services they engage with
-                through our platform. <br /><br />
-                We may also disclose personal and non-personal information about you
-                to government or law enforcement officials or private parties as we,
-                in our sole discretion, believe necessary or appropriate to respond
-                to claims, legal processes (including subpoenas), protect our rights
-                and interests or those of a third party, the safety of the public or
-                any person, to prevent or stop any illegal, unethical, or legally
-                actionable activity, or to otherwise comply with applicable court
-                orders, laws, rules, and regulations.
-                <br /><br /> Under no circumstances shall ALFA be liable for third-party
-                misuse of information beyond its control or for legal obligations
-                imposed on third parties. ALFA will comply with the Saudi Data
-                Protection Laws and ensure its actions align with the rights and
-                obligations outlined therein.
+
+            <AccordionItem id={6} title="7. Disclosure of Personal Data">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                We do not sell your personal data. We may share it with: trusted
+                service providers who process data on our behalf (such as website
+                hosting, email and analytics providers) under appropriate
+                agreements; our affiliates and business partners where necessary
+                to provide services; and competent government, regulatory or law
+                enforcement authorities where required by applicable law or to
+                protect our legal rights. Any data processor acting on our behalf
+                is bound to process personal data only on our instructions and to
+                apply appropriate safeguards.
               </p>
             </AccordionItem>
-            <AccordionItem id={16} title="Where and When Is Information Collected from Customers and End Users?">
-              <p className="text-lg mt-4 text-white/75">
-                ALFA will collect personal information that you submit to us. We may
-                also receive personal information about you from third parties as
-                described above.
+
+            <AccordionItem id={7} title="8. Cross-Border Transfers">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                Where personal data is transferred outside the Kingdom of Saudi
+                Arabia (for example to service providers), we will only do so in
+                accordance with the conditions and safeguards required by the PDPL
+                and its Implementing Regulations, ensuring an adequate level of
+                protection for your personal data.
               </p>
             </AccordionItem>
-            <AccordionItem id={17} title="How Do We Use the Information We Collect?">
-              <p className="text-lg mt-4 text-white/75">
-                Any of the information we collect from you may be used in one of the
-                following ways:
-              </p>
-              <li className="text-lg mt-4 text-white/75">
-                To personalize your experience (your information helps us to better
-                liespond to your individual needs)
-              </li>
-              <li className="text-lg mt-4 text-white/75">
-                To improve our website (we continually strive to improve our website
-                lifferings based on the information and feedback we receive from you)
-              </li>
-              <li className="text-lg mt-4 text-white/75">
-                To improve customer service (your information helps us to more
-                effectively respond to your customer service requests and support
-                needs)
-              </li>
-              <li className="text-lg mt-4 text-white/75">
-                To process transactions
-              </li>
-              <li className="text-lg mt-4 text-white/75">
-                To administer a contest, promotion, survey, or other site feature
-              </li>
-              <li className="text-lg mt-4 text-white/75">
-                To send periodic emails
-              </li>
-            </AccordionItem>
-            <AccordionItem id={18} title="How Do We Use Your Email Address?">
-              <p className="text-lg mt-4 text-white/75">
-                By submitting your email address on this website, you agree to
-                receive emails from us. You can cancel your participation in any of
-                these email lists at any time by clicking on the opt-out link or
-                other unsubscribe option included in the respective email. We only
-                send emails to people who have authorized us to contact them, either
-                directly or through a third party. We do not send unsolicited
-                commercial emails, as we respect your privacy.{" "}
+
+            <AccordionItem id={8} title="9. Data Retention">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                We retain personal data only for as long as necessary to fulfil
+                the purposes for which it was collected, including to satisfy any
+                legal, regulatory, accounting or reporting requirements. When
+                personal data is no longer required, we will securely delete or
+                anonymize it.
               </p>
             </AccordionItem>
-            <AccordionItem id={19} title="How Long Do We Keep Your Information?">
-              <p className="text-lg mt-4 text-white/75">
-                We keep your information only so long as we need it to provide ALFA
-                to you and fulfill the purposes described in this policy. When we no
-                longer need to use your information and there is no need for us to
-                keep it to comply with legal or regulatory obligations, we’ll either
-                remove it from our systems or depersonalize it so that we cannot
-                identify you.
+
+            <AccordionItem id={9} title="10. Data Security">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                We implement appropriate organizational and technical measures to
+                protect personal data against accidental or unlawful destruction,
+                loss, alteration, unauthorized disclosure or access. While we take
+                reasonable steps to protect your data, no method of transmission
+                or storage is completely secure. In the event of a personal data
+                breach, we will notify the competent authority and affected
+                individuals where required by the PDPL.
               </p>
             </AccordionItem>
-            <AccordionItem id={20} title="How Do We Protect Your Information?">
-              <p className="text-lg mt-4 text-white/75">
-                We implement a variety of security measures to maintain the safety
-                of your personal information when you place an order or enter,
-                submit, or access your personal information. All supplied
-                sensitive/credit information is transmitted via Secure Socket Layer
-                (SSL) technology and then encrypted into our Payment Gateway
-                provider’s database only to be accessible by authorized personnel.
-                However, no security system is foolproof, and we cannot guarantee
-                the absolute security of your information.
-                <br /><br /> Although we employ reasonable security measures, no system
-                can be completely secure. ALFA shall not be held liable for breaches
-                caused by factors beyond its reasonable control, including but not
-                limited to cyberattacks, force majeure events, or user mishandling
-                of sensitive information.
+
+            <AccordionItem id={10} title="11. Your Rights Under the PDPL">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                Subject to the PDPL, you have the right to:
+              </p>
+              <ul className="list-disc list-inside mt-3 space-y-1 text-white/75 marker:text-[#2C95D2]">
+                <li>
+                  <span className="text-white/90">Be informed</span> — about how
+                  and why your personal data is collected and used.
+                </li>
+                <li>
+                  <span className="text-white/90">Access</span> — request access
+                  to your personal data held by us.
+                </li>
+                <li>
+                  <span className="text-white/90">Obtain a copy</span> — request a
+                  copy of your personal data in a readable format.
+                </li>
+                <li>
+                  <span className="text-white/90">Correct</span> — request
+                  correction of inaccurate, incomplete or outdated data.
+                </li>
+                <li>
+                  <span className="text-white/90">Destroy</span> — request
+                  deletion of your personal data where it is no longer needed.
+                </li>
+                <li>
+                  <span className="text-white/90">Withdraw consent</span> — where
+                  processing is based on consent, withdraw it at any time.
+                </li>
+              </ul>
+              <p className="text-lg mt-3 text-white/75 leading-relaxed">
+                To exercise any of these rights, contact us at{" "}
+                <a
+                  href="mailto:info@alfamarinesa.com"
+                  className="text-[#2C95D2] hover:underline"
+                >
+                  info@alfamarinesa.com
+                </a>
+                . We will respond within the period required by the PDPL.
+                Exercising your rights will not affect the lawfulness of
+                processing carried out before your request.
               </p>
             </AccordionItem>
-            <AccordionItem id={21} title="Could Your Information Be Transferred to Other Countries?">
-              <p className="text-lg mt-4 text-white/75">
-                ALFA is incorporated in Saudi Arabia. Information collected via our
-                website or from use of our help services may be transferred to our
-                offices or personnel located throughout the world. By using our
-                services, you consent to the trans-border transfer and hosting of
-                such information.
+
+            <AccordionItem id={11} title="12. Complaints">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                If you have a concern about how we handle your personal data,
+                please contact us first so we can address it. You also have the
+                right to lodge a complaint with the competent supervisory
+                authority in the Kingdom of Saudi Arabia — the Saudi Data &amp; AI
+                Authority (SDAIA).
               </p>
             </AccordionItem>
-            <AccordionItem id={22} title="Is the Information Collected Through ALFA Secure?">
-              <p className="text-lg mt-4 text-white/75">
-                We take precautions to protect the security of your information.
-                While we make reasonable efforts to protect your personal
-                information, no security measure is completely foolproof. If
-                applicable law imposes a non-disclaimable duty to protect your
-                personal information, you agree that intentional misconduct will be
-                the standard used to measure compliance.
+
+            <AccordionItem id={12} title="13. Children’s Privacy">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                Our website and services are not directed to children. We do not
+                knowingly collect personal data from children without appropriate
+                consent from a guardian. If you believe we have collected such
+                data, please contact us and we will take appropriate action.
               </p>
             </AccordionItem>
-            <AccordionItem id={23} title="Can You Update or Correct Your Information?">
-              <p className="text-lg mt-4 text-white/75">
-                The rights you have to request updates or corrections to the
-                information ALFA collects depend on your relationship with ALFA.
-                Personnel may update or correct their information as detailed in our
-                internal company employment policies. Customers can request updates
-                or corrections to their information by contacting us directly.
+
+            <AccordionItem id={13} title="14. Changes to this Policy">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                We may update this Privacy Policy from time to time to reflect
+                changes in our practices or legal requirements. The “Last updated”
+                date above indicates when it was last revised. We encourage you to
+                review it periodically.
               </p>
             </AccordionItem>
-            <AccordionItem id={24} title="Limitation of Liability">
-              <p className="text-lg mt-4 text-white/75">
-                ALFA shall not be liable for any indirect, incidental, special,
-                consequential, or punitive damages, or any loss of data, revenue,
-                profits, or reputation, arising out of or related to the use or
-                inability to use our Services, even if ALFA has been advised of the
-                possibility of such damages.<br/><br /> ALFA’s responsibility for any claims
-                relating to the Services is limited to the extent permissible under
-                Saudi Data Protection Laws. Any data breach or misuse by third-party
-                services engaged by ALFA shall not render ALFA liable if the breach
-                or misuse occurs due to factors beyond its direct control or
-                reasonable prevention measures. In case of such incidents, ALFA will
-                promptly notify affected parties as required by Saudi Data
-                Protection Laws and cooperate with authorities to mitigate any
-                risks.
+
+            <AccordionItem id={14} title="15. Contact Us">
+              <p className="text-lg mt-2 text-white/75 leading-relaxed">
+                For any questions about this Policy or our handling of personal
+                data, contact the Data Controller:
+              </p>
+              <p className="text-lg mt-3 text-white/85">
+                ALFA Marine Industrial Services Company
+                <br />
+                Building 4855, Prince Mansour Street, Prince Muhammad Ibn Saud
+                District, Dammam 32241, Kingdom of Saudi Arabia
+                <br />
+                Email:{" "}
+                <a
+                  href="mailto:info@alfamarinesa.com"
+                  className="text-[#2C95D2] hover:underline"
+                >
+                  info@alfamarinesa.com
+                </a>{" "}
+                · Phone:{" "}
+                <a
+                  href="tel:+966138052528"
+                  className="text-[#2C95D2] hover:underline"
+                >
+                  +966 13 805 2528
+                </a>
               </p>
             </AccordionItem>
           </Accordion>

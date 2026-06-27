@@ -1,0 +1,39 @@
+# ALFA Group
+
+> ALFA Group is a steadily growing multi-division company supporting major industries across the Middle East. Operating as a reliable subcontractor from Dammam, Saudi Arabia, ALFA delivers integrated Engineering, Procurement, Fabrication & Construction (EPFC) solutions across the Oil & Gas, Renewable Energy, Power & Utilities, Marine & Offshore, Defense, Petrochemical, Construction, Industrial and Commercial sectors.
+
+ALFA Group operates through specialized divisions — Marine & Offshore, Construction, Fabrication & Machining, Trading, ICT, Facility Management, and Joinery — backed by ISO certifications and a commitment to quality, safety, and on-time delivery.
+
+Contact: info@alfamarinesa.com · +966 13 805 2528 · Prince Muhammad Ibn Saud District, Dammam, Kingdom of Saudi Arabia.
+
+## Main pages
+
+- [Home](https://alfa-website-chi.vercel.app/): Overview of ALFA Group, divisions, capabilities, and presence in Saudi Arabia.
+- [Who We Are](https://alfa-website-chi.vercel.app/who-we-are): Group overview, divisions, mission/vision/goals, core values, strategy, culture, facilities, capabilities, and accreditations.
+- [What We Do](https://alfa-website-chi.vercel.app/what-we-do): The seven operating divisions and their services.
+- [Sustainability](https://alfa-website-chi.vercel.app/sustainability): Environmental responsibility, HSE policy, quality assurance, and ethics & compliance.
+- [Media Center](https://alfa-website-chi.vercel.app/media-center): Company news and downloads.
+- [Get In Touch](https://alfa-website-chi.vercel.app/get-in-touch): Contact form, commercial inquiries, careers, supplier registration, and whistleblowing.
+
+## Divisions
+
+- [Marine & Offshore](https://alfa-website-chi.vercel.app/what-we-do#marine-offshore): Modular buildings, living quarters, and offshore technical services to ABS/DNV standards.
+- [Construction](https://alfa-website-chi.vercel.app/what-we-do#construction): Civil, structural, and MEP construction solutions.
+- [Fabrication & Machining](https://alfa-website-chi.vercel.app/what-we-do#fabrication-machining): Specialized steel fabrication and CNC machining.
+- [Trading](https://alfa-website-chi.vercel.app/what-we-do#trading): Procurement, trading, and industrial supplies.
+- [ICT](https://alfa-website-chi.vercel.app/what-we-do#ict): ICT & ELV systems, structured cabling, and smart solutions.
+- [Facility Management](https://alfa-website-chi.vercel.app/what-we-do#facility-management): Facility management and maintenance.
+- [Joinery](https://alfa-website-chi.vercel.app/what-we-do#joinery): Joinery works and custom fit-outs.
+
+## Governance
+
+- [HSE Policy](https://alfa-website-chi.vercel.app/sustainability#hse-policy): Health, safety, and environmental commitments.
+- [Quality Assurance Policy](https://alfa-website-chi.vercel.app/sustainability#quality-assurance): Quality management system and standards.
+- [Ethics & Compliance](https://alfa-website-chi.vercel.app/sustainability#ethics-compliance): Business conduct and compliance.
+- [Privacy Policy](https://alfa-website-chi.vercel.app/privacy-policy)
+- [Cookie Policy](https://alfa-website-chi.vercel.app/cookies-policy)
+- [Terms & Conditions](https://alfa-website-chi.vercel.app/terms-and-conditions)
+
+## Optional
+
+- [Sitemap](https://alfa-website-chi.vercel.app/sitemap.xml): Full list of indexable pages.

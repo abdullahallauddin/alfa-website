@@ -95,7 +95,7 @@ const WhistleBlowing = ({ embedded }) => {
             concern or complaint, or who participate in the investigation of
             such matters
           </p>
-          <div className="flex flex-col items-center justify-center mt-10 -mb-24">
+          <div className="flex flex-col items-center justify-center mt-10">
             <div className="container px-4 py-8 flex flex-wrap justify-center gap-12">
               {contactusdetails.map((contactusdetail) => (
                 <div
@@ -114,7 +114,7 @@ const WhistleBlowing = ({ embedded }) => {
                       <img
                         src={contactusdetail.logo}
                         alt={contactusdetail.title}
-                        className="h-8 w-8"
+                        className="h-8 w-8 brightness-0 invert"
                       />
                     </div>
                     <h3

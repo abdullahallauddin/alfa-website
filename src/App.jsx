@@ -11,6 +11,7 @@ import WhatsAppButton from "./Components/WhatsAppButton.jsx";
 import Loader from "./Components/Loader.jsx";
 import Footer from "./Components/Footer.jsx";
 import InnerLayout from "./Components/InnerLayout.jsx";
+import CookieConsent from "./Components/CookieConsent.jsx";
 
 // Lazy load views
 const Home = lazy(() => import("./Views/Home"));
@@ -41,6 +42,7 @@ function App() {
           <Navbar />
           <ScrollToTopButton />
           <WhatsAppButton />
+          <CookieConsent />
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<Home />} />

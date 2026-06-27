@@ -305,6 +305,28 @@ const ContactUs = ({ embedded }) => {
                   />
                 </div>
 
+                <label className="flex items-start gap-3 font-roboto text-sm leading-relaxed text-white/65">
+                  <input
+                    type="checkbox"
+                    required
+                    name="consent"
+                    className="mt-1 h-4 w-4 shrink-0 accent-[#2C95D2]"
+                  />
+                  <span>
+                    I consent to ALFA processing my personal data to respond to
+                    my enquiry, in accordance with the{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#2C95D2] hover:underline"
+                    >
+                      Privacy Policy
+                    </a>
+                    . <span className="text-[#2C95D2]">*</span>
+                  </span>
+                </label>
+
                 <button
                   type="submit"
                   className="inline-flex items-center gap-2 rounded-full bg-[#2C95D2] px-7 py-3 font-roboto text-[15px] font-medium text-white transition-all duration-300 hover:bg-[#2C95D2]/90 hover:shadow-[0_0_22px_2px_rgba(44,149,210,0.4)]"
