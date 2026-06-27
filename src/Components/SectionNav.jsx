@@ -29,7 +29,7 @@ const SectionNav = ({ items, activeKey, onSelect }) => {
       data-no-reveal
     >
       <nav aria-label="Section navigation" className="mx-auto max-w-6xl px-6 md:px-10">
-        <ul ref={listRef} className="flex gap-1 overflow-x-auto no-scrollbar py-2">
+        <ul ref={listRef} className="flex gap-1 overflow-x-auto no-scrollbar py-2 md:justify-between md:gap-2">
           {items.map(({ key, label }) => {
             const active = key === activeKey;
             return (

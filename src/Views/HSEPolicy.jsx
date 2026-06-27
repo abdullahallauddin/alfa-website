@@ -153,7 +153,7 @@ const HSEPolicy = ({ embedded }) => {
                 },
               ].map(({ icon, title, bullets }, idx) => (
                 <div key={idx} className="flex items-start space-x-4">
-                  <img src={icon} alt={title} className="w-9 h-9 mt-1" />
+                  <img src={icon} alt={title} className="w-9 h-9 mt-1 brightness-0 invert" />
                   <div>
                     <h3
                       className="font-semibold text-lg mb-1 text-white font-roboto font-light"

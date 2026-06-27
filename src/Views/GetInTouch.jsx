@@ -15,14 +15,14 @@ import WhistleBlowing from "./WhistleBlowing";
 // Each sub-view renders with `embedded` so it drops its own hero/scroll reset.
 const TABS = [
   {
-    key: "commercial-inquiries",
-    label: "Commercial Inquiries",
-    content: <CommercialInquiries embedded />,
-  },
-  {
     key: "contact",
     label: "Contact us",
     content: <ContactUs embedded />,
+  },
+  {
+    key: "commercial-inquiries",
+    label: "Commercial Inquiries",
+    content: <CommercialInquiries embedded />,
   },
   {
     key: "careers",

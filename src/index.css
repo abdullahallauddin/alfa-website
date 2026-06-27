@@ -40,6 +40,9 @@ html.home-snap {
   background-attachment: fixed;
   color: rgba(255, 255, 255, 0.82);
   min-height: 100vh;
+  /* establish a BFC so trailing child margins don't collapse out and
+     expose the white body above the footer (flow-root keeps sticky working) */
+  display: flow-root;
 }
 
 /* Inner-page scroll reveal — progressive enhancement.

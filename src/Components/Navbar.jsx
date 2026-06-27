@@ -170,7 +170,7 @@ const Navbar = () => {
 
           {/* Center: inline menu (hidden while overlay is open) */}
           {!isOpen && (
-            <ul className="hidden lg:flex items-center justify-center gap-9 font-roboto font-normal text-[15px] tracking-[0.3px] p-0 m-0 justify-self-center">
+            <ul className="hidden lg:flex items-center justify-center gap-9 font-roboto font-normal text-[18px] tracking-[0.3px] p-0 m-0 justify-self-center">
               {links.map((menu, idx) => (
                 <li
                   key={idx}
@@ -224,7 +224,7 @@ const Navbar = () => {
                   aria-label="LinkedIn"
                 >
                   <FaLinkedinIn
-                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                    className={`text-[19px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
                   />
                 </a>
                 <a
@@ -234,7 +234,7 @@ const Navbar = () => {
                   aria-label="Instagram"
                 >
                   <FaInstagram
-                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                    className={`text-[19px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
                   />
                 </a>
                 <a
@@ -244,11 +244,11 @@ const Navbar = () => {
                   aria-label="X"
                 >
                   <FaXTwitter
-                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                    className={`text-[19px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
                   />
                 </a>
                 <span
-                  className={`w-px h-5 ${
+                  className={`w-px h-6 ${
                     isSticky ? "bg-[#11234B]/40" : "bg-white/40"
                   }`}
                 />
@@ -259,33 +259,33 @@ const Navbar = () => {
                   aria-label="Login"
                 >
                   <FaUser
-                    className={`text-[15px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
+                    className={`text-[19px] transition-colors duration-200 ${topTextColor} hover:text-[#2C95D2]`}
                   />
                 </a>
               </div>
             )}
             <FaSearch
-              className={`text-[16px] cursor-pointer transition-colors duration-200 ${iconColor} hover:text-[#2C95D2]`}
+              className={`text-[20px] cursor-pointer transition-colors duration-200 ${iconColor} hover:text-[#2C95D2]`}
             />
             <button
               onClick={toggleMenu}
               aria-label={isOpen ? "Close menu" : "Open menu"}
-              className="group relative w-7 h-[18px] cursor-pointer"
+              className="group relative w-8 h-[22px] cursor-pointer"
             >
               <span
-                className={`absolute left-0 h-[2px] w-7 rounded-full transition-all duration-300 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
+                className={`absolute left-0 h-[2px] w-8 rounded-full transition-all duration-300 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
                   isOpen
                     ? "top-1/2 -translate-y-1/2 rotate-45"
                     : "top-0 rotate-0"
                 }`}
               />
               <span
-                className={`absolute left-0 top-1/2 -translate-y-1/2 h-[2px] w-7 rounded-full transition-all duration-200 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
+                className={`absolute left-0 top-1/2 -translate-y-1/2 h-[2px] w-8 rounded-full transition-all duration-200 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
                   isOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
                 }`}
               />
               <span
-                className={`absolute left-0 h-[2px] w-7 rounded-full transition-all duration-300 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
+                className={`absolute left-0 h-[2px] w-8 rounded-full transition-all duration-300 ease-in-out group-hover:bg-[#2C95D2] ${lineColor} ${
                   isOpen
                     ? "top-1/2 -translate-y-1/2 -rotate-45"
                     : "bottom-0 rotate-0"
@@ -309,7 +309,7 @@ const Navbar = () => {
 
           {/* Menu: accordion on mobile, grid + hover on desktop */}
           <div className="relative min-h-screen flex items-start lg:items-center px-6 md:px-10 lg:px-16 pt-24 lg:pt-32 pb-16">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-10 lg:gap-y-28 w-full max-w-6xl mx-auto">
+            <div className="flex flex-col gap-y-1 lg:flex-row lg:flex-wrap lg:items-start lg:justify-center lg:gap-x-14 lg:gap-y-20 w-full mx-auto">
               {links.map((menu, idx) => {
                 const active = overlayMenu === menu.name;
                 const anyActive = overlayMenu !== null;

@@ -76,11 +76,16 @@ const FooterLink = ({ to, children }) => (
 
 const Footer = () => {
   return (
-    <footer className="snap-section relative overflow-hidden bg-[#0a1428] text-white">
-      {/* top hairline + accent sheen */}
+    <footer className="snap-section relative overflow-hidden bg-gradient-to-br from-[#0c1a36] via-[#0a1428] to-[#0a1326] text-white">
+      {/* top hairline */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2C95D2]/40 to-transparent" />
-      {/* ambient glow */}
-      <div className="pointer-events-none absolute -top-24 right-0 h-[40vh] w-[40vh] rounded-full bg-[#2C95D2]/[0.06] blur-[120px]" />
+      {/* top-left ambient blue glow */}
+      <div className="pointer-events-none absolute -top-40 -left-40 h-[60vh] w-[60vh] rounded-full bg-[#2C95D2]/[0.12] blur-[140px]" />
+      {/* diagonal two-tone panel (soft lighter triangle, lower-right) */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-white/[0.018]"
+        style={{ clipPath: "polygon(72% 0, 100% 0, 100% 100%, 38% 100%)" }}
+      />
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 sm:px-10 lg:px-16 pt-20 pb-10">
         <div className="grid gap-14 lg:grid-cols-[1.05fr_1.35fr] lg:gap-16">
@@ -174,14 +179,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-
-      {/* oversized brand wordmark */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -translate-x-1/2 select-none font-roboto font-bold leading-none tracking-[-0.04em] text-white/[0.035] text-[26vw]"
-      >
-        ALFA
-      </span>
     </footer>
   );
 };
