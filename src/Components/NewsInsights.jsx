@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaChevronLeft, FaChevronRight, FaArrowRight } from "react-icons/fa";
 import { news } from "../data/news";
+import useDragScroll from "../hooks/useDragScroll";
 
 const EASE = [0.22, 1, 0.36, 1];
 
 const NewsInsights = () => {
   const trackRef = useRef(null);
+  useDragScroll(trackRef);
 
   const scrollByCard = (dir) => {
     const track = trackRef.current;
@@ -74,14 +76,14 @@ const NewsInsights = () => {
         {/* Carousel */}
         <div
           ref={trackRef}
-          className="mt-10 flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2"
+          className="mt-10 flex gap-6 overflow-x-auto no-scrollbar pb-2 cursor-grab select-none"
         >
           {news.map((item) => (
             <Link
               key={item.slug}
               to={`/news/${item.slug}`}
               data-card
-              className="group snap-start shrink-0 w-[82vw] sm:w-[20rem] overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-colors duration-300 hover:border-[#2C95D2]/50 hover:bg-white/[0.08]"
+              className="group shrink-0 w-[82vw] sm:w-[20rem] overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-colors duration-300 hover:border-[#2C95D2]/50 hover:bg-white/[0.08]"
             >
               <div className="relative h-44 overflow-hidden">
                 <img

@@ -16,6 +16,7 @@ import Facility2a from "../Assets/Images/facility2a.png";
 import Joinery2a from "../Assets/Images/joinery2a.png";
 import { motion } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import useDragScroll from "../hooks/useDragScroll";
 
 // Original cards
 const cards = [
@@ -133,6 +134,7 @@ const N = cards.length;
 
 function OurDivisions() {
   const trackRef = useRef(null);
+  useDragScroll(trackRef);
   const rafId = useRef(0);
   const settleTimer = useRef(null);
   const resetting = useRef(false);
@@ -267,7 +269,7 @@ function OurDivisions() {
         <div
           ref={trackRef}
           onScroll={handleScroll}
-          className="div-track no-scrollbar flex gap-6 md:gap-8 overflow-x-auto px-[calc(50%-9rem)] sm:px-[calc(50%-10rem)] md:px-[calc(50%-11rem)] py-8"
+          className="div-track no-scrollbar flex gap-6 md:gap-8 overflow-x-auto px-[calc(50%-9rem)] sm:px-[calc(50%-10rem)] md:px-[calc(50%-11rem)] py-8 cursor-grab select-none"
         >
           {slides.map((card, i) => (
             <div

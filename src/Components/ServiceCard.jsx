@@ -8,9 +8,11 @@ import Trading from "../Assets/Icons/Trading.svg";
 import ICT from "../Assets/Icons/ICT.svg";
 import Facility from "../Assets/Icons/Facility.svg";
 import Joinery from "../Assets/Icons/Joinery.svg";
+import useDragScroll from "../hooks/useDragScroll";
 
 const ServiceCard = ({ carousel = false }) => {
   const trackRef = useRef(null);
+  useDragScroll(trackRef);
 
   const scrollByCard = (dir) => {
     const track = trackRef.current;
@@ -84,7 +86,7 @@ const ServiceCard = ({ carousel = false }) => {
       key={card.id}
       data-card
       className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 transition-colors duration-300 hover:bg-white/[0.08] hover:border-[#2C95D2]/50 ${
-        inCarousel ? "snap-start shrink-0 w-[82vw] sm:w-[20rem]" : ""
+        inCarousel ? "shrink-0 w-[82vw] sm:w-[20rem]" : ""
       }`}
     >
       <div className="mb-5 grid">
@@ -108,7 +110,7 @@ const ServiceCard = ({ carousel = false }) => {
       <div className="relative mt-6">
         <div
           ref={trackRef}
-          className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-1 py-2"
+          className="flex gap-6 overflow-x-auto no-scrollbar px-1 py-2 cursor-grab select-none"
         >
           {cards.map((card) => renderCard(card, true))}
         </div>
