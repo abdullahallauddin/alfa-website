@@ -4,12 +4,13 @@ import SaudiMap from "./SaudiMap";
 
 const EASE = [0.22, 1, 0.36, 1];
 
-// Positions are percentages within the map box (tuned to the SVG outline)
+// x/y are % within the map box (derived from the SVG geoViewBox);
+// region is the province path id that lifts when the city is selected.
 const locations = [
-  { label: "Dammam", x: 73.6, y: 37.7 },
-  { label: "Al Jubail", x: 71.5, y: 34.7 },
-  { label: "Riyadh", x: 57.4, y: 46.8 },
-  { label: "Jeddah", x: 22.1, y: 63.7 },
+  { label: "Dammam", region: "SA-04", x: 73.6, y: 36.8 },
+  { label: "Al Jubail", region: "SA-04", x: 71.6, y: 33.2 },
+  { label: "Riyadh", region: "SA-01", x: 57.5, y: 47.6 },
+  { label: "Jeddah", region: "SA-02", x: 22.2, y: 67.9 },
 ];
 
 const OurPresence = () => {
@@ -106,8 +107,11 @@ const OurPresence = () => {
           viewport={{ once: false, amount: 0.3 }}
           className="relative mx-auto w-full max-w-2xl"
         >
-          <div className="relative w-full aspect-square">
-            <SaudiMap className="absolute inset-0 h-full w-full" />
+          <div className="relative w-full aspect-[730/600]">
+            <SaudiMap
+              className="absolute inset-0 h-full w-full"
+              activeRegion={locations[active].region}
+            />
 
             {/* Markers */}
             {locations.map((loc, i) => {
