@@ -1,5 +1,6 @@
 import React from "react";
 import { PROVINCES, SA_VIEWBOX } from "../data/saudiProvinces";
+// province-level map; active region is elevated (see OurPresence)
 
 // Province-level Saudi Arabia map. When `activeRegion` (e.g. "SA-04") is set,
 // that province is elevated (lifted, brightened, shadowed) above the rest.

@@ -15,28 +15,97 @@ const locations = [
 
 const OurPresence = () => {
   const [active, setActive] = useState(0);
-  const interacted = useRef(false);
+  const sectionRef = useRef(null);
+  const activeRef = useRef(0);
+  const lastStep = useRef(0);
+  const wasSettled = useRef(false);
 
-  // Gently auto-cycle through cities until the visitor interacts
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+
+  // Scroll-lock: while the section is settled in view, each scroll step reveals
+  // one region at a time. Only once all regions are shown (or you scroll back to
+  // the first) does the scroll release to the next/previous section.
   useEffect(() => {
     const prefersReduced =
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
-    const id = setInterval(() => {
-      if (interacted.current) return;
-      setActive((i) => (i + 1) % locations.length);
-    }, 2600);
-    return () => clearInterval(id);
+
+    const COOLDOWN = 650;
+    const BOUNDARY_HOLD = 750; // keep the first/last region visible before releasing
+    const last = locations.length - 1;
+
+    const onWheel = (e) => {
+      const sec = sectionRef.current;
+      if (!sec) return;
+      const rect = sec.getBoundingClientRect();
+      const settled = Math.abs(rect.top) < 12;
+      if (!settled) {
+        wasSettled.current = false;
+        return;
+      }
+      const dir = e.deltaY > 0 ? 1 : -1;
+
+      // First time the section settles: align starting region to entry direction.
+      if (!wasSettled.current) {
+        wasSettled.current = true;
+        const start = dir > 0 ? 0 : last;
+        activeRef.current = start;
+        setActive(start);
+        lastStep.current = Date.now();
+        e.preventDefault();
+        return;
+      }
+
+      const cur = activeRef.current;
+      const atEnd = (dir > 0 && cur >= last) || (dir < 0 && cur <= 0);
+      if (atEnd) {
+        // Hold the first (Dammam) / last (Jeddah) region visible for a moment
+        // before releasing the scroll to the next/previous section.
+        if (Date.now() - lastStep.current < BOUNDARY_HOLD) {
+          e.preventDefault();
+        }
+        return;
+      }
+
+      e.preventDefault();
+      const now = Date.now();
+      if (now - lastStep.current < COOLDOWN) return;
+      lastStep.current = now;
+      const next = Math.min(Math.max(cur + dir, 0), last);
+      activeRef.current = next;
+      setActive(next);
+    };
+
+    // Reliably reset the "settled" flag whenever the section is scrolled away
+    // (covers native snap entry from either direction, so re-entry always
+    // re-locks and re-aligns the starting region).
+    const onScroll = () => {
+      const sec = sectionRef.current;
+      if (!sec) return;
+      if (Math.abs(sec.getBoundingClientRect().top) > 40) {
+        wasSettled.current = false;
+      }
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   const select = (i) => {
-    interacted.current = true;
+    activeRef.current = i;
     setActive(i);
   };
 
   return (
     <section
+      ref={sectionRef}
       id="presence"
       className="snap-section relative min-h-screen w-full flex items-center overflow-hidden bg-gradient-to-br from-[#0a1428] via-[#11234B] to-[#0a1428]"
     >
@@ -138,16 +207,12 @@ const OurPresence = () => {
                         : "h-2.5 w-2.5 bg-white/55 hover:bg-white"
                     }`}
                   />
-                  {/* label tooltip */}
-                  <span
-                    className={`pointer-events-none absolute left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap rounded-md bg-[#0a1428]/90 px-3 py-1 font-roboto text-sm text-white ring-1 ring-white/15 transition-all duration-300 ${
-                      isActive
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-1"
-                    }`}
-                  >
-                    {loc.label}
-                  </span>
+                  {/* name label on the piece */}
+                  {isActive && (
+                    <span className="pointer-events-none absolute left-1/2 -top-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#0a1428]/90 px-4 py-1.5 font-roboto text-sm font-medium text-white ring-1 ring-[#2C95D2]/60 shadow-lg backdrop-blur-sm">
+                      {loc.label}
+                    </span>
+                  )}
                 </button>
               );
             })}
