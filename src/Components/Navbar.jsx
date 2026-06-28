@@ -12,12 +12,14 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import menuBg from "../Assets/Images/main-background.jpg";
 import { useI18n } from "../i18n/i18n";
+import SearchOverlay from "./SearchOverlay";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
   const [overlayMenu, setOverlayMenu] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { lang, toggle } = useI18n();
@@ -224,7 +226,14 @@ const Navbar = () => {
               </div>
             )}
             <LangToggle className={iconColor} />
-            <FaSearch className={`text-[20px] cursor-pointer transition-colors duration-200 ${iconColor} hover:text-[#2C95D2]`} />
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              aria-label={lang === "ar" ? "بحث" : "Search"}
+              className={`transition-colors duration-200 ${iconColor} hover:text-[#2C95D2]`}
+            >
+              <FaSearch className="text-[20px]" />
+            </button>
             <button
               onClick={toggleMenu}
               aria-label={isOpen ? (lang === "ar" ? "إغلاق القائمة" : "Close menu") : lang === "ar" ? "فتح القائمة" : "Open menu"}
@@ -305,6 +314,8 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 };
