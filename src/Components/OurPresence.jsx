@@ -34,6 +34,8 @@ const OurPresence = () => {
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
+    // Safari handles wheel-jacking poorly; let it scroll natively there.
+    if (document.documentElement.classList.contains("is-safari")) return;
 
     const COOLDOWN = 650;
     const BOUNDARY_HOLD = 750; // keep the first/last region visible before releasing

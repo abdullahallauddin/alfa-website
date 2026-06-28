@@ -32,6 +32,15 @@ html.home-snap {
   scroll-snap-stop: always;
 }
 
+/* Safari (incl. iOS): mandatory snap + scroll-snap-stop can trap scrolling.
+   Relax to proximity and drop the hard stop so the page always scrolls. */
+html.is-safari.home-snap {
+  scroll-snap-type: y proximity;
+}
+html.is-safari .snap-section {
+  scroll-snap-stop: normal;
+}
+
 /* Inner pages: dark navy theme to match the home aesthetic */
 .inner-page {
   background:
