@@ -32,11 +32,8 @@ html.home-snap {
   scroll-snap-stop: always;
 }
 
-/* Safari (incl. iOS): mandatory snap + scroll-snap-stop can trap scrolling.
-   Relax to proximity and drop the hard stop so the page always scrolls. */
-html.is-safari.home-snap {
-  scroll-snap-type: y proximity;
-}
+/* Safari (incl. iOS): keep mandatory section snapping, but `scroll-snap-stop:
+   always` traps scrolling in Safari — relax just that so the lock works. */
 html.is-safari .snap-section {
   scroll-snap-stop: normal;
 }

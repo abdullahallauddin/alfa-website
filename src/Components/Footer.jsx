@@ -159,7 +159,7 @@ const Footer = () => {
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] ring-1 ring-white/10 transition-colors duration-200 group-hover:bg-[#2C95D2] group-hover:ring-[#2C95D2]">
                   <FontAwesomeIcon icon={faPhoneAlt} className="text-xs" />
                 </span>
-                +966 13 805 2528
+                <bdi dir="ltr">+966 13 805 2528</bdi>
               </a>
               <a
                 href="mailto:info@alfamarinesa.com"

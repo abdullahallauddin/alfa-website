@@ -97,7 +97,7 @@ const PrivacyPolicy = () => {
                   href="tel:+966138052528"
                   className="text-[#2C95D2] hover:underline"
                 >
-                  +966 13 805 2528
+                  <bdi dir="ltr">+966 13 805 2528</bdi>
                 </a>
               </dd>
             </div>
@@ -379,7 +379,7 @@ const PrivacyPolicy = () => {
                   href="tel:+966138052528"
                   className="text-[#2C95D2] hover:underline"
                 >
-                  +966 13 805 2528
+                  <bdi dir="ltr">+966 13 805 2528</bdi>
                 </a>
               </p>
             </AccordionItem>

@@ -34,7 +34,9 @@ const OurPresence = () => {
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
-    // Safari handles wheel-jacking poorly; let it scroll natively there.
+    // Safari's wheel-jacking (preventDefault on wheel) traps page scrolling,
+    // so the region-by-region scroll lock is Chrome/Firefox only. Safari uses
+    // the auto-cycle fallback below instead.
     if (document.documentElement.classList.contains("is-safari")) return;
 
     const COOLDOWN = 650;
@@ -99,6 +101,41 @@ const OurPresence = () => {
     return () => {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  // Safari fallback: auto-cycle the regions while the section is in view, so all
+  // regions are revealed without scroll-jacking (which Safari can't handle).
+  useEffect(() => {
+    if (!document.documentElement.classList.contains("is-safari")) return;
+    const prefersReduced =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    const sec = sectionRef.current;
+    if (!sec) return;
+    let timer = null;
+    const start = () => {
+      if (timer) return;
+      timer = setInterval(
+        () => setActive((i) => (i + 1) % locations.length),
+        1800
+      );
+    };
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    const io = new IntersectionObserver(
+      (entries) => (entries[0]?.isIntersecting ? start() : stop()),
+      { threshold: 0.4 }
+    );
+    io.observe(sec);
+    return () => {
+      io.disconnect();
+      stop();
     };
   }, []);
 

@@ -148,7 +148,7 @@ const WhistleBlowing = ({ embedded }) => {
                     <p
                       className="mt-6 mb-8 align-left ms-4 text-white/75"
                     >
-                      {contactusdetail.description}
+                      <bdi dir="ltr">{contactusdetail.description}</bdi>
                     </p>
                   </a>
                 </div>

@@ -34,6 +34,7 @@ const CONTACT_INFO = [
     labelAr: "الهاتف",
     value: "+966 13 805 2528",
     href: "tel:+966138052528",
+    ltr: true,
   },
   {
     icon: FaEnvelope,
@@ -144,7 +145,7 @@ const ContactUs = ({ embedded }) => {
 
             <ul className="flex flex-1 flex-col gap-4">
               {CONTACT_INFO.map(
-                ({ icon: Icon, label, labelAr, value, valueAr, href, newTab }) => {
+                ({ icon: Icon, label, labelAr, value, valueAr, href, newTab, ltr }) => {
                 const inner = (
                   <div className="group flex h-full items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 transition-colors duration-200 hover:border-[#2C95D2]/50 hover:bg-white/[0.08]">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#2C95D2]/10 text-[#2C95D2] transition-colors duration-200 group-hover:bg-[#2C95D2] group-hover:text-white">
@@ -154,7 +155,10 @@ const ContactUs = ({ embedded }) => {
                       <p className="font-roboto text-xs uppercase tracking-wide text-white/45">
                         {t(label, labelAr)}
                       </p>
-                      <p className="mt-1 font-roboto text-[15px] leading-snug text-white/85">
+                      <p
+                        className="mt-1 font-roboto text-[15px] leading-snug text-white/85"
+                        dir={ltr ? "ltr" : undefined}
+                      >
                         {t(value, valueAr)}
                       </p>
                     </div>
@@ -266,6 +270,7 @@ const ContactUs = ({ embedded }) => {
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
                         aria-label={t("Country code", "رمز الدولة")}
+                        dir="ltr"
                         className="rounded-lg border border-white/10 bg-white/5 px-3 py-3 font-roboto text-[15px] text-white outline-none transition-colors focus:border-[#2C95D2] focus:ring-1 focus:ring-[#2C95D2] [&>option]:bg-[#11234B]"
                       >
                         {countryOptions.map((c) => (
@@ -279,6 +284,7 @@ const ContactUs = ({ embedded }) => {
                         value={form.phone}
                         onChange={update}
                         inputMode="tel"
+                        dir="ltr"
                         placeholder="50 123 4567"
                         className={inputClass}
                       />
