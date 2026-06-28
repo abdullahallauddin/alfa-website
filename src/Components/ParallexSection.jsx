@@ -1,7 +1,9 @@
 import React from "react";
 import ParallaxBG from "../Assets/Images/parallex.png"; // Replace with your image
+import { useT } from "../i18n/i18n";
 
 const ParallaxSection = () => {
+  const t = useT();
   return (
     <section
       id="reach"
@@ -16,15 +18,18 @@ const ParallaxSection = () => {
           className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] mb-5 text-balance"
           style={{ letterSpacing: "-0.02em" }}
         >
-          Global Reach, <span className="text-[#2C95D2]">Local Expertise</span>
+          {t("Global Reach,", "حضور عالمي،")}{" "}
+          <span className="text-[#2C95D2]">{t("Local Expertise", "خبرة محلية")}</span>
         </h2>
         <span className="mb-7 mx-auto block h-px w-16 bg-[#2C95D2]" />
         <p
           className="font-roboto font-light text-lg text-white/80 max-w-[55ch] mx-auto"
           style={{ textWrap: "pretty" }}
         >
-          From coastlines to continents, ALFA Group delivers excellence across the globe.
-          Our reach is vast, and our presence is impactful.
+          {t(
+            "From coastlines to continents, ALFA Group delivers excellence across the globe. Our reach is vast, and our presence is impactful.",
+            "من السواحل إلى القارات، تقدّم مجموعة ألفا التميّز في مختلف أنحاء العالم. حضورنا واسع، وأثرنا ملموس."
+          )}
         </p>
       </div>
     </section>

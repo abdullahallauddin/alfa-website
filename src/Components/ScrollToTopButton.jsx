@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useT } from "../i18n/i18n";
 import UpArrow from "../Assets/Icons/up-arrow.svg";
 
 const ScrollToTopButton = () => {
+  const t = useT();
   const [scroll, setScroll] = useState(0);
 
   const handleScroll = () => {
@@ -48,7 +50,7 @@ const ScrollToTopButton = () => {
           strokeLinecap="round"
         />
       </svg>
-      <img src={UpArrow} alt="Scroll to top" className="w-7 h-7 z-10" />
+      <img src={UpArrow} alt={t("Scroll to top", "العودة إلى الأعلى")} className="w-7 h-7 z-10" />
     </div>
   );
 };

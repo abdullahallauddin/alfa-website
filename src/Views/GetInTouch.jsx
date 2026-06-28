@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import heroImage from "../Assets/Images/contactus1.jpg";
 import PageBanner from "../Components/PageBanner";
 import SectionNav from "../Components/SectionNav";
+import { useT } from "../i18n/i18n";
 
 import CommercialInquiries from "./CommercialInquiries";
 import ContactUs from "./ContactUs";
@@ -17,31 +18,37 @@ const TABS = [
   {
     key: "contact",
     label: "Contact us",
+    labelAr: "اتصل بنا",
     content: <ContactUs embedded />,
   },
   {
     key: "commercial-inquiries",
     label: "Commercial Inquiries",
+    labelAr: "الاستفسارات التجارية",
     content: <CommercialInquiries embedded />,
   },
   {
     key: "careers",
     label: "Careers",
+    labelAr: "الوظائف",
     content: <CareersInquiries embedded />,
   },
   {
     key: "become-a-supplier",
     label: "Become a Supplier",
+    labelAr: "كن مورّداً",
     content: <Supplier embedded />,
   },
   {
     key: "whistleblowing",
     label: "Whistleblowing",
+    labelAr: "الإبلاغ عن المخالفات",
     content: <WhistleBlowing embedded />,
   },
 ];
 
 const GetInTouch = () => {
+  const t = useT();
   const location = useLocation();
   const prefersReduced = useReducedMotion();
   const tabRefs = useRef([]);
@@ -92,12 +99,16 @@ const GetInTouch = () => {
     <div className="inner-page bg-[#0a1428] text-white">
       {/* Hero band */}
       <PageBanner image={heroImage}>
-        Get In <span className="text-[#2C95D2]">Touch</span>
+        {t("Get In ", "تواصل ")}
+        <span className="text-[#2C95D2]">{t("Touch", "معنا")}</span>
       </PageBanner>
 
       {/* Section nav */}
       <SectionNav
-        items={TABS.map((t) => ({ key: t.key, label: t.label }))}
+        items={TABS.map((tab) => ({
+          key: tab.key,
+          label: t(tab.label, tab.labelAr),
+        }))}
         activeKey={TABS[active].key}
         onSelect={(key) => selectTab(TABS.findIndex((t) => t.key === key))}
       />

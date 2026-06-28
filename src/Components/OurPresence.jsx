@@ -1,19 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SaudiMap from "./SaudiMap";
+import { useT } from "../i18n/i18n";
 
 const EASE = [0.22, 1, 0.36, 1];
 
 // x/y are % within the map box (derived from the SVG geoViewBox);
 // region is the province path id that lifts when the city is selected.
 const locations = [
-  { label: "Dammam", region: "SA-04", x: 73.6, y: 36.8 },
-  { label: "Al Jubail", region: "SA-04", x: 71.6, y: 33.2 },
-  { label: "Riyadh", region: "SA-01", x: 57.5, y: 47.6 },
-  { label: "Jeddah", region: "SA-02", x: 22.2, y: 67.9 },
+  { label: "Dammam", labelAr: "الدمام", region: "SA-04", x: 73.6, y: 36.8 },
+  { label: "Al Jubail", labelAr: "الجبيل", region: "SA-04", x: 71.6, y: 33.2 },
+  { label: "Riyadh", labelAr: "الرياض", region: "SA-01", x: 57.5, y: 47.6 },
+  { label: "Jeddah", labelAr: "جدة", region: "SA-02", x: 22.2, y: 67.9 },
 ];
 
 const OurPresence = () => {
+  const t = useT();
   const [active, setActive] = useState(0);
   const sectionRef = useRef(null);
   const activeRef = useRef(0);
@@ -124,7 +126,8 @@ const OurPresence = () => {
             className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] text-white text-balance"
             style={{ letterSpacing: "-0.02em" }}
           >
-            <span className="text-[#2C95D2]">OUR</span> PRESENCE
+            <span className="text-[#2C95D2]">{t("OUR", "تواجدنا")}</span>{" "}
+            {t("PRESENCE", "")}
           </h1>
           <span className="mt-5 mb-8 block h-px w-16 bg-[#2C95D2]" />
 
@@ -138,7 +141,7 @@ const OurPresence = () => {
                     onMouseEnter={() => select(i)}
                     onFocus={() => select(i)}
                     onClick={() => select(i)}
-                    className={`group flex w-full items-center gap-3 rounded-md py-3 pl-3 pr-4 text-left transition-all duration-300 ${
+                    className={`group flex w-full items-center gap-3 rounded-md py-3 ps-3 pe-4 text-start transition-all duration-300 ${
                       isActive ? "bg-white/[0.06]" : "hover:bg-white/[0.03]"
                     }`}
                   >
@@ -154,10 +157,10 @@ const OurPresence = () => {
                         isActive ? "text-white" : "text-white/55"
                       }`}
                     >
-                      {loc.label}
+                      {t(loc.label, loc.labelAr)}
                     </span>
                     <span
-                      className={`ml-auto h-px bg-[#2C95D2] transition-all duration-300 ${
+                      className={`ms-auto h-px bg-[#2C95D2] transition-all duration-300 ${
                         isActive ? "w-8 opacity-100" : "w-0 opacity-0"
                       }`}
                     />
@@ -191,7 +194,7 @@ const OurPresence = () => {
                   key={loc.label}
                   onMouseEnter={() => select(i)}
                   onClick={() => select(i)}
-                  aria-label={loc.label}
+                  aria-label={t(loc.label, loc.labelAr)}
                   className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
                   style={{ left: `${loc.x}%`, top: `${loc.y}%` }}
                 >
@@ -210,7 +213,7 @@ const OurPresence = () => {
                   {/* name label on the piece */}
                   {isActive && (
                     <span className="pointer-events-none absolute left-1/2 -top-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#0a1428]/90 px-4 py-1.5 font-roboto text-sm font-medium text-white ring-1 ring-[#2C95D2]/60 shadow-lg backdrop-blur-sm">
-                      {loc.label}
+                      {t(loc.label, loc.labelAr)}
                     </span>
                   )}
                 </button>

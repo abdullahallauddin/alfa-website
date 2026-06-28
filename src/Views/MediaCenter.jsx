@@ -6,6 +6,12 @@ import PageBanner from "../Components/PageBanner";
 import SectionNav from "../Components/SectionNav";
 import NewsSection from "./NewsSection";
 import DownloadCenter from "./DownloadCenter";
+import { useT } from "../i18n/i18n";
+
+const TAB_LABELS_AR = {
+  News: "الأخبار",
+  "Download Center": "مركز التحميل",
+};
 
 const TABS = [
   { key: "news", label: "News", content: <NewsSection embedded /> },
@@ -22,6 +28,7 @@ const keyFromHash = (hash) => {
 };
 
 const MediaCenter = () => {
+  const t = useT();
   const location = useLocation();
   const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
@@ -69,12 +76,15 @@ const MediaCenter = () => {
     <div className="inner-page min-h-screen bg-[#0a1124] text-white">
       {/* HERO */}
       <PageBanner image={heroImage}>
-        Media <span className="text-[#2C95D2]">Center</span>
+        {t("Media ", "المركز ")}<span className="text-[#2C95D2]">{t("Center", "الإعلامي")}</span>
       </PageBanner>
 
       {/* Section nav */}
       <SectionNav
-        items={TABS.map((t) => ({ key: t.key, label: t.label }))}
+        items={TABS.map((tab) => ({
+          key: tab.key,
+          label: t(tab.label, TAB_LABELS_AR[tab.label]),
+        }))}
         activeKey={activeKey}
         onSelect={(key) => selectTab(key)}
       />

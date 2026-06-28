@@ -3,9 +3,11 @@ import backgroundImage from "../Assets/Images/commercial-inquiries.png";
 import ContactUs from "./ContactUs";
 import { motion } from "framer-motion";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
+import { useT } from "../i18n/i18n";
 
 // import AboutUSComp from '../Components/AboutUSComp';
 const CommercialInquiries = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -30,7 +32,7 @@ const CommercialInquiries = ({ embedded }) => {
               viewport={{ once: false, amount: 0.3 }}
             >
               <h1 className="text-5xl font-bold text-center">
-                Commercial Inquiries
+                {t("Commercial Inquiries", "الاستفسارات التجارية")}
               </h1>
             </motion.div>
           </div>
@@ -46,18 +48,17 @@ const CommercialInquiries = ({ embedded }) => {
       >
         <div className="w-full py-6 md:py-10">
           <h1
-            className="text-4xl font-roboto font-light mb-4 text-center md:text-left text-white"
+            className="text-4xl font-roboto font-light mb-4 text-center md:text-start text-white"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Commercial Inquiries
+            {t("Commercial Inquiries", "الاستفسارات التجارية")}
           </h1>
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/[0.08] hover:border-[#2C95D2]/50 transition">
           <p className="text-lg mt-4 text-justify text-white/75">
-            We welcome your commercial inquiries and value your interest in our
-            services. Please feel free to reach out to us directly via email or
-            phone, and our dedicated team will respond promptly to assist with
-            your requirements. Your feedback and inquiries are important to us,
-            and we look forward to serving you.
+            {t(
+              "We welcome your commercial inquiries and value your interest in our services. Please feel free to reach out to us directly via email or phone, and our dedicated team will respond promptly to assist with your requirements. Your feedback and inquiries are important to us, and we look forward to serving you.",
+              "نرحّب باستفساراتكم التجارية ونقدّر اهتمامكم بخدماتنا. لا تتردّدوا في التواصل معنا مباشرةً عبر البريد الإلكتروني أو الهاتف، وسيردّ فريقنا المتخصّص عليكم بسرعة لمساعدتكم في تلبية متطلباتكم. إنّ ملاحظاتكم واستفساراتكم مهمّة بالنسبة لنا، ونتطلّع إلى خدمتكم."
+            )}
           </p>
           <a
             href="mailto:sales@alfamarinesa.com"
@@ -67,11 +68,11 @@ const CommercialInquiries = ({ embedded }) => {
     text-white bg-[#2196F3] transition-all duration-500 cursor-pointer group overflow-hidden"
           >
             <span className="relative z-10 group-hover:text-[#2196F3] transition duration-500">
-              Email Us
+              {t("Email Us", "راسلنا")}
             </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-4 h-4 relative z-10 group-hover:text-[#2196F3] transition duration-500"
+              className="w-4 h-4 relative z-10 group-hover:text-[#2196F3] transition duration-500 rtl-flip"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

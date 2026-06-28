@@ -4,8 +4,10 @@ import SustainbilityBG from "../Assets/Images/SustainbilityBG.png";
 import BoardMembers from "../Components/BoardMembers";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 
 const Leadership = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -24,7 +26,7 @@ const Leadership = ({ embedded }) => {
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h1 className="text-5xl text-white font-bold">Our Leadership</h1>
+            <h1 className="text-5xl text-white font-bold">{t("Our Leadership", "قيادتنا")}</h1>
           </motion.div>
         </div>
       </SectionWrapperReverse>

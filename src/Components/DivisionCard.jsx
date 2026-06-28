@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useT } from "../i18n/i18n";
 
 const DivisionCard = ({
   icon,
@@ -11,6 +12,7 @@ const DivisionCard = ({
   isCenter,
   path,
 }) => {
+  const t = useT();
   const [hasAnimated, setHasAnimated] = React.useState(false);
 
   React.useEffect(() => {
@@ -90,7 +92,7 @@ const DivisionCard = ({
               />
             </div>
             <span className="tracking-widest text-xs font-semibold group-hover:underline group-hover:text-[#2C95D2] transition duration-300">
-              KNOW MORE
+              {t("KNOW MORE", "اعرف المزيد")}
             </span>
           </motion.div>
         </Link>

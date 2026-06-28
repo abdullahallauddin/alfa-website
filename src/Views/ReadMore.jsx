@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 import businesselectricitybg from "../Assets/Images/businesselectricitybg.png";
 import electricityimage1 from "../Assets/Images/electricityimage1.png";
 import electricityimage2 from "../Assets/Images/electricityimage2.png";
@@ -16,6 +17,28 @@ const services = [
     id: 1,
     link: 'business_electricity',
     maintitle: "Business Electricity",
+    maintitleAr: "كهرباء الأعمال",
+    title1Ar: 'London Tradex: مستشاروك الأوائل في كهرباء الأعمال بالمملكة المتحدة',
+    description1Ar: 'في ظل المشهد المعقد والمتغير باستمرار لشراء الطاقة للأعمال، قد يكون العثور على مورّد الطاقة المناسب لعملك مهمة شاقة. وهنا يأتي دور London Tradex بصفته شريكك الموثوق. فنحن ملتزمون بتبسيط هذه العملية وضمان استفادة عملك من أفضل صفقات الطاقة الممكنة المتاحة في السوق. وقد رسّخ التزامنا بالتميز ورضا العملاء مكانتنا بصفتنا المستشارين الرائدين في مجال طاقة الأعمال في المملكة المتحدة.',
+    title2Ar: "خبرة لا تُضاهى ومقارنة شاملة",
+    description2Ar: 'في London Tradex، نفخر بمعرفتنا الواسعة وخبرتنا في قطاع الطاقة. ويعمل فريقنا من المستشارين المحنّكين بلا كلل لمواكبة اتجاهات السوق والتغييرات التنظيمية والعروض الجديدة من مورّدي الطاقة. ويتيح لنا ذلك تزويد عملائنا بمعلومات دقيقة ومحدّثة ونصائح مصمّمة خصيصاً. ونقارن عروض الأسعار من أكثر من 10 مورّدي طاقة أعمال موثوقين في المملكة المتحدة، بما يضمن وصولك إلى أكثر الأسعار تنافسية والخطط الأكثر شمولاً المتاحة. وتشمل مقارنتنا أسماءً راسخة ووافدين جدداً مبتكرين، بما يمنحك نظرة واسعة على خياراتك.',
+    title3Ar: 'استشارة مخصصة وإرشاد شفاف',
+    description3Ar: 'ما يميّز London Tradex هو التزامنا بالخدمة المخصصة. فنحن ندرك أن لكل عمل احتياجات طاقة وقيود ميزانية فريدة. ويأخذ مستشارونا الوقت الكافي لفهم متطلباتك المحددة وأنماط استخدامك وأهدافك بعيدة المدى. ويضمن هذا النهج المخصص أن تكون عروض الأسعار التي نقدمها إليك ليست تنافسية فحسب، بل تتوافق تماماً مع الاحتياجات التشغيلية والأهداف المالية لعملك.<br /><br />وبمجرد جمعنا لعروض الأسعار وتحليلها، سيشرح لك مستشارونا التفاصيل مباشرةً على شاشتك. فنحن نؤمن بالشفافية والوضوح، ونحرص على أن تفهم تماماً الشروط والمزايا والعيوب المحتملة لكل خيار. ويساعدك هذا الشرح الوافي على اتخاذ قرار مستنير، بما يضمن اختيارك لخطة الطاقة الأنسب لعملك.',
+    title4Ar: "دعم شامل وإدارة مستمرة",
+    description4Ar: `لا تنتهي خدمتنا بمجرد اختيارك لمورّد الطاقة. ففي London Tradex، نوفر دعماً وإدارة مستمرين لضمان استمرار تلبية احتياجاتك من الطاقة بكفاءة وفعالية من حيث التكلفة. ونراقب استخدامك للطاقة وأداء المورّد الذي اخترته، ونقدم لك المشورة بشأن أي تعديلات محتملة أو فرص لتحقيق المزيد من التوفير. ويساعدك هذا النهج الاستباقي على البقاء في الطليعة وتعظيم كفاءة الطاقة لديك.`,
+    innertitleAr: "الأفضل في استشارات طاقة الأعمال بالمملكة المتحدة",
+    innerdescriptionaAr: "اكتسبت London Tradex سمعتها بصفتها أفضل مستشاري الطاقة في المملكة المتحدة من خلال تقديمها المستمر لقيمة وخدمة استثنائيتين لعملائنا. وتجعلنا رؤانا العميقة للقطاع وأدوات المقارنة الشاملة وعملية الاستشارة المخصصة الخيار المفضل للأعمال التي تتطلع إلى تحسين شراء الطاقة لديها. وسواء كنت عملاً صغيراً يسعى لخفض التكاليف العامة أو مؤسسة كبيرة تسعى لتطبيق حلول طاقة مستدامة، فإن London Tradex تمتلك الخبرة والموارد لدعم أهدافك.",
+    innerdescriptionbAr: "اكتسبت London Tradex سمعتها بصفتها أفضل مستشاري الطاقة في المملكة المتحدة من خلال تقديمها المستمر لقيمة وخدمة استثنائيتين لعملائنا. وتجعلنا رؤانا العميقة للقطاع وأدوات المقارنة الشاملة وعملية الاستشارة المخصصة الخيار المفضل للأعمال التي تتطلع إلى تحسين شراء الطاقة لديها. وسواء كنت عملاً صغيراً يسعى لخفض التكاليف العامة أو مؤسسة كبيرة تسعى لتطبيق حلول طاقة مستدامة، فإن London Tradex تمتلك الخبرة والموارد لدعم أهدافك.",
+    title5Ar: `لماذا تختار London Tradex؟`,
+    description5Ar: `
+      <ul>
+        <li><b><br><br>مقارنة شاملة:</b> الوصول إلى عروض أسعار من أكثر من 10 مورّدي طاقة أعمال موثوقين في المملكة المتحدة.</li><br>
+        <li><b>مشورة الخبراء:</b> معرفة سوقية معمّقة واستشارة مخصصة.</li><br>
+        <li><b>عملية شفافة:</b> شروحات واضحة ومفصّلة لجميع خياراتك.</li><br>
+        <li><b>دعم مستمر:</b> إدارة ومشورة متواصلة لتحسين استخدامك للطاقة.</li><br>
+        <li><b>سمعة في التميز:</b> سجل حافل مثبت في مساعدة الأعمال على تحقيق أهدافها في مجال الطاقة.</li><br>
+      </ul>
+    `,
     title1: 'London Tradex: Your Premier UK Business Electricity Consultants',
     description1: 'In the complex and ever-changing landscape of business energy procurement, finding the right energy supplier for your business can be a daunting task. This is where London Tradex steps in as your trusted partner. We are dedicated to simplifying this process and ensuring that your business benefits from the best possible energy deals available in the market. Our commitment to excellence and customer satisfaction has established us as the leading business energy consultants in the UK.',
     generalimage1: electricityimage1,
@@ -45,6 +68,25 @@ const services = [
     id: 2,
     link: 'business_gas',
     maintitle: "Business Gas",
+    maintitleAr: "غاز الأعمال",
+    title1Ar: 'توفير مضمون: من 15% إلى 25%',
+    description1Ar: 'سيعمل فريقنا من المستشارين الخبراء بلا كلل لتحليل خطط المرافق والاتصالات الحالية لديك والتفاوض مع كبار المورّدين لتأمين أفضل الأسعار الممكنة لك. ونضمن أنك ستوفّر ما بين 15% و25% مقارنةً بتكاليفك الحالية. ويمكن لهذا الخفض الكبير في نفقات المرافق لديك أن يحسّن أرباحك الصافية بشكل ملحوظ ويحرّر الموارد لمجالات أخرى بالغة الأهمية في عملك.',
+    title2Ar: "تركيب مجاني",
+    description2Ar: 'قد يكون الانتقال إلى مورّد مرافق أو اتصالات جديد أمراً مزعجاً أحياناً، لكنه مع London Tradex تجربة سلسة. فنحن نقدم خدمات تركيب مجانية لجميع عملائنا الجدد، بما يضمن أن يكون الانتقال سلساً ودون أي تكاليف إضافية. وسيتولى فنيونا ذوو الخبرة كل شيء، من إعداد أنظمتك الجديدة إلى ضمان تشغيلها بالكامل، حتى تتمكن من التركيز على إدارة عملك دون انقطاع.',
+    title3Ar: 'مزايا إضافية للشراكة مع London Tradex',
+    description3Ar: `<ul>
+        <li><b><br><br>مقارنة سوقية شاملة:</b> نقارن عروض الأسعار من أكثر من 10 مورّدي طاقة واتصالات أعمال موثوقين في المملكة المتحدة لضمان حصولك على أفضل صفقة.</li><br>
+        <li><b>استشارة مخصصة:</b> يأخذ مستشارونا الوقت الكافي لفهم احتياجاتك المحددة وتقديم توصيات مصمّمة خصيصاً.</li><br>
+        <li><b>دعم مستمر:</b> استمتع بدعم عملاء متواصل ومراجعات دورية لضمان بقاء خدماتك مثلى وفعّالة من حيث التكلفة.</li><br>
+        <li><b>التركيز على الاستدامة:</b> نساعدك على تبنّي حلول موفّرة للطاقة تقلل الأثر البيئي وتزيد من توفيرك.</li><br>
+      </ul>`,
+    title4Ar: "نقل مجاني من المورّد الحالي",
+    description4Ar: `نعلم أن تغيير المورّدين قد يكون أمراً شاقاً، ولهذا تقدم London Tradex خدمة نقل مجانية من مورّد المرافق أو الاتصالات الحالي لديك. وسيتولى فريقنا المتخصص إدارة عملية النقل بالكامل، بالتنسيق مع مورّديك الحاليين والجدد لضمان انتقال سلس. ونتولى جميع الأوراق والتفاصيل اللوجستية، بما يجعل الانتقال سهلاً عليك. وقد صُمّمت هذه الخدمة لتوفّر وقتك وتزيل التوتر المرتبط بتغيير المورّدين.`,
+    innertitleAr: "تصرّف الآن وأمّن مدخراتك",
+    innerdescriptionaAr: "هذا العرض الخاص فرصة لفترة محدودة لخفض نفقات عملك وتعزيز كفاءتك التشغيلية. وسواء كنت عملاً جديداً يتطلع إلى إعداد مرافقه واتصالاته أو عملاً قائماً يهدف إلى خفض التكاليف، فإن London Tradex هنا لمساعدتك. استفد اليوم من خدمات التوفير المضمون والتركيب المجاني والنقل المجاني التي نقدمها.",
+    innerdescriptionbAr: "تواصل معنا الآن لتحديد موعد استشارة والبدء في التوفير مع London Tradex. فريقنا جاهز لمساعدتك والإجابة عن أي أسئلة قد تكون لديك. لا تفوّت هذه الفرصة لتحسين الصحة المالية لعملك وكفاءته التشغيلية مع London Tradex.",
+    title5Ar: `عرض خاص للأعمال الجديدة والقائمة: توفير لا يُضاهى مع London Tradex`,
+    description5Ar: `في London Tradex، ندرك أن إدارة نفقات الأعمال بكفاءة أمر بالغ الأهمية للنجاح. ولهذا يسعدنا أن نعلن عن عرض خاص مصمّم لمساعدة الأعمال الجديدة والقائمة على حد سواء في تحقيق توفير كبير في نفقات المرافق والاتصالات لديها. ومع عرضنا الحصري، يمكنك الاستمتاع بتوفير مضمون من 15% إلى 25% على أسعارك الحالية، إلى جانب باقة من المزايا الإضافية.`,
     title1: 'Guaranteed Savings: 15% to 25%',
     description1: 'Our team of expert consultants will work tirelessly to analyze your current utility and telecommunications plans and negotiate with leading suppliers to secure you the best possible rates. We guarantee that you will save between 15% and 25% compared to your existing costs. This substantial reduction in your utility expenses can significantly improve your bottom line and free up resources for other critical areas of your business.',
     generalimage1: gasimage1,
@@ -72,6 +114,28 @@ London Tradex`,
     id: 3,
     link: 'business_broadband',
     maintitle: "Business BroadBand",
+    maintitleAr: "نطاق عريض للأعمال",
+    title1Ar: 'حلول موثوقة وقابلة للتوسع للأعمال الحديثة',
+    description1Ar: 'في London Tradex، ندرك أن الاتصال الموثوق هو العمود الفقري لأي عمل ناجح. ولهذا نقدم مجموعة شاملة من حلول اتصالات الأعمال المصمّمة لإبقائك متصلاً ومنتجاً، أينما كان فريقك.',
+    title2Ar: "اتصال ألياف من الجيل التالي",
+    description2Ar: 'اختبر سرعات إنترنت فائقة مع اتصال الألياف من الجيل التالي لدينا. نتشارك مع جميع الشبكات الكبرى لنوفر لك أفضل خدمة ممكنة، بما يضمن بقاء عملك في صدارة المنافسة. وخدمات النطاق العريض بالألياف لدينا حائزة على جوائز، وتوفّر تنزيلات غير محدودة وموثوقية لا تُضاهى.',
+    title3Ar: 'استشارة مخصصة',
+    description3Ar: `يقدم مستشارونا استشارة مخصصة لفهم احتياجاتك الفريدة في مجال الاتصالات. ونحلل إعدادك الحالي ونوصي بحلول تعزز بنيتك التحتية للاتصالات.<br />كما نضمن تواصلاً شفافاً وواضحاً، حتى تفهم كل جانب من جوانب خطتك.`,
+    title4Ar: "خدمة موثوقة",
+    description4Ar: `لا تنتهي خدمتنا بمجرد اختيارك لمورّد الطاقة. ففي London Tradex، نوفر دعماً وإدارة مستمرين لضمان استمرار تلبية احتياجاتك من الطاقة بكفاءة وفعالية من حيث التكلفة. ونراقب استخدامك للطاقة وأداء المورّد الذي اخترته، ونقدم لك المشورة بشأن أي تعديلات محتملة أو فرص لتحقيق المزيد من التوفير. ويساعدك هذا النهج الاستباقي على البقاء في الطليعة وتعظيم كفاءة الطاقة لديك.`,
+    innertitleAr: "الأفضل في استشارات طاقة الأعمال بالمملكة المتحدة",
+    innerdescriptionaAr: "اكتسبت London Tradex سمعتها بصفتها أفضل مستشاري الطاقة في المملكة المتحدة من خلال تقديمها المستمر لقيمة وخدمة استثنائيتين لعملائنا. وتجعلنا رؤانا العميقة للقطاع وأدوات المقارنة الشاملة وعملية الاستشارة المخصصة الخيار المفضل للأعمال التي تتطلع إلى تحسين شراء الطاقة لديها. وسواء كنت عملاً صغيراً يسعى لخفض التكاليف العامة أو مؤسسة كبيرة تسعى لتطبيق حلول طاقة مستدامة، فإن London Tradex تمتلك الخبرة والموارد لدعم أهدافك.",
+    innerdescriptionbAr: "اكتسبت London Tradex سمعتها بصفتها أفضل مستشاري الطاقة في المملكة المتحدة من خلال تقديمها المستمر لقيمة وخدمة استثنائيتين لعملائنا. وتجعلنا رؤانا العميقة للقطاع وأدوات المقارنة الشاملة وعملية الاستشارة المخصصة الخيار المفضل للأعمال التي تتطلع إلى تحسين شراء الطاقة لديها. وسواء كنت عملاً صغيراً يسعى لخفض التكاليف العامة أو مؤسسة كبيرة تسعى لتطبيق حلول طاقة مستدامة، فإن London Tradex تمتلك الخبرة والموارد لدعم أهدافك.",
+    title5Ar: `لماذا تختار London Tradex؟`,
+    description5Ar: `
+      <ul>
+        <li><b><br><br>مقارنة شاملة:</b> الوصول إلى عروض أسعار من أكثر من 10 مورّدي طاقة أعمال موثوقين في المملكة المتحدة.</li><br>
+        <li><b>مشورة الخبراء:</b> معرفة سوقية معمّقة واستشارة مخصصة.</li><br>
+        <li><b>عملية شفافة:</b> شروحات واضحة ومفصّلة لجميع خياراتك.</li><br>
+        <li><b>دعم مستمر:</b> إدارة ومشورة متواصلة لتحسين استخدامك للطاقة.</li><br>
+        <li><b>سمعة في التميز:</b> سجل حافل مثبت في مساعدة الأعمال على تحقيق أهدافها في مجال الطاقة.</li><br>
+      </ul>
+    `,
     title1: 'Reliable and Scalable Solutions for Modern Businesses',
     description1: 'At London Tradex, we understand that reliable communication is the backbone of any successful business. That’s why we offer a comprehensive range of business telecom solutions designed to keep you connected and productive, no matter where your team is located.',
     generalimage1: telecomimage1,
@@ -101,6 +165,25 @@ London Tradex`,
     id: 4,
     link: 'business_water',
     maintitle: "Business Water",
+    maintitleAr: "مياه الأعمال",
+    title1Ar: 'توفير مضمون: من 15% إلى 25%',
+    description1Ar: 'سيعمل فريقنا من المستشارين الخبراء بلا كلل لتحليل خطط المرافق والاتصالات الحالية لديك والتفاوض مع كبار المورّدين لتأمين أفضل الأسعار الممكنة لك. ونضمن أنك ستوفّر ما بين 15% و25% مقارنةً بتكاليفك الحالية. ويمكن لهذا الخفض الكبير في نفقات المرافق لديك أن يحسّن أرباحك الصافية بشكل ملحوظ ويحرّر الموارد لمجالات أخرى بالغة الأهمية في عملك.',
+    title2Ar: "تركيب مجاني",
+    description2Ar: 'قد يكون الانتقال إلى مورّد مرافق أو اتصالات جديد أمراً مزعجاً أحياناً، لكنه مع London Tradex تجربة سلسة. فنحن نقدم خدمات تركيب مجانية لجميع عملائنا الجدد، بما يضمن أن يكون الانتقال سلساً ودون أي تكاليف إضافية. وسيتولى فنيونا ذوو الخبرة كل شيء، من إعداد أنظمتك الجديدة إلى ضمان تشغيلها بالكامل، حتى تتمكن من التركيز على إدارة عملك دون انقطاع.',
+    title3Ar: 'مزايا إضافية للشراكة مع London Tradex',
+    description3Ar: `<ul>
+        <li><b><br><br>مقارنة سوقية شاملة:</b> نقارن عروض الأسعار من أكثر من 10 مورّدي طاقة واتصالات أعمال موثوقين في المملكة المتحدة لضمان حصولك على أفضل صفقة.</li><br>
+        <li><b>استشارة مخصصة:</b> يأخذ مستشارونا الوقت الكافي لفهم احتياجاتك المحددة وتقديم توصيات مصمّمة خصيصاً.</li><br>
+        <li><b>دعم مستمر:</b> استمتع بدعم عملاء متواصل ومراجعات دورية لضمان بقاء خدماتك مثلى وفعّالة من حيث التكلفة.</li><br>
+        <li><b>التركيز على الاستدامة:</b> نساعدك على تبنّي حلول موفّرة للطاقة تقلل الأثر البيئي وتزيد من توفيرك.</li><br>
+      </ul>`,
+    title4Ar: "نقل مجاني من المورّد الحالي",
+    description4Ar: `نعلم أن تغيير المورّدين قد يكون أمراً شاقاً، ولهذا تقدم London Tradex خدمة نقل مجانية من مورّد المرافق أو الاتصالات الحالي لديك. وسيتولى فريقنا المتخصص إدارة عملية النقل بالكامل، بالتنسيق مع مورّديك الحاليين والجدد لضمان انتقال سلس. ونتولى جميع الأوراق والتفاصيل اللوجستية، بما يجعل الانتقال سهلاً عليك. وقد صُمّمت هذه الخدمة لتوفّر وقتك وتزيل التوتر المرتبط بتغيير المورّدين.`,
+    innertitleAr: "تصرّف الآن وأمّن مدخراتك",
+    innerdescriptionaAr: "هذا العرض الخاص فرصة لفترة محدودة لخفض نفقات عملك وتعزيز كفاءتك التشغيلية. وسواء كنت عملاً جديداً يتطلع إلى إعداد مرافقه واتصالاته أو عملاً قائماً يهدف إلى خفض التكاليف، فإن London Tradex هنا لمساعدتك. استفد اليوم من خدمات التوفير المضمون والتركيب المجاني والنقل المجاني التي نقدمها.",
+    innerdescriptionbAr: "تواصل معنا الآن لتحديد موعد استشارة والبدء في التوفير مع London Tradex. فريقنا جاهز لمساعدتك والإجابة عن أي أسئلة قد تكون لديك. لا تفوّت هذه الفرصة لتحسين الصحة المالية لعملك وكفاءته التشغيلية مع London Tradex.",
+    title5Ar: `عرض خاص للأعمال الجديدة والقائمة: توفير لا يُضاهى مع London Tradex`,
+    description5Ar: `في London Tradex، ندرك أن إدارة نفقات الأعمال بكفاءة أمر بالغ الأهمية للنجاح. ولهذا يسعدنا أن نعلن عن عرض خاص مصمّم لمساعدة الأعمال الجديدة والقائمة على حد سواء في تحقيق توفير كبير في نفقات المرافق والاتصالات لديها. ومع عرضنا الحصري، يمكنك الاستمتاع بتوفير مضمون من 15% إلى 25% على أسعارك الحالية، إلى جانب باقة من المزايا الإضافية.`,
     title1: 'Guaranteed Savings: 15% to 25%',
     description1: 'Our team of expert consultants will work tirelessly to analyze your current utility and telecommunications plans and negotiate with leading suppliers to secure you the best possible rates. We guarantee that you will save between 15% and 25% compared to your existing costs. This substantial reduction in your utility expenses can significantly improve your bottom line and free up resources for other critical areas of your business.',
     generalimage1: gasimage1,
@@ -128,6 +211,28 @@ London Tradex`,
     id: 5,
     link: 'business_point_of_sale',
     maintitle: "Point of Sale",
+    maintitleAr: "نقاط البيع",
+    title1Ar: 'London Tradex: مستشاروك الأوائل في كهرباء الأعمال بالمملكة المتحدة',
+    description1Ar: 'في ظل المشهد المعقد والمتغير باستمرار لشراء الطاقة للأعمال، قد يكون العثور على مورّد الطاقة المناسب لعملك مهمة شاقة. وهنا يأتي دور London Tradex بصفته شريكك الموثوق. فنحن ملتزمون بتبسيط هذه العملية وضمان استفادة عملك من أفضل صفقات الطاقة الممكنة المتاحة في السوق. وقد رسّخ التزامنا بالتميز ورضا العملاء مكانتنا بصفتنا المستشارين الرائدين في مجال طاقة الأعمال في المملكة المتحدة.',
+    title2Ar: "خبرة لا تُضاهى ومقارنة شاملة",
+    description2Ar: 'في London Tradex، نفخر بمعرفتنا الواسعة وخبرتنا في قطاع الطاقة. ويعمل فريقنا من المستشارين المحنّكين بلا كلل لمواكبة اتجاهات السوق والتغييرات التنظيمية والعروض الجديدة من مورّدي الطاقة. ويتيح لنا ذلك تزويد عملائنا بمعلومات دقيقة ومحدّثة ونصائح مصمّمة خصيصاً. ونقارن عروض الأسعار من أكثر من 10 مورّدي طاقة أعمال موثوقين في المملكة المتحدة، بما يضمن وصولك إلى أكثر الأسعار تنافسية والخطط الأكثر شمولاً المتاحة. وتشمل مقارنتنا أسماءً راسخة ووافدين جدداً مبتكرين، بما يمنحك نظرة واسعة على خياراتك.',
+    title3Ar: 'استشارة مخصصة وإرشاد شفاف',
+    description3Ar: 'ما يميّز London Tradex هو التزامنا بالخدمة المخصصة. فنحن ندرك أن لكل عمل احتياجات طاقة وقيود ميزانية فريدة. ويأخذ مستشارونا الوقت الكافي لفهم متطلباتك المحددة وأنماط استخدامك وأهدافك بعيدة المدى. ويضمن هذا النهج المخصص أن تكون عروض الأسعار التي نقدمها إليك ليست تنافسية فحسب، بل تتوافق تماماً مع الاحتياجات التشغيلية والأهداف المالية لعملك.<br /><br />وبمجرد جمعنا لعروض الأسعار وتحليلها، سيشرح لك مستشارونا التفاصيل مباشرةً على شاشتك. فنحن نؤمن بالشفافية والوضوح، ونحرص على أن تفهم تماماً الشروط والمزايا والعيوب المحتملة لكل خيار. ويساعدك هذا الشرح الوافي على اتخاذ قرار مستنير، بما يضمن اختيارك لخطة الطاقة الأنسب لعملك.',
+    title4Ar: "دعم شامل وإدارة مستمرة",
+    description4Ar: `لا تنتهي خدمتنا بمجرد اختيارك لمورّد الطاقة. ففي London Tradex، نوفر دعماً وإدارة مستمرين لضمان استمرار تلبية احتياجاتك من الطاقة بكفاءة وفعالية من حيث التكلفة. ونراقب استخدامك للطاقة وأداء المورّد الذي اخترته، ونقدم لك المشورة بشأن أي تعديلات محتملة أو فرص لتحقيق المزيد من التوفير. ويساعدك هذا النهج الاستباقي على البقاء في الطليعة وتعظيم كفاءة الطاقة لديك.`,
+    innertitleAr: "الأفضل في استشارات طاقة الأعمال بالمملكة المتحدة",
+    innerdescriptionaAr: "اكتسبت London Tradex سمعتها بصفتها أفضل مستشاري الطاقة في المملكة المتحدة من خلال تقديمها المستمر لقيمة وخدمة استثنائيتين لعملائنا. وتجعلنا رؤانا العميقة للقطاع وأدوات المقارنة الشاملة وعملية الاستشارة المخصصة الخيار المفضل للأعمال التي تتطلع إلى تحسين شراء الطاقة لديها. وسواء كنت عملاً صغيراً يسعى لخفض التكاليف العامة أو مؤسسة كبيرة تسعى لتطبيق حلول طاقة مستدامة، فإن London Tradex تمتلك الخبرة والموارد لدعم أهدافك.",
+    innerdescriptionbAr: "اكتسبت London Tradex سمعتها بصفتها أفضل مستشاري الطاقة في المملكة المتحدة من خلال تقديمها المستمر لقيمة وخدمة استثنائيتين لعملائنا. وتجعلنا رؤانا العميقة للقطاع وأدوات المقارنة الشاملة وعملية الاستشارة المخصصة الخيار المفضل للأعمال التي تتطلع إلى تحسين شراء الطاقة لديها. وسواء كنت عملاً صغيراً يسعى لخفض التكاليف العامة أو مؤسسة كبيرة تسعى لتطبيق حلول طاقة مستدامة، فإن London Tradex تمتلك الخبرة والموارد لدعم أهدافك.",
+    title5Ar: `لماذا تختار London Tradex؟`,
+    description5Ar: `
+      <ul>
+        <li><b><br><br>مقارنة شاملة:</b> الوصول إلى عروض أسعار من أكثر من 10 مورّدي طاقة أعمال موثوقين في المملكة المتحدة.</li><br>
+        <li><b>مشورة الخبراء:</b> معرفة سوقية معمّقة واستشارة مخصصة.</li><br>
+        <li><b>عملية شفافة:</b> شروحات واضحة ومفصّلة لجميع خياراتك.</li><br>
+        <li><b>دعم مستمر:</b> إدارة ومشورة متواصلة لتحسين استخدامك للطاقة.</li><br>
+        <li><b>سمعة في التميز:</b> سجل حافل مثبت في مساعدة الأعمال على تحقيق أهدافها في مجال الطاقة.</li><br>
+      </ul>
+    `,
     title1: 'London Tradex: Your Premier UK Business Electricity Consultants',
     description1: 'In the complex and ever-changing landscape of business energy procurement, finding the right energy supplier for your business can be a daunting task. This is where London Tradex steps in as your trusted partner. We are dedicated to simplifying this process and ensuring that your business benefits from the best possible energy deals available in the market. Our commitment to excellence and customer satisfaction has established us as the leading business energy consultants in the UK.',
     generalimage1: electricityimage1,
@@ -157,6 +262,25 @@ London Tradex`,
     id: 6,
     link: 'business_payments',
     maintitle: "Business Payments",
+    maintitleAr: "مدفوعات الأعمال",
+    title1Ar: 'توفير مضمون: من 15% إلى 25%',
+    description1Ar: 'سيعمل فريقنا من المستشارين الخبراء بلا كلل لتحليل خطط المرافق والاتصالات الحالية لديك والتفاوض مع كبار المورّدين لتأمين أفضل الأسعار الممكنة لك. ونضمن أنك ستوفّر ما بين 15% و25% مقارنةً بتكاليفك الحالية. ويمكن لهذا الخفض الكبير في نفقات المرافق لديك أن يحسّن أرباحك الصافية بشكل ملحوظ ويحرّر الموارد لمجالات أخرى بالغة الأهمية في عملك.',
+    title2Ar: "تركيب مجاني",
+    description2Ar: 'قد يكون الانتقال إلى مورّد مرافق أو اتصالات جديد أمراً مزعجاً أحياناً، لكنه مع London Tradex تجربة سلسة. فنحن نقدم خدمات تركيب مجانية لجميع عملائنا الجدد، بما يضمن أن يكون الانتقال سلساً ودون أي تكاليف إضافية. وسيتولى فنيونا ذوو الخبرة كل شيء، من إعداد أنظمتك الجديدة إلى ضمان تشغيلها بالكامل، حتى تتمكن من التركيز على إدارة عملك دون انقطاع.',
+    title3Ar: 'مزايا إضافية للشراكة مع London Tradex',
+    description3Ar: `<ul>
+        <li><b><br><br>مقارنة سوقية شاملة:</b> نقارن عروض الأسعار من أكثر من 10 مورّدي طاقة واتصالات أعمال موثوقين في المملكة المتحدة لضمان حصولك على أفضل صفقة.</li><br>
+        <li><b>استشارة مخصصة:</b> يأخذ مستشارونا الوقت الكافي لفهم احتياجاتك المحددة وتقديم توصيات مصمّمة خصيصاً.</li><br>
+        <li><b>دعم مستمر:</b> استمتع بدعم عملاء متواصل ومراجعات دورية لضمان بقاء خدماتك مثلى وفعّالة من حيث التكلفة.</li><br>
+        <li><b>التركيز على الاستدامة:</b> نساعدك على تبنّي حلول موفّرة للطاقة تقلل الأثر البيئي وتزيد من توفيرك.</li><br>
+      </ul>`,
+    title4Ar: "نقل مجاني من المورّد الحالي",
+    description4Ar: `نعلم أن تغيير المورّدين قد يكون أمراً شاقاً، ولهذا تقدم London Tradex خدمة نقل مجانية من مورّد المرافق أو الاتصالات الحالي لديك. وسيتولى فريقنا المتخصص إدارة عملية النقل بالكامل، بالتنسيق مع مورّديك الحاليين والجدد لضمان انتقال سلس. ونتولى جميع الأوراق والتفاصيل اللوجستية، بما يجعل الانتقال سهلاً عليك. وقد صُمّمت هذه الخدمة لتوفّر وقتك وتزيل التوتر المرتبط بتغيير المورّدين.`,
+    innertitleAr: "تصرّف الآن وأمّن مدخراتك",
+    innerdescriptionaAr: "هذا العرض الخاص فرصة لفترة محدودة لخفض نفقات عملك وتعزيز كفاءتك التشغيلية. وسواء كنت عملاً جديداً يتطلع إلى إعداد مرافقه واتصالاته أو عملاً قائماً يهدف إلى خفض التكاليف، فإن London Tradex هنا لمساعدتك. استفد اليوم من خدمات التوفير المضمون والتركيب المجاني والنقل المجاني التي نقدمها.",
+    innerdescriptionbAr: "تواصل معنا الآن لتحديد موعد استشارة والبدء في التوفير مع London Tradex. فريقنا جاهز لمساعدتك والإجابة عن أي أسئلة قد تكون لديك. لا تفوّت هذه الفرصة لتحسين الصحة المالية لعملك وكفاءته التشغيلية مع London Tradex.",
+    title5Ar: `عرض خاص للأعمال الجديدة والقائمة: توفير لا يُضاهى مع London Tradex`,
+    description5Ar: `في London Tradex، ندرك أن إدارة نفقات الأعمال بكفاءة أمر بالغ الأهمية للنجاح. ولهذا يسعدنا أن نعلن عن عرض خاص مصمّم لمساعدة الأعمال الجديدة والقائمة على حد سواء في تحقيق توفير كبير في نفقات المرافق والاتصالات لديها. ومع عرضنا الحصري، يمكنك الاستمتاع بتوفير مضمون من 15% إلى 25% على أسعارك الحالية، إلى جانب باقة من المزايا الإضافية.`,
     title1: 'Guaranteed Savings: 15% to 25%',
     description1: 'Our team of expert consultants will work tirelessly to analyze your current utility and telecommunications plans and negotiate with leading suppliers to secure you the best possible rates. We guarantee that you will save between 15% and 25% compared to your existing costs. This substantial reduction in your utility expenses can significantly improve your bottom line and free up resources for other critical areas of your business.',
     generalimage1: gasimage1,
@@ -184,6 +308,7 @@ London Tradex`,
 ];
 
 const ReadMore = () => {
+  const t = useT();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -191,7 +316,7 @@ const ReadMore = () => {
   const service = services.find(service => service.link === serviceName);
 
   if (!service) {
-    return <div className="text-white p-24">Service not found</div>;
+    return <div className="text-white p-24">{t("Service not found", "الخدمة غير موجودة")}</div>;
   }
 
 
@@ -202,7 +327,7 @@ const ReadMore = () => {
         style={{ backgroundImage: `url(${businesselectricitybg})` }}
       >
         <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-5xl font-bold mt-24 mb-4 text-center md:text-left">{service.maintitle}</h1>
+          <h1 className="text-5xl font-bold mt-24 mb-4 text-center md:text-start">{t(service.maintitle, service.maintitleAr)}</h1>
         </div>
       </div>
       <div className="container mx-auto p-4">
@@ -216,12 +341,12 @@ const ReadMore = () => {
           className="flex flex-col gap-16 md:flex-row md:justify-between p-6 mt-24 mb-16"
         >
           <div className="md:w-1/2 mb-6 md:mb-0">
-            <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title1}</h1>
-            <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: service.description1 }}></p>
+            <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{t(service.title1, service.title1Ar)}</h1>
+            <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: t(service.description1, service.description1Ar) }}></p>
           </div>
           <div className="md:w-1/2 mt-8 flex justify-center md:justify-end md:mt-24">
             <div className="group overflow-hidden rounded-2xl ring-1 ring-white/10">
-              <img src={service.generalimage1} alt="About Us" className="w-auto h-auto transition-transform duration-500 group-hover:scale-105" />
+              <img src={service.generalimage1} alt={t("About Us", "من نحن")} className="w-auto h-auto transition-transform duration-500 group-hover:scale-105" />
             </div>
           </div>
         </motion.div>
@@ -235,12 +360,12 @@ const ReadMore = () => {
           className="flex flex-col gap-16 md:flex-row md:justify-between p-6 mt-24 mb-16"
         >
           <div className="md:w-1/2 mb-6 md:mb-0">
-            <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title2}</h1>
-            <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: service.description2 }}></p>
+            <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{t(service.title2, service.title2Ar)}</h1>
+            <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: t(service.description2, service.description2Ar) }}></p>
           </div>
           <div className="md:w-1/2 mt-8 flex justify-center md:justify-end md:mt-24">
             <div className="group overflow-hidden rounded-2xl ring-1 ring-white/10">
-              <img src={service.generalimage2} alt="About Us" className="w-auto h-auto transition-transform duration-500 group-hover:scale-105" />
+              <img src={service.generalimage2} alt={t("About Us", "من نحن")} className="w-auto h-auto transition-transform duration-500 group-hover:scale-105" />
             </div>
           </div>
         </motion.div>
@@ -254,8 +379,8 @@ const ReadMore = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="w-full mb-6"
         >
-          <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title3}</h1>
-          <p className="text-lg w-full text-white/75" dangerouslySetInnerHTML={{ __html: service.description3 }}></p>
+          <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{t(service.title3, service.title3Ar)}</h1>
+          <p className="text-lg w-full text-white/75" dangerouslySetInnerHTML={{ __html: t(service.description3, service.description3Ar) }}></p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -264,8 +389,8 @@ const ReadMore = () => {
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="w-full mb-6"
         >
-          <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{service.title4}</h1>
-          <p className="text-lg w-full text-white/75" dangerouslySetInnerHTML={{ __html: service.description4 }}></p>
+          <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{t(service.title4, service.title4Ar)}</h1>
+          <p className="text-lg w-full text-white/75" dangerouslySetInnerHTML={{ __html: t(service.description4, service.description4Ar) }}></p>
         </motion.div>
       </div>
 
@@ -274,9 +399,9 @@ const ReadMore = () => {
         style={{ backgroundImage: `url(${electricityinnerbg})` }}
       >
         <div className="relative flex flex-col p-4 md:p-24 justify-start h-full text-white">
-          <h1 className="text-5xl font-bold mt-24 text-center md:text-left" dangerouslySetInnerHTML={{ __html: service.innertitle }}></h1>
-          <p className="text-1xl font-normal mt-12" dangerouslySetInnerHTML={{ __html: service.innerdescriptiona }}></p>
-          <p className="text-1xl font-normal mt-12 mb-24" dangerouslySetInnerHTML={{ __html: service.innerdescriptionb }}></p>
+          <h1 className="text-5xl font-bold mt-24 text-center md:text-start" dangerouslySetInnerHTML={{ __html: t(service.innertitle, service.innertitleAr) }}></h1>
+          <p className="text-1xl font-normal mt-12" dangerouslySetInnerHTML={{ __html: t(service.innerdescriptiona, service.innerdescriptionaAr) }}></p>
+          <p className="text-1xl font-normal mt-12 mb-24" dangerouslySetInnerHTML={{ __html: t(service.innerdescriptionb, service.innerdescriptionbAr) }}></p>
         </div>
       </div>
 
@@ -287,8 +412,8 @@ const ReadMore = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full py-6 md:py-10"
       >
-        <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }} dangerouslySetInnerHTML={{ __html: service.title5 }}></h1>
-        <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: service.description5 }}></p>
+        <h1 className="text-4xl font-roboto font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }} dangerouslySetInnerHTML={{ __html: t(service.title5, service.title5Ar) }}></h1>
+        <p className="text-lg text-white/75" dangerouslySetInnerHTML={{ __html: t(service.description5, service.description5Ar) }}></p>
       </motion.div>
     </>
 

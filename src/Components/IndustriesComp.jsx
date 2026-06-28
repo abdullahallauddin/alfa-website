@@ -1,23 +1,25 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
+import { useT } from "../i18n/i18n";
 
 const EASE = [0.22, 1, 0.36, 1];
 
 // Sectors as already stated in the existing site content (Group Overview).
 const sectors = [
-  "Oil & Gas",
-  "Renewable Energy",
-  "Marine & Offshore",
-  "Power & Utilities",
-  "Defense",
-  "Construction & Infrastructure",
-  "Petrochemical",
-  "Industrial Plants",
-  "Commercial Projects",
+  { name: "Oil & Gas", nameAr: "النفط والغاز" },
+  { name: "Renewable Energy", nameAr: "الطاقة المتجددة" },
+  { name: "Marine & Offshore", nameAr: "البحرية والمنشآت البحرية" },
+  { name: "Power & Utilities", nameAr: "الطاقة والمرافق" },
+  { name: "Defense", nameAr: "الدفاع" },
+  { name: "Construction & Infrastructure", nameAr: "الإنشاءات والبنية التحتية" },
+  { name: "Petrochemical", nameAr: "البتروكيماويات" },
+  { name: "Industrial Plants", nameAr: "المنشآت الصناعية" },
+  { name: "Commercial Projects", nameAr: "المشاريع التجارية" },
 ];
 
 const IndustriesComp = () => {
+  const t = useT();
   return (
     <section
       id="industries"
@@ -38,7 +40,8 @@ const IndustriesComp = () => {
             className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] text-white"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Industries <span className="text-[#2C95D2]">We Serve</span>
+            {t("Industries", "القطاعات")}{" "}
+            <span className="text-[#2C95D2]">{t("We Serve", "التي نخدمها")}</span>
           </h2>
           <span className="mt-5 block h-px w-16 bg-[#2C95D2]" />
         </motion.div>
@@ -46,7 +49,7 @@ const IndustriesComp = () => {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/10 rounded-2xl overflow-hidden">
           {sectors.map((sector, i) => (
             <motion.div
-              key={sector}
+              key={sector.name}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
@@ -59,9 +62,9 @@ const IndustriesComp = () => {
             >
               <span className="h-2 w-2 shrink-0 rounded-full bg-[#2C95D2]/50 transition-all duration-300 group-hover:scale-125 group-hover:bg-[#2C95D2]" />
               <span className="font-roboto text-lg text-white/85 transition-colors duration-300 group-hover:text-white">
-                {sector}
+                {t(sector.name, sector.nameAr)}
               </span>
-              <FaArrowRight className="ml-auto -translate-x-2 text-sm text-transparent transition-all duration-300 group-hover:translate-x-0 group-hover:text-[#2C95D2]" />
+              <FaArrowRight className="rtl-flip ms-auto -translate-x-2 text-sm text-transparent transition-all duration-300 group-hover:translate-x-0 group-hover:text-[#2C95D2]" />
             </motion.div>
           ))}
         </div>

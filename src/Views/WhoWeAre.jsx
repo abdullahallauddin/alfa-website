@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import heroImage from "../Assets/Images/GroupOverview.jpeg";
 import PageBanner from "../Components/PageBanner";
 import SectionNav from "../Components/SectionNav";
+import { useT } from "../i18n/i18n";
 
 import OurDivisionsComponent from "../Components/OurDivisionsComponent";
 import OurStatement from "./OurStatement";
@@ -17,18 +18,19 @@ import Accreditation from "./Accreditation";
 const NAV_OFFSET = 140; // global navbar (76) + sticky section sub-nav
 
 const SECTIONS = [
-  { id: "group-overview", title: "Group Overview", render: () => <OurDivisionsComponent part="text" /> },
-  { id: "our-divisions", title: "Our Divisions", render: () => <OurDivisionsComponent part="cards" /> },
-  { id: "mission-vision-goals", title: "Mission, Vision & Goals", render: () => <OurStatement embedded /> },
-  { id: "core-values", title: "Core Values", render: () => <CoreValues embedded /> },
-  { id: "our-strategy", title: "Our Strategy", render: () => <Strategy embedded /> },
-  { id: "our-culture", title: "Our Culture", render: () => <OurCulture embedded /> },
-  { id: "our-facilities", title: "Our Facilities", render: () => <Facility embedded /> },
-  { id: "our-capabilities", title: "Our Capabilities", render: () => <Capability embedded /> },
-  { id: "accreditations", title: "Accreditations", render: () => <Accreditation embedded /> },
+  { id: "group-overview", title: "Group Overview", titleAr: "نبذة عن المجموعة", render: () => <OurDivisionsComponent part="text" /> },
+  { id: "our-divisions", title: "Our Divisions", titleAr: "قطاعاتنا", render: () => <OurDivisionsComponent part="cards" /> },
+  { id: "mission-vision-goals", title: "Mission, Vision & Goals", titleAr: "الرسالة والرؤية والأهداف", render: () => <OurStatement embedded /> },
+  { id: "core-values", title: "Core Values", titleAr: "قيمنا الأساسية", render: () => <CoreValues embedded /> },
+  { id: "our-strategy", title: "Our Strategy", titleAr: "استراتيجيتنا", render: () => <Strategy embedded /> },
+  { id: "our-culture", title: "Our Culture", titleAr: "ثقافتنا", render: () => <OurCulture embedded /> },
+  { id: "our-facilities", title: "Our Facilities", titleAr: "مرافقنا", render: () => <Facility embedded /> },
+  { id: "our-capabilities", title: "Our Capabilities", titleAr: "قدراتنا", render: () => <Capability embedded /> },
+  { id: "accreditations", title: "Accreditations", titleAr: "الاعتمادات والشهادات", render: () => <Accreditation embedded /> },
 ];
 
 const WhoWeAre = () => {
+  const t = useT();
   const location = useLocation();
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
@@ -86,12 +88,12 @@ const WhoWeAre = () => {
 
       {/* ===== Hero ===== */}
       <PageBanner image={heroImage}>
-        Who We <span className="text-[#2C95D2]">Are</span>
+        {t("Who We ", "من ")}<span className="text-[#2C95D2]">{t("Are", "نحن")}</span>
       </PageBanner>
 
       {/* ===== Sticky section sub-nav ===== */}
       <SectionNav
-        items={SECTIONS.map(({ id, title }) => ({ key: id, label: title }))}
+        items={SECTIONS.map(({ id, title, titleAr }) => ({ key: id, label: t(title, titleAr) }))}
         activeKey={activeId}
         onSelect={(id) => {
           setActiveId(id);
@@ -101,7 +103,7 @@ const WhoWeAre = () => {
 
       {/* ===== Sections ===== */}
       <div>
-        {SECTIONS.map(({ id, title, render }, i) => {
+        {SECTIONS.map(({ id, title, titleAr, render }, i) => {
           const banded = i % 2 === 1;
           return (
             <section
@@ -123,7 +125,7 @@ const WhoWeAre = () => {
                     className="font-roboto font-light text-white"
                     style={{ fontSize: "clamp(1.75rem,3.6vw,2.6rem)", letterSpacing: "-0.02em", textWrap: "balance" }}
                   >
-                    {title}
+                    {t(title, titleAr)}
                   </h2>
                   <span className="mt-4 block h-px w-16 bg-[#2C95D2]" />
                 </motion.header>

@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { news, getNewsBySlug } from "../data/news";
+import { news, getNewsBySlug, NEWS_CATEGORIES_AR, formatNewsDate } from "../data/news";
+import { useT } from "../i18n/i18n";
 
 const NewsArticle = () => {
+  const t = useT();
   const { slug } = useParams();
   const article = getNewsBySlug(slug);
 
@@ -18,16 +20,19 @@ const NewsArticle = () => {
       <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
         <p className="font-roboto text-sm tracking-[0.2em] text-[#2C95D2]">404</p>
         <h1 className="mt-3 font-roboto font-light text-3xl text-white">
-          Article not found
+          {t("Article not found", "المقال غير موجود")}
         </h1>
         <p className="mt-3 max-w-md font-roboto font-light text-white/60">
-          The article you’re looking for doesn’t exist or may have moved.
+          {t(
+            "The article you’re looking for doesn’t exist or may have moved.",
+            "المقال الذي تبحث عنه غير موجود أو ربما تم نقله."
+          )}
         </p>
         <Link
           to="/media-center#news"
           className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#2C95D2] px-6 py-2.5 font-roboto text-sm text-white transition hover:bg-[#2C95D2]/90"
         >
-          <FaArrowLeft className="text-xs" /> Back to News
+          <FaArrowLeft className="text-xs rtl-flip" /> {t("Back to News", "العودة إلى الأخبار")}
         </Link>
       </div>
     );
@@ -47,7 +52,7 @@ const NewsArticle = () => {
       >
         <img
           src={article.image}
-          alt={article.title}
+          alt={t(article.title, article.titleAr)}
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1428] via-[#0a1428]/70 to-[#0a1428]/30" />
@@ -56,19 +61,19 @@ const NewsArticle = () => {
             to="/media-center#news"
             className="inline-flex items-center gap-2 font-roboto text-sm text-white/70 transition hover:text-white"
           >
-            <FaArrowLeft className="text-xs" /> Back to News
+            <FaArrowLeft className="text-xs rtl-flip" /> {t("Back to News", "العودة إلى الأخبار")}
           </Link>
           <div className="mt-5 flex items-center gap-3">
             <span className="rounded-full bg-[#2C95D2] px-3 py-1 font-roboto text-xs text-white">
-              {article.category}
+              {t(article.category, NEWS_CATEGORIES_AR[article.category])}
             </span>
-            <time className="font-roboto text-sm text-white/60">{article.date}</time>
+            <time className="font-roboto text-sm text-white/60">{t(article.date, formatNewsDate(article.date, "ar"))}</time>
           </div>
           <h1
             className="mt-4 font-roboto font-light text-white"
             style={{ fontSize: "clamp(1.9rem,4.5vw,3rem)", letterSpacing: "-0.02em", textWrap: "balance" }}
           >
-            {article.title}
+            {t(article.title, article.titleAr)}
           </h1>
         </div>
       </section>
@@ -82,7 +87,7 @@ const NewsArticle = () => {
         data-no-reveal
       >
         <p className="font-roboto text-lg leading-relaxed text-white/90">
-          {article.excerpt}
+          {t(article.excerpt, article.excerptAr)}
         </p>
         <span className="my-8 block h-px w-16 bg-[#2C95D2]" />
         <div className="space-y-6">
@@ -92,7 +97,7 @@ const NewsArticle = () => {
               className="font-roboto font-light text-[1.05rem] leading-relaxed text-white/75"
               style={{ textWrap: "pretty" }}
             >
-              {para}
+              {t(para, article.bodyAr?.[i])}
             </p>
           ))}
         </div>
@@ -105,10 +110,10 @@ const NewsArticle = () => {
               className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-[#2C95D2]/50 hover:bg-white/[0.08]"
             >
               <span className="inline-flex items-center gap-2 font-roboto text-xs text-white/45">
-                <FaArrowLeft className="text-[10px]" /> Previous
+                <FaArrowLeft className="text-[10px] rtl-flip" /> {t("Previous", "السابق")}
               </span>
               <p className="mt-2 font-roboto text-white transition-colors group-hover:text-[#2C95D2]">
-                {prev.title}
+                {t(prev.title, prev.titleAr)}
               </p>
             </Link>
           ) : (
@@ -117,13 +122,13 @@ const NewsArticle = () => {
           {next && (
             <Link
               to={`/news/${next.slug}`}
-              className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-right transition hover:border-[#2C95D2]/50 hover:bg-white/[0.08] sm:col-start-2"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-end transition hover:border-[#2C95D2]/50 hover:bg-white/[0.08] sm:col-start-2"
             >
               <span className="inline-flex items-center gap-2 font-roboto text-xs text-white/45">
-                Next <FaArrowRight className="text-[10px]" />
+                {t("Next", "التالي")} <FaArrowRight className="text-[10px] rtl-flip" />
               </span>
               <p className="mt-2 font-roboto text-white transition-colors group-hover:text-[#2C95D2]">
-                {next.title}
+                {t(next.title, next.titleAr)}
               </p>
             </Link>
           )}

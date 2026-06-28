@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
 import facilityBg from "../Assets/Images/our-facility.png";
+import { useT } from "../i18n/i18n";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -38,31 +39,52 @@ const StatCard = ({ number, label, delay }) => {
 };
 
 const steps = [
-  ["01", "CONSULTATION", "We listen and understand your vision and goals."],
-  [
-    "02",
-    "DESIGN & ENGINEERING",
-    "Creating meticulous blueprints and innovative solutions tailored to your needs.",
-  ],
-  [
-    "03",
-    "PROCUREMENT",
-    "Securing top-quality materials & resources efficiently.",
-  ],
-  [
-    "04",
-    "PLANNING",
-    "Developing a detailed roadmap with optimized timelines & budgets.",
-  ],
-  [
-    "05",
-    "CONSTRUCTION",
-    "Skilled execution, ensuring quality & safety from start to finish.",
-  ],
-  ["06", "HANDOVER", "Seamless transition & ongoing support for your success."],
+  {
+    step: "01",
+    title: "CONSULTATION",
+    titleAr: "الاستشارة",
+    desc: "We listen and understand your vision and goals.",
+    descAr: "نُصغي إليكم ونفهم رؤيتكم وأهدافكم.",
+  },
+  {
+    step: "02",
+    title: "DESIGN & ENGINEERING",
+    titleAr: "التصميم والهندسة",
+    desc: "Creating meticulous blueprints and innovative solutions tailored to your needs.",
+    descAr: "إعداد مخططات دقيقة وحلول مبتكرة مصممة خصيصاً لتلبية احتياجاتكم.",
+  },
+  {
+    step: "03",
+    title: "PROCUREMENT",
+    titleAr: "التوريد",
+    desc: "Securing top-quality materials & resources efficiently.",
+    descAr: "تأمين أجود المواد والموارد بكفاءة عالية.",
+  },
+  {
+    step: "04",
+    title: "PLANNING",
+    titleAr: "التخطيط",
+    desc: "Developing a detailed roadmap with optimized timelines & budgets.",
+    descAr: "وضع خارطة طريق مفصّلة بجداول زمنية وميزانيات مثلى.",
+  },
+  {
+    step: "05",
+    title: "CONSTRUCTION",
+    titleAr: "التنفيذ",
+    desc: "Skilled execution, ensuring quality & safety from start to finish.",
+    descAr: "تنفيذ احترافي يضمن الجودة والسلامة من البداية حتى النهاية.",
+  },
+  {
+    step: "06",
+    title: "HANDOVER",
+    titleAr: "التسليم",
+    desc: "Seamless transition & ongoing support for your success.",
+    descAr: "انتقال سلس ودعم مستمر لتحقيق نجاحكم.",
+  },
 ];
 
 const AlfaAtGlance = () => {
+  const t = useT();
   return (
     <>
       {/* ===== ALFA AT GLANCE — stat band over facility imagery ===== */}
@@ -85,14 +107,31 @@ const AlfaAtGlance = () => {
             className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] mb-16 text-white"
             style={{ letterSpacing: "-0.02em" }}
           >
-            <span className="text-[#2C95D2]">ALFA</span> AT GLANCE
+            <span className="text-[#2C95D2]">{t("ALFA", "ألفا")}</span>{" "}
+            {t("AT GLANCE", "في لمحة")}
           </motion.h1>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 md:gap-y-0 md:divide-x md:divide-white/15 text-center">
-            <StatCard number="70+" label="Successful Projects Completed" delay={0.05} />
-            <StatCard number="10+" label="Years of Contracting Expertise" delay={0.12} />
-            <StatCard number="185M+" label="Valuation of Completed Projects" delay={0.19} />
-            <StatCard number="200+" label="Global Vendors and Partners" delay={0.26} />
+            <StatCard
+              number="70+"
+              label={t("Successful Projects Completed", "مشاريع منجزة بنجاح")}
+              delay={0.05}
+            />
+            <StatCard
+              number="10+"
+              label={t("Years of Contracting Expertise", "سنوات من الخبرة في المقاولات")}
+              delay={0.12}
+            />
+            <StatCard
+              number="185M+"
+              label={t("Valuation of Completed Projects", "قيمة المشاريع المنجزة")}
+              delay={0.19}
+            />
+            <StatCard
+              number="200+"
+              label={t("Global Vendors and Partners", "موردون وشركاء عالميون")}
+              delay={0.26}
+            />
           </div>
         </div>
       </section>
@@ -114,28 +153,36 @@ const AlfaAtGlance = () => {
               className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] mb-6 text-white"
               style={{ letterSpacing: "-0.02em" }}
             >
-              <span className="text-[#2C95D2]">OUR</span> WAY
+              <span className="text-[#2C95D2]">{t("OUR", "طريقتنا")}</span>{" "}
+              {t("WAY", "")}
             </h1>
             <p
               className="font-roboto leading-relaxed text-base md:text-[1.05rem] font-light text-white/75 max-w-[62ch]"
               style={{ textWrap: "pretty" }}
             >
-              From the first consultation to final handover, we follow a
-              structured,{" "}
+              {t(
+                "From the first consultation to final handover, we follow a structured,",
+                "من الاستشارة الأولى وحتى التسليم النهائي، نتبع نهجاً منظماً"
+              )}{" "}
               <strong className="font-medium text-white">
-                client-focused approach
+                {t("client-focused approach", "يركّز على العميل")}
               </strong>
-              . Every phase from design and procurement to construction is
-              driven by{" "}
+              {t(
+                ". Every phase from design and procurement to construction is driven by",
+                ". وتُدار كل مرحلة، من التصميم والتوريد وصولاً إلى التنفيذ، بـ"
+              )}{" "}
               <strong className="font-medium text-white">
-                precision, quality,
+                {t("precision, quality,", "الدقة والجودة،")}
               </strong>{" "}
-              and a commitment to delivering lasting value.
+              {t(
+                "and a commitment to delivering lasting value.",
+                "والالتزام بتقديم قيمة دائمة."
+              )}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
-            {steps.map(([step, title, desc], idx) => (
+            {steps.map(({ step, title, titleAr, desc, descAr }, idx) => (
               <motion.div
                 key={step}
                 initial={{ opacity: 0, y: 32 }}
@@ -148,10 +195,10 @@ const AlfaAtGlance = () => {
                   {step}
                 </span>
                 <h3 className="font-roboto font-medium mt-4 text-white tracking-wide">
-                  {title}
+                  {t(title, titleAr)}
                 </h3>
                 <p className="font-roboto font-light text-sm mt-2 text-white/60 leading-relaxed">
-                  {desc}
+                  {t(desc, descAr)}
                 </p>
               </motion.div>
             ))}

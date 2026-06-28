@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import backgroundImage from "../Assets/Images/main-background.jpg";
 import PageBanner from "../Components/PageBanner";
 import SectionNav from "../Components/SectionNav";
+import { useT } from "../i18n/i18n";
 
 import MarineOffshoreDivision from "./MarineOffshoreDivision";
 import ConstructionDivision from "./ConstructionDivision";
@@ -15,13 +16,13 @@ import Joinery from "./Joinery";
 
 // Tab keys double as anchor ids for deep-linking (e.g. /what-we-do#trading).
 const DIVISIONS = [
-  { key: "marine-offshore", label: "Marine & Offshore", Component: MarineOffshoreDivision },
-  { key: "construction", label: "Construction", Component: ConstructionDivision },
-  { key: "fabrication-machining", label: "Fabrication & Machining", Component: FabricationDivision },
-  { key: "trading", label: "Trading", Component: TradingDivision },
-  { key: "ict", label: "ICT", Component: ICTDivision },
-  { key: "facility-management", label: "Facility Management", Component: FacilityManagement },
-  { key: "joinery", label: "Joinery", Component: Joinery },
+  { key: "marine-offshore", label: "Marine & Offshore", labelAr: "البحرية والمنشآت البحرية", Component: MarineOffshoreDivision },
+  { key: "construction", label: "Construction", labelAr: "الإنشاءات", Component: ConstructionDivision },
+  { key: "fabrication-machining", label: "Fabrication & Machining", labelAr: "التصنيع والتشكيل المعدني", Component: FabricationDivision },
+  { key: "trading", label: "Trading", labelAr: "التجارة والتوريد", Component: TradingDivision },
+  { key: "ict", label: "ICT", labelAr: "تقنية المعلومات والاتصالات", Component: ICTDivision },
+  { key: "facility-management", label: "Facility Management", labelAr: "إدارة المرافق", Component: FacilityManagement },
+  { key: "joinery", label: "Joinery", labelAr: "أعمال النجارة", Component: Joinery },
 ];
 
 const indexFromHash = (hash) => {
@@ -31,6 +32,7 @@ const indexFromHash = (hash) => {
 };
 
 const WhatWeDo = () => {
+  const t = useT();
   const location = useLocation();
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState(() => indexFromHash(location.hash));
@@ -73,12 +75,12 @@ const WhatWeDo = () => {
     <div className="text-white">
       {/* HERO */}
       <PageBanner image={backgroundImage}>
-        What We <span className="text-[#2C95D2]">Do</span>
+        {t("What We ", "")}<span className="text-[#2C95D2]">{t("Do", "أعمالنا")}</span>
       </PageBanner>
 
       {/* Section nav */}
       <SectionNav
-        items={DIVISIONS.map((d) => ({ key: d.key, label: d.label }))}
+        items={DIVISIONS.map((d) => ({ key: d.key, label: t(d.label, d.labelAr) }))}
         activeKey={DIVISIONS[active].key}
         onSelect={(key) => selectTab(DIVISIONS.findIndex((d) => d.key === key))}
       />

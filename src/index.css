@@ -116,6 +116,25 @@ html.home-snap {
   --font-roboto: Roboto, sans-serif;
 }
 
+/* ===== Arabic typography + RTL ===== */
+/* Swap the brand font variables to Cairo in Arabic mode so every existing
+   `font-roboto` / `font-poppins` utility renders with an Arabic-friendly face. */
+html.lang-ar {
+  --font-roboto: "Cairo", "Roboto", sans-serif;
+  --font-poppins: "Cairo", "Poppins", sans-serif;
+}
+html.lang-ar body {
+  font-family: "Cairo", sans-serif;
+}
+/* Arabic reads a touch larger; loosen line-height for legibility */
+html.lang-ar {
+  line-height: 1.7;
+}
+/* Mirror direction-implying icons in RTL (chevrons/arrows used for nav) */
+html.lang-ar .rtl-flip {
+  transform: scaleX(-1);
+}
+
 @keyframes scrollDot {
   0% {
     transform: translateY(0);

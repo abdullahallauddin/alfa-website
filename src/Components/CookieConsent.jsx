@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useT } from "../i18n/i18n";
 
 const KEY = "alfa_cookie_consent";
 
@@ -15,6 +16,7 @@ export const reopenCookiePreferences = () => {
 };
 
 const CookieConsent = () => {
+  const t = useT();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -45,18 +47,19 @@ const CookieConsent = () => {
     <div
       role="dialog"
       aria-live="polite"
-      aria-label="Cookie consent"
+      aria-label={t("Cookie consent", "الموافقة على ملفات تعريف الارتباط")}
       className="fixed bottom-4 left-4 right-4 z-[1001] sm:right-auto sm:max-w-md rounded-2xl border border-white/10 bg-[#0a1428]/95 p-5 shadow-2xl ring-1 ring-white/10 backdrop-blur-md"
     >
       <h3 className="font-roboto text-base font-medium text-white">
-        We value your privacy
+        {t("We value your privacy", "نحن نقدّر خصوصيتك")}
       </h3>
       <p className="mt-2 font-roboto text-sm leading-relaxed text-white/70">
-        We use strictly necessary cookies to run this site and, with your
-        consent, analytics cookies to improve it. You can accept or reject
-        non-essential cookies. See our{" "}
+        {t(
+          "We use strictly necessary cookies to run this site and, with your consent, analytics cookies to improve it. You can accept or reject non-essential cookies. See our",
+          "نستخدم ملفات تعريف الارتباط الضرورية للغاية لتشغيل هذا الموقع، وبموافقتك، ملفات تعريف ارتباط تحليلية لتحسينه. يمكنك قبول أو رفض ملفات تعريف الارتباط غير الأساسية. اطّلع على"
+        )}{" "}
         <Link to="/cookies-policy" className="text-[#2C95D2] hover:underline">
-          Cookies Policy
+          {t("Cookies Policy", "سياسة ملفات تعريف الارتباط")}
         </Link>
         .
       </p>
@@ -66,14 +69,14 @@ const CookieConsent = () => {
           onClick={() => decide("accepted")}
           className="rounded-full bg-[#2C95D2] px-5 py-2 font-roboto text-sm font-medium text-white transition-colors hover:bg-[#2C95D2]/90"
         >
-          Accept all
+          {t("Accept all", "قبول الكل")}
         </button>
         <button
           type="button"
           onClick={() => decide("rejected")}
           className="rounded-full border border-white/20 px-5 py-2 font-roboto text-sm text-white/85 transition-colors hover:border-white/40 hover:text-white"
         >
-          Reject non-essential
+          {t("Reject non-essential", "رفض غير الأساسية")}
         </button>
       </div>
     </div>

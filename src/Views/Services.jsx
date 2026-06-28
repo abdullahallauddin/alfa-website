@@ -2,9 +2,11 @@ import React,{useEffect} from 'react';
 import backgroundImage from "../Assets/Images/main-background.jpg"
 import ServiceCopm from '../Components/ServiceCopm';
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 // import ServiceCard from '../Components/ServiceCard';
 
 const Services = () => {
+  const t = useT();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -25,7 +27,7 @@ const Services = () => {
             className="text-5xl font-roboto font-light mt-24 mb-4"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Our <span className="text-[#2C95D2]">Services</span>
+            {t("Our ", "")}<span className="text-[#2C95D2]">{t("Services", "خدماتنا")}</span>
           </motion.h1>
         </div>
       </div>

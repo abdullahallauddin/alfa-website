@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 
 /**
  * Consistent sticky section navigation used across the combined pages.
@@ -8,6 +9,7 @@ import { motion, useReducedMotion } from "framer-motion";
  * what onSelect does).
  */
 const SectionNav = ({ items, activeKey, onSelect }) => {
+  const t = useT();
   const listRef = useRef(null);
   const reduce = useReducedMotion();
 
@@ -28,7 +30,7 @@ const SectionNav = ({ items, activeKey, onSelect }) => {
       className="sticky top-[76px] z-30 border-b border-white/10 bg-[#0a1428]/90 backdrop-blur"
       data-no-reveal
     >
-      <nav aria-label="Section navigation" className="mx-auto max-w-6xl px-6 md:px-10">
+      <nav aria-label={t("Section navigation", "التنقّل بين الأقسام")} className="mx-auto max-w-6xl px-6 md:px-10">
         <ul
           ref={listRef}
           className={`flex gap-1 overflow-x-auto no-scrollbar py-2 ${

@@ -2,12 +2,14 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaChevronLeft, FaChevronRight, FaArrowRight } from "react-icons/fa";
-import { news } from "../data/news";
+import { news, NEWS_CATEGORIES_AR, formatNewsDate } from "../data/news";
 import useDragScroll from "../hooks/useDragScroll";
+import { useT } from "../i18n/i18n";
 
 const EASE = [0.22, 1, 0.36, 1];
 
 const NewsInsights = () => {
+  const t = useT();
   const trackRef = useRef(null);
   useDragScroll(trackRef);
 
@@ -40,7 +42,7 @@ const NewsInsights = () => {
               className="font-roboto font-light text-[clamp(2rem,4.5vw,3rem)] text-white text-balance"
               style={{ letterSpacing: "-0.02em" }}
             >
-              News &amp; <span className="text-[#2C95D2]">Insights</span>
+              {t("News & ", "الأخبار و")}<span className="text-[#2C95D2]">{t("Insights", "الرؤى")}</span>
             </h2>
             <span className="mt-5 block h-px w-16 bg-[#2C95D2]" />
           </div>
@@ -50,24 +52,24 @@ const NewsInsights = () => {
               to="/media-center#news"
               className="inline-flex items-center gap-2 font-roboto text-sm text-white/70 transition-colors hover:text-white"
             >
-              View all news <FaArrowRight className="text-xs" />
+              {t("View all news", "عرض كل الأخبار")} <FaArrowRight className="text-xs rtl-flip" />
             </Link>
             <div className="hidden sm:flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => scrollByCard(-1)}
-                aria-label="Previous news"
+                aria-label={t("Previous news", "الأخبار السابقة")}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors duration-200 hover:border-[#2C95D2] hover:bg-[#2C95D2]"
               >
-                <FaChevronLeft className="text-sm" />
+                <FaChevronLeft className="text-sm rtl-flip" />
               </button>
               <button
                 type="button"
                 onClick={() => scrollByCard(1)}
-                aria-label="Next news"
+                aria-label={t("Next news", "الأخبار التالية")}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors duration-200 hover:border-[#2C95D2] hover:bg-[#2C95D2]"
               >
-                <FaChevronRight className="text-sm" />
+                <FaChevronRight className="text-sm rtl-flip" />
               </button>
             </div>
           </div>
@@ -88,26 +90,26 @@ const NewsInsights = () => {
               <div className="relative h-44 overflow-hidden">
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt={t(item.title, item.titleAr)}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a1428]/70 to-transparent" />
                 <span className="absolute left-3 top-3 rounded-full bg-[#2C95D2] px-3 py-1 font-roboto text-[11px] text-white">
-                  {item.category}
+                  {t(item.category, NEWS_CATEGORIES_AR[item.category])}
                 </span>
               </div>
               <div className="p-5">
                 <time className="font-roboto text-xs text-white/50">
-                  {item.date}
+                  {t(item.date, formatNewsDate(item.date, "ar"))}
                 </time>
                 <h3 className="mt-2 font-roboto text-lg font-medium leading-snug text-white line-clamp-2">
-                  {item.title}
+                  {t(item.title, item.titleAr)}
                 </h3>
                 <p className="mt-2 font-roboto text-sm font-light leading-relaxed text-white/65 line-clamp-3">
-                  {item.excerpt}
+                  {t(item.excerpt, item.excerptAr)}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-2 font-roboto text-sm text-[#2C95D2] transition-colors group-hover:text-white">
-                  Read more <FaArrowRight className="text-xs" />
+                  {t("Read more", "اقرأ المزيد")} <FaArrowRight className="text-xs rtl-flip" />
                 </span>
               </div>
             </Link>

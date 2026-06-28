@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import backgroundImage from "../Assets/Images/our-facility.png";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 
 const cardAnimation = {
 hidden: { opacity: 0, y: 40 },
 visible: { opacity: 1, y: 0 },
 };
 const Facility = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -28,7 +30,7 @@ const Facility = ({ embedded }) => {
               transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
               viewport={{ once: false, amount: 0.3 }}
             >
-              <h1 className="text-5xl font-roboto font-light text-white" style={{ letterSpacing: "-0.02em" }}>Our <span className="text-[#2C95D2]">Facilities</span></h1>
+              <h1 className="text-5xl font-roboto font-light text-white" style={{ letterSpacing: "-0.02em" }}>{t("Our ", "")}<span className="text-[#2C95D2]">{t("Facilities", "مرافقنا")}</span></h1>
             </motion.div>
           </div>
         </div>
@@ -43,47 +45,49 @@ const Facility = ({ embedded }) => {
       >
         <div className="max-w-6xl mx-auto px-6 py-10 text-white/75">
           <p className="mb-6 text-justify text-sm sm:text-base">
-            Our facilities are designed to support high-volume and high-quality
-            production, logistics, and service operations. Located strategically
-            in Saudi Arabia, our infrastructure includes:
+            {t(
+              "Our facilities are designed to support high-volume and high-quality production, logistics, and service operations. Located strategically in Saudi Arabia, our infrastructure includes:",
+              "صُمّمت مرافقنا لدعم عمليات الإنتاج واللوجستيات والخدمات عالية الجودة وكبيرة الحجم. وتقع بنيتنا التحتية في مواقع استراتيجية داخل المملكة العربية السعودية، وتشمل:"
+            )}
           </p>
 
-          <ul className="grid grid-cols-1 gap-4 list-none pl-0 sm:grid-cols-2 text-sm sm:text-base">
+          <ul className="grid grid-cols-1 gap-4 list-none ps-0 sm:grid-cols-2 text-sm sm:text-base">
             <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
-              <strong>Fabrication Yards and Workshops</strong> equipped with
-              advanced machinery
+              <strong>{t("Fabrication Yards and Workshops", "أحواض ووِرَش التصنيع")}</strong>{" "}
+              {t("equipped with advanced machinery", "مجهّزة بآلات متطورة")}
             </li>
             <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
-              <strong>Well-Furnished Porta Cabins</strong> for site offices and
-              accommodations
+              <strong>{t("Well-Furnished Porta Cabins", "كرفانات مجهّزة بالكامل")}</strong>{" "}
+              {t("for site offices and accommodations", "للمكاتب الميدانية وأماكن الإقامة")}
             </li>
             <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
-              <strong>Warehouse and Storage Areas</strong> with organized
-              material handling systems
-            </li>
-            <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
-              <strong>
-                Specialized Zones for Joinery, Electrical Assembly, and Painting
-              </strong>
-            </li>
-            <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
-              <strong>Dedicated Training & Meeting Halls</strong>
+              <strong>{t("Warehouse and Storage Areas", "مستودعات ومناطق تخزين")}</strong>{" "}
+              {t("with organized material handling systems", "بأنظمة منظّمة لمناولة المواد")}
             </li>
             <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
               <strong>
-                Secure and Compliant Storage for Hazardous & Non-Hazardous
-                Materials
+                {t("Specialized Zones for Joinery, Electrical Assembly, and Painting", "مناطق متخصصة لأعمال النجارة والتجميع الكهربائي والطلاء")}
               </strong>
             </li>
             <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
-              <strong>Fleet of Equipment, Vehicles, and Tools</strong> for
-              project mobilization and execution
+              <strong>{t("Dedicated Training & Meeting Halls", "قاعات مخصّصة للتدريب والاجتماعات")}</strong>
+            </li>
+            <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
+              <strong>
+                {t("Secure and Compliant Storage for Hazardous & Non-Hazardous Materials", "تخزين آمن ومتوافق للمواد الخطرة وغير الخطرة")}
+              </strong>
+            </li>
+            <li className="group rounded-2xl border border-white/10 bg-white/5 p-5 text-white/75 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:border-[#2C95D2]/50">
+              <strong>{t("Fleet of Equipment, Vehicles, and Tools", "أسطول من المعدات والمركبات والأدوات")}</strong>{" "}
+              {t("for project mobilization and execution", "لحشد المشاريع وتنفيذها")}
             </li>
           </ul>
 
           <p className="mt-6 text-justify text-sm sm:text-base">
-            We maintain all the necessary HSE, quality, and compliance standards
-            to ensure optimal operations and safe working environments.
+            {t(
+              "We maintain all the necessary HSE, quality, and compliance standards to ensure optimal operations and safe working environments.",
+              "نلتزم بجميع معايير الصحة والسلامة والبيئة والجودة والامتثال اللازمة لضمان العمليات المثلى وبيئات عمل آمنة."
+            )}
           </p>
         </div>
       </motion.div>

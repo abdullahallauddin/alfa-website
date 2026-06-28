@@ -1,6 +1,8 @@
 import React from 'react';
+import { useT } from "../i18n/i18n";
 
 const SustainabilityComp = ({ title, description, icon }) => {
+  const t = useT();
   return (
     <div className="py-10 px-6 md:px-24">
       <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -18,7 +20,7 @@ const SustainabilityComp = ({ title, description, icon }) => {
         <div className="flex-shrink-0">
           <img
             src={icon}
-            alt={`${title} Icon`}
+            alt={`${title} ${t("Icon", "أيقونة")}`}
             className="w-24 h-24 md:w-32 md:h-32"
           />
         </div>

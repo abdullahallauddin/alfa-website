@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa6";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import Markup from "../Assets/Images/markup.png";
+import { useT } from "../i18n/i18n";
 
 const CONTACT_EMAIL = "info@alfamarinesa.com";
 const EASE = [0.22, 1, 0.36, 1];
@@ -30,20 +31,25 @@ const CONTACT_INFO = [
   {
     icon: FaPhone,
     label: "Phone",
+    labelAr: "الهاتف",
     value: "+966 13 805 2528",
     href: "tel:+966138052528",
   },
   {
     icon: FaEnvelope,
     label: "Email",
+    labelAr: "البريد الإلكتروني",
     value: CONTACT_EMAIL,
     href: `mailto:${CONTACT_EMAIL}`,
   },
   {
     icon: FaLocationDot,
     label: "Address",
+    labelAr: "العنوان",
     value:
       "Prince Muhammad Ibn Saud District, Dammam, Kingdom of Saudi Arabia",
+    valueAr:
+      "حي الأمير محمد بن سعود، الدمام، المملكة العربية السعودية",
     href: "https://www.google.com/maps/search/?api=1&query=26.4345218%2C50.1077281",
     newTab: true,
   },
@@ -53,6 +59,7 @@ const inputClass =
   "w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 font-roboto text-[15px] text-white placeholder-white/40 outline-none transition-colors duration-200 focus:border-[#2C95D2] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#2C95D2]";
 
 const ContactUs = ({ embedded }) => {
+  const t = useT();
   const [code, setCode] = useState("+966");
   const [form, setForm] = useState({
     name: "",
@@ -102,7 +109,9 @@ const ContactUs = ({ embedded }) => {
               transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
               viewport={{ once: false, amount: 0.3 }}
             >
-              <h1 className="text-5xl text-white font-light">Contact Us</h1>
+              <h1 className="text-5xl text-white font-light">
+                {t("Contact Us", "اتصل بنا")}
+              </h1>
             </motion.div>
           </div>
         </SectionWrapperReverse>
@@ -122,16 +131,20 @@ const ContactUs = ({ embedded }) => {
               className="font-roboto text-3xl font-light text-white"
               style={{ letterSpacing: "-0.02em" }}
             >
-              Get in <span className="text-[#2C95D2]">touch</span>
+              {t("Get in ", "تواصل ")}
+              <span className="text-[#2C95D2]">{t("touch", "معنا")}</span>
             </h2>
             <span className="mt-4 mb-7 block h-px w-14 bg-[#2C95D2]" />
             <p className="mb-8 max-w-md font-roboto font-light leading-relaxed text-white/65">
-              Have a project or an enquiry? Reach out and our team will respond
-              promptly.
+              {t(
+                "Have a project or an enquiry? Reach out and our team will respond promptly.",
+                "هل لديك مشروع أو استفسار؟ تواصل معنا وسيرد فريقنا عليك في أقرب وقت."
+              )}
             </p>
 
             <ul className="flex flex-1 flex-col gap-4">
-              {CONTACT_INFO.map(({ icon: Icon, label, value, href, newTab }) => {
+              {CONTACT_INFO.map(
+                ({ icon: Icon, label, labelAr, value, valueAr, href, newTab }) => {
                 const inner = (
                   <div className="group flex h-full items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 transition-colors duration-200 hover:border-[#2C95D2]/50 hover:bg-white/[0.08]">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#2C95D2]/10 text-[#2C95D2] transition-colors duration-200 group-hover:bg-[#2C95D2] group-hover:text-white">
@@ -139,10 +152,10 @@ const ContactUs = ({ embedded }) => {
                     </span>
                     <div>
                       <p className="font-roboto text-xs uppercase tracking-wide text-white/45">
-                        {label}
+                        {t(label, labelAr)}
                       </p>
                       <p className="mt-1 font-roboto text-[15px] leading-snug text-white/85">
-                        {value}
+                        {t(value, valueAr)}
                       </p>
                     </div>
                   </div>
@@ -164,7 +177,8 @@ const ContactUs = ({ embedded }) => {
                     )}
                   </li>
                 );
-              })}
+                }
+              )}
             </ul>
           </motion.div>
 
@@ -182,11 +196,16 @@ const ContactUs = ({ embedded }) => {
                   <FaCheck className="text-2xl" />
                 </span>
                 <h3 className="mt-5 font-roboto text-xl font-light text-white">
-                  Your message is ready to send
+                  {t(
+                    "Your message is ready to send",
+                    "رسالتك جاهزة للإرسال"
+                  )}
                 </h3>
                 <p className="mt-2 max-w-sm font-roboto font-light text-white/60">
-                  Your email app should have opened with the details. If it
-                  didn’t, write to us directly at{" "}
+                  {t(
+                    "Your email app should have opened with the details. If it didn’t, write to us directly at ",
+                    "ينبغي أن يكون تطبيق البريد الإلكتروني قد فُتح مع التفاصيل. إذا لم يحدث ذلك، فراسلنا مباشرةً على "
+                  )}
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
                     className="text-[#2C95D2] hover:underline"
@@ -200,7 +219,7 @@ const ContactUs = ({ embedded }) => {
                   onClick={() => setSent(false)}
                   className="mt-7 rounded-full border border-white/15 px-6 py-2.5 font-roboto text-sm text-white/80 transition-colors hover:border-[#2C95D2] hover:text-white"
                 >
-                  Send another message
+                  {t("Send another message", "إرسال رسالة أخرى")}
                 </button>
               </div>
             ) : (
@@ -208,20 +227,22 @@ const ContactUs = ({ embedded }) => {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label className="mb-2 block font-roboto text-sm text-white/70">
-                      Full name <span className="text-[#2C95D2]">*</span>
+                      {t("Full name", "الاسم الكامل")}{" "}
+                      <span className="text-[#2C95D2]">*</span>
                     </label>
                     <input
                       required
                       name="name"
                       value={form.name}
                       onChange={update}
-                      placeholder="Your name"
+                      placeholder={t("Your name", "اسمك")}
                       className={inputClass}
                     />
                   </div>
                   <div>
                     <label className="mb-2 block font-roboto text-sm text-white/70">
-                      Email <span className="text-[#2C95D2]">*</span>
+                      {t("Email", "البريد الإلكتروني")}{" "}
+                      <span className="text-[#2C95D2]">*</span>
                     </label>
                     <input
                       required
@@ -238,13 +259,13 @@ const ContactUs = ({ embedded }) => {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label className="mb-2 block font-roboto text-sm text-white/70">
-                      Phone
+                      {t("Phone", "الهاتف")}
                     </label>
                     <div className="flex gap-2">
                       <select
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                        aria-label="Country code"
+                        aria-label={t("Country code", "رمز الدولة")}
                         className="rounded-lg border border-white/10 bg-white/5 px-3 py-3 font-roboto text-[15px] text-white outline-none transition-colors focus:border-[#2C95D2] focus:ring-1 focus:ring-[#2C95D2] [&>option]:bg-[#11234B]"
                       >
                         {countryOptions.map((c) => (
@@ -265,13 +286,13 @@ const ContactUs = ({ embedded }) => {
                   </div>
                   <div>
                     <label className="mb-2 block font-roboto text-sm text-white/70">
-                      Company
+                      {t("Company", "الشركة")}
                     </label>
                     <input
                       name="company"
                       value={form.company}
                       onChange={update}
-                      placeholder="Company name"
+                      placeholder={t("Company name", "اسم الشركة")}
                       className={inputClass}
                     />
                   </div>
@@ -279,20 +300,21 @@ const ContactUs = ({ embedded }) => {
 
                 <div>
                   <label className="mb-2 block font-roboto text-sm text-white/70">
-                    Subject
+                    {t("Subject", "الموضوع")}
                   </label>
                   <input
                     name="subject"
                     value={form.subject}
                     onChange={update}
-                    placeholder="How can we help?"
+                    placeholder={t("How can we help?", "كيف يمكننا مساعدتك؟")}
                     className={inputClass}
                   />
                 </div>
 
                 <div>
                   <label className="mb-2 block font-roboto text-sm text-white/70">
-                    Message <span className="text-[#2C95D2]">*</span>
+                    {t("Message", "الرسالة")}{" "}
+                    <span className="text-[#2C95D2]">*</span>
                   </label>
                   <textarea
                     required
@@ -300,7 +322,10 @@ const ContactUs = ({ embedded }) => {
                     value={form.message}
                     onChange={update}
                     rows={5}
-                    placeholder="Tell us about your project or enquiry…"
+                    placeholder={t(
+                      "Tell us about your project or enquiry…",
+                      "أخبرنا عن مشروعك أو استفسارك…"
+                    )}
                     className={`${inputClass} resize-y`}
                   />
                 </div>
@@ -313,15 +338,17 @@ const ContactUs = ({ embedded }) => {
                     className="mt-1 h-4 w-4 shrink-0 accent-[#2C95D2]"
                   />
                   <span>
-                    I consent to ALFA processing my personal data to respond to
-                    my enquiry, in accordance with the{" "}
+                    {t(
+                      "I consent to ALFA processing my personal data to respond to my enquiry, in accordance with the ",
+                      "أوافق على معالجة ألفا لبياناتي الشخصية للرد على استفساري، وفقاً لـ"
+                    )}{" "}
                     <a
                       href="/privacy-policy"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#2C95D2] hover:underline"
                     >
-                      Privacy Policy
+                      {t("Privacy Policy", "سياسة الخصوصية")}
                     </a>
                     . <span className="text-[#2C95D2]">*</span>
                   </span>
@@ -331,7 +358,8 @@ const ContactUs = ({ embedded }) => {
                   type="submit"
                   className="inline-flex items-center gap-2 rounded-full bg-[#2C95D2] px-7 py-3 font-roboto text-[15px] font-medium text-white transition-all duration-300 hover:bg-[#2C95D2]/90 hover:shadow-[0_0_22px_2px_rgba(44,149,210,0.4)]"
                 >
-                  Send message <FaPaperPlane className="text-sm" />
+                  {t("Send message", "إرسال الرسالة")}{" "}
+                  <FaPaperPlane className="text-sm" />
                 </button>
               </form>
             )}
@@ -344,11 +372,12 @@ const ContactUs = ({ embedded }) => {
             className="mb-6 font-roboto text-2xl font-light text-white"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Our office <span className="text-[#2C95D2]">location</span>
+            {t("Our office ", "موقع ")}
+            <span className="text-[#2C95D2]">{t("location", "مكتبنا")}</span>
           </h2>
           <div className="w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
             <iframe
-              title="Alfa Marine Location"
+              title={t("Alfa Marine Location", "موقع ألفا مارين")}
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7716012845244!2d50.1077281!3d26.4345218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49fb6d8a3e52d5%3A0x36ad5b73c9d39550!2sAlfa%20Marine%20%26%20Industrial%20Services%20Company!5e0!3m2!1sen!2s!4v1717356840000!5m2!1sen!2s"
               width="100%"
               height="460"

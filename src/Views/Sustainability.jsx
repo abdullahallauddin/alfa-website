@@ -9,6 +9,7 @@ import EnvironmentalResponsability from "./EnvironmentalResponsability";
 import HSEPolicy from "./HSEPolicy";
 import QualityAssurancePolicy from "./QualityAssurancePolicy";
 import EthicsCompliance from "./EthicsCompliance";
+import { useT } from "../i18n/i18n";
 
 // One entry per policy. The `key` values are the EXACT anchor ids used in the
 // URL hash (e.g. /sustainability#hse-policy).
@@ -16,21 +17,25 @@ const TABS = [
   {
     key: "environmental-responsibility",
     label: "Environmental Responsibility",
+    labelAr: "المسؤولية البيئية",
     render: () => <EnvironmentalResponsability embedded />,
   },
   {
     key: "hse-policy",
     label: "Health, Safety & Environmental Policy",
+    labelAr: "سياسة الصحة والسلامة والبيئة",
     render: () => <HSEPolicy embedded />,
   },
   {
     key: "quality-assurance",
     label: "Quality Assurance Policy",
+    labelAr: "سياسة ضمان الجودة",
     render: () => <QualityAssurancePolicy embedded />,
   },
   {
     key: "ethics-compliance",
     label: "Ethics and Compliance",
+    labelAr: "الأخلاقيات والامتثال",
     render: () => <EthicsCompliance embedded />,
   },
 ];
@@ -42,6 +47,7 @@ const indexForHash = (hash) => {
 };
 
 const Sustainability = () => {
+  const t = useT();
   const location = useLocation();
   const navigate = useNavigate();
   const reduce = useReducedMotion();
@@ -85,14 +91,21 @@ const Sustainability = () => {
     <div className="inner-page">
       {/* Hero */}
       <PageBanner image={heroImage}>
-        Sustain<span className="text-[#2C95D2]">ability</span>
+        {t(
+          <>
+            Sustain<span className="text-[#2C95D2]">ability</span>
+          </>,
+          <>
+            الاستدا<span className="text-[#2C95D2]">مة</span>
+          </>
+        )}
       </PageBanner>
 
       {/* Section nav */}
       <SectionNav
-        items={TABS.map((t) => ({ key: t.key, label: t.label }))}
+        items={TABS.map((tab) => ({ key: tab.key, label: t(tab.label, tab.labelAr) }))}
         activeKey={TABS[active].key}
-        onSelect={(key) => selectTab(TABS.findIndex((t) => t.key === key))}
+        onSelect={(key) => selectTab(TABS.findIndex((tab) => tab.key === key))}
       />
 
       {/* Panel */}

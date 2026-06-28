@@ -7,11 +7,13 @@ import SustainabilityComp from "../Components/SustainabilityComp";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import Tabs from "../Components/Tabs";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 const cardAnimation = {
 hidden: { opacity: 0, y: 40 },
 visible: { opacity: 1, y: 0 },
 };
 const OurStatement = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -19,10 +21,16 @@ const OurStatement = ({ embedded }) => {
 
   const missionText =
     "To deliver innovative, high-quality, and sustainable solutions across multiple industries by providing integrated services through our specialized divisions. We are dedicated to exceeding client expectations through operational excellence, safety, integrity, and a commitment to continuous improvement.";
+  const missionTextAr =
+    "تقديم حلول مبتكرة وعالية الجودة ومستدامة عبر مختلف الصناعات من خلال توفير خدمات متكاملة عبر أقسامنا المتخصصة. نلتزم بتجاوز توقعات عملائنا من خلال التميّز التشغيلي والسلامة والنزاهة والالتزام بالتحسين المستمر.";
   const visionText =
     "To be a leading multi-division enterprise recognized globally for our reliability, innovation, and excellence—serving as the preferred one-stop solution provider across the Oil & Gas, Renewable Energy, Power & Utilities, Marine & Offshore, Defense, Petrochemical, Construction, Industrial, Commercial, and Entertainment sectors.";
+  const visionTextAr =
+    "أن نكون مؤسسة رائدة متعددة القطاعات معترفًا بها عالميًا بموثوقيتنا وابتكارنا وتميّزنا، لنكون مزوّد الحلول المتكاملة المفضّل عبر قطاعات النفط والغاز والطاقة المتجددة والطاقة والمرافق والبحرية والمنشآت البحرية والدفاع والبتروكيماويات والإنشاءات والقطاعات الصناعية والتجارية والترفيهية.";
   const goalsText =
     "Deliver high-quality solutions with global standards, build lasting relationships through tailored services that exceed customer expectations, promote sustainable growth with eco-friendly practices, advance through technology and expertise, and expand capabilities to reach new sectors and regions.";
+  const goalsTextAr =
+    "تقديم حلول عالية الجودة وفق المعايير العالمية، وبناء علاقات دائمة من خلال خدمات مصمّمة خصيصًا تتجاوز توقعات العملاء، وتعزيز النمو المستدام بممارسات صديقة للبيئة، والتقدّم عبر التقنية والخبرة، وتوسيع القدرات للوصول إلى قطاعات ومناطق جديدة.";
 
   return (
     <>
@@ -38,7 +46,7 @@ const OurStatement = ({ embedded }) => {
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h1 className="font-roboto text-5xl text-white font-light" style={{ letterSpacing: "-0.02em" }}>Our Mission, Vision & <span className="text-[#2C95D2]">Goals</span></h1>
+            <h1 className="font-roboto text-5xl text-white font-light" style={{ letterSpacing: "-0.02em" }}>{t("Our Mission, Vision & ", "رسالتنا ورؤيتنا و")}<span className="text-[#2C95D2]">{t("Goals", "أهدافنا")}</span></h1>
           </motion.div>
         </div>
       </SectionWrapperReverse>
@@ -53,9 +61,9 @@ const OurStatement = ({ embedded }) => {
       >
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { label: "Mission", text: missionText, icon: missionIcon },
-            { label: "Vision", text: visionText, icon: visionIcon },
-            { label: "Goals", text: goalsText, icon: goalsIcon },
+            { label: "Mission", labelAr: "الرسالة", text: missionText, textAr: missionTextAr, icon: missionIcon },
+            { label: "Vision", labelAr: "الرؤية", text: visionText, textAr: visionTextAr, icon: visionIcon },
+            { label: "Goals", labelAr: "الأهداف", text: goalsText, textAr: goalsTextAr, icon: goalsIcon },
           ].map((item) => (
             <div
               key={item.label}
@@ -65,10 +73,10 @@ const OurStatement = ({ embedded }) => {
                 <img src={item.icon} alt="" className="h-8 w-8 brightness-0 invert" />
               </div>
               <h3 className="font-roboto text-xl font-medium text-white mb-3">
-                {item.label}
+                {t(item.label, item.labelAr)}
               </h3>
               <p className="font-roboto font-light leading-relaxed text-white/75">
-                {item.text}
+                {t(item.text, item.textAr)}
               </p>
             </div>
           ))}

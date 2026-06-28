@@ -1,6 +1,8 @@
 import React from "react";
+import { useT } from "../i18n/i18n";
 
 const NewsCard = ({ image, title, description, onClick }) => {
+  const t = useT();
   return (
     <div className="max-w-sm rounded overflow-hidden shadow border" style={{ color: "#20376D" }}>
       <img src={image} alt={title} className="w-full h-24 object-cover" />
@@ -11,7 +13,7 @@ const NewsCard = ({ image, title, description, onClick }) => {
           onClick={onClick}
           className="bg-[#20376D] text-white text-sm px-4 py-2 rounded hover:bg-gray-800 transition"
         >
-          Read More
+          {t("Read More", "اقرأ المزيد")}
         </button>
       </div>
     </div>

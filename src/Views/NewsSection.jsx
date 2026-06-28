@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 import { FaSearch, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import backgroundImage from "../Assets/Images/aboutcompanyimage.jpg";
-import { news, NEWS_CATEGORIES } from "../data/news";
+import { news, NEWS_CATEGORIES, NEWS_CATEGORIES_AR, formatNewsDate } from "../data/news";
+import { useT } from "../i18n/i18n";
 
 const PAGE_SIZE = 6;
 
 const NewsSection = ({ embedded }) => {
+  const t = useT();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [page, setPage] = useState(1);
@@ -52,7 +54,7 @@ const NewsSection = ({ embedded }) => {
           >
             <div className="absolute inset-0 bg-black/50" />
             <div className="relative z-10 text-white">
-              <h1 className="text-5xl font-roboto font-light">News</h1>
+              <h1 className="text-5xl font-roboto font-light">{t("News", "الأخبار")}</h1>
             </div>
           </div>
         </SectionWrapperReverse>
@@ -62,14 +64,14 @@ const NewsSection = ({ embedded }) => {
         {/* Controls: search + category filters */}
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div className="relative w-full md:max-w-xs" data-no-reveal>
-            <FaSearch className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-white/40" />
+            <FaSearch className="pointer-events-none absolute start-4 top-1/2 -translate-y-1/2 text-sm text-white/40" />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search news…"
-              aria-label="Search news"
-              className="w-full rounded-full border border-white/15 bg-white/5 py-2.5 pl-11 pr-4 font-roboto text-sm text-white placeholder-white/40 outline-none transition focus:border-[#2C95D2] focus:ring-2 focus:ring-[#2C95D2]/30"
+              placeholder={t("Search news…", "ابحث في الأخبار…")}
+              aria-label={t("Search news", "ابحث في الأخبار")}
+              className="w-full rounded-full border border-white/15 bg-white/5 py-2.5 ps-11 pe-4 font-roboto text-sm text-white placeholder-white/40 outline-none transition focus:border-[#2C95D2] focus:ring-2 focus:ring-[#2C95D2]/30"
             />
           </div>
 
@@ -88,7 +90,7 @@ const NewsSection = ({ embedded }) => {
                       : "border border-white/15 text-white/65 hover:text-white hover:border-white/30"
                   }`}
                 >
-                  {c}
+                  {c === "All" ? t("All", "الكل") : t(c, NEWS_CATEGORIES_AR[c])}
                 </button>
               );
             })}
@@ -98,9 +100,9 @@ const NewsSection = ({ embedded }) => {
         {/* Results */}
         {visible.length === 0 ? (
           <div className="mt-16 rounded-2xl border border-white/10 bg-white/5 px-6 py-16 text-center">
-            <p className="font-roboto text-lg text-white">No articles found</p>
+            <p className="font-roboto text-lg text-white">{t("No articles found", "لم يتم العثور على مقالات")}</p>
             <p className="mt-2 font-roboto font-light text-white/60">
-              Try a different search term or category.
+              {t("Try a different search term or category.", "جرّب مصطلح بحث أو فئة مختلفة.")}
             </p>
             <button
               type="button"
@@ -110,7 +112,7 @@ const NewsSection = ({ embedded }) => {
               }}
               className="mt-6 rounded-full bg-[#2C95D2] px-5 py-2 font-roboto text-sm text-white transition hover:bg-[#2C95D2]/90"
             >
-              Clear filters
+              {t("Clear filters", "مسح عوامل التصفية")}
             </button>
           </div>
         ) : (
@@ -137,25 +139,25 @@ const NewsSection = ({ embedded }) => {
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <img
                       src={n.image}
-                      alt={n.title}
+                      alt={t(n.title, n.titleAr)}
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <span className="absolute left-3 top-3 rounded-full bg-[#0a1428]/85 px-3 py-1 font-roboto text-xs text-[#2C95D2] ring-1 ring-white/10">
-                      {n.category}
+                    <span className="absolute start-3 top-3 rounded-full bg-[#0a1428]/85 px-3 py-1 font-roboto text-xs text-[#2C95D2] ring-1 ring-white/10">
+                      {t(n.category, NEWS_CATEGORIES_AR[n.category])}
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <time className="font-roboto text-xs text-white/45">{n.date}</time>
+                    <time className="font-roboto text-xs text-white/45">{t(n.date, formatNewsDate(n.date, "ar"))}</time>
                     <h3 className="mt-2 font-roboto text-lg text-white transition-colors group-hover:text-[#2C95D2]">
-                      {n.title}
+                      {t(n.title, n.titleAr)}
                     </h3>
                     <p className="mt-2 font-roboto font-light text-sm leading-relaxed text-white/65">
-                      {n.excerpt}
+                      {t(n.excerpt, n.excerptAr)}
                     </p>
                     <span className="mt-4 inline-flex items-center gap-2 font-roboto text-sm text-[#2C95D2]">
-                      Read more
-                      <FaArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
+                      {t("Read more", "اقرأ المزيد")}
+                      <FaArrowRight className="text-xs rtl-flip transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
                 </Link>
@@ -171,10 +173,10 @@ const NewsSection = ({ embedded }) => {
               type="button"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={current === 1}
-              aria-label="Previous page"
+              aria-label={t("Previous page", "الصفحة السابقة")}
               className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent"
             >
-              <FaChevronLeft className="text-xs" />
+              <FaChevronLeft className="text-xs rtl-flip" />
             </button>
             {Array.from({ length: pageCount }, (_, i) => i + 1).map((p) => (
               <button
@@ -195,10 +197,10 @@ const NewsSection = ({ embedded }) => {
               type="button"
               onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
               disabled={current === pageCount}
-              aria-label="Next page"
+              aria-label={t("Next page", "الصفحة التالية")}
               className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent"
             >
-              <FaChevronRight className="text-xs" />
+              <FaChevronRight className="text-xs rtl-flip" />
             </button>
           </div>
         )}

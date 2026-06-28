@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useT } from "../i18n/i18n";
 import logo from "../Assets/Icons/white-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
@@ -13,31 +14,66 @@ import {
 const columns = [
   {
     title: "Company",
+    titleAr: "الشركة",
     links: [
-      { label: "Home", to: "/" },
-      { label: "About Us", to: "/groupoverview" },
-      { label: "Core Values", to: "/core-values" },
-      { label: "Our Facilities", to: "/our-facilities" },
-      { label: "Sustainability", to: "/environmental-responsibility" },
+      { label: "Home", labelAr: "الرئيسية", to: "/" },
+      { label: "About Us", labelAr: "نبذة عنا", to: "/groupoverview" },
+      { label: "Core Values", labelAr: "قيمنا الأساسية", to: "/core-values" },
+      { label: "Our Facilities", labelAr: "مرافقنا", to: "/our-facilities" },
+      {
+        label: "Sustainability",
+        labelAr: "الاستدامة",
+        to: "/environmental-responsibility",
+      },
     ],
   },
   {
     title: "Divisions",
+    titleAr: "القطاعات",
     links: [
-      { label: "Marine & Offshore", to: "/marine-and-offshore-division" },
-      { label: "Construction", to: "/construction-division" },
-      { label: "Fabrication", to: "/fabrication-and-machining-division" },
-      { label: "Facility Management", to: "/facility-management-division" },
+      {
+        label: "Marine & Offshore",
+        labelAr: "البحرية والمنشآت البحرية",
+        to: "/marine-and-offshore-division",
+      },
+      {
+        label: "Construction",
+        labelAr: "الإنشاءات",
+        to: "/construction-division",
+      },
+      {
+        label: "Fabrication",
+        labelAr: "التصنيع",
+        to: "/fabrication-and-machining-division",
+      },
+      {
+        label: "Facility Management",
+        labelAr: "إدارة المرافق",
+        to: "/facility-management-division",
+      },
     ],
   },
   {
     title: "Governance",
+    titleAr: "الحوكمة",
     links: [
-      { label: "Ethics & Compliance", to: "/ethics-and-compliance" },
-      { label: "HSE Policy", to: "/health-safety-and-environmental-policy" },
-      { label: "Accreditations", to: "/accreditations" },
-      { label: "Become a Supplier", to: "/become-a-supplier" },
-      { label: "Contact Us", to: "/contact" },
+      {
+        label: "Ethics & Compliance",
+        labelAr: "الأخلاقيات والامتثال",
+        to: "/ethics-and-compliance",
+      },
+      {
+        label: "HSE Policy",
+        labelAr: "سياسة الصحة والسلامة والبيئة",
+        to: "/health-safety-and-environmental-policy",
+      },
+      { label: "Accreditations", labelAr: "الاعتمادات", to: "/accreditations" },
+      {
+        label: "Become a Supplier",
+        labelAr: "كن مورّداً",
+        to: "/become-a-supplier",
+      },
+      { label: "Contact Us", labelAr: "اتصل بنا", to: "/contact" },
     ],
   },
 ];
@@ -57,9 +93,17 @@ const socials = [
 ];
 
 const legal = [
-  { label: "Privacy Policy", to: "/privacy-policy" },
-  { label: "Cookies Policy", to: "/cookies-policy" },
-  { label: "Terms & Conditions", to: "/terms-and-conditions" },
+  { label: "Privacy Policy", labelAr: "سياسة الخصوصية", to: "/privacy-policy" },
+  {
+    label: "Cookies Policy",
+    labelAr: "سياسة ملفات تعريف الارتباط",
+    to: "/cookies-policy",
+  },
+  {
+    label: "Terms & Conditions",
+    labelAr: "الشروط والأحكام",
+    to: "/terms-and-conditions",
+  },
 ];
 
 const FooterLink = ({ to, children }) => (
@@ -75,6 +119,7 @@ const FooterLink = ({ to, children }) => (
 );
 
 const Footer = () => {
+  const t = useT();
   return (
     <footer className="snap-section relative overflow-hidden bg-gradient-to-br from-[#0c1a36] via-[#0a1428] to-[#0a1326] text-white">
       {/* top hairline */}
@@ -92,7 +137,7 @@ const Footer = () => {
           {/* Brand + contact */}
           <div>
             <Link to="/" className="inline-flex items-center">
-              <img src={logo} alt="ALFA Group" className="w-40" />
+              <img src={logo} alt={t("ALFA Group", "مجموعة ألفا")} className="w-40" />
             </Link>
 
             <p className="mt-7 flex max-w-xs items-start gap-3 text-[15px] leading-relaxed text-white/60">
@@ -100,7 +145,10 @@ const Footer = () => {
                 icon={faMapMarkerAlt}
                 className="mt-1 text-[#2C95D2]"
               />
-              Prince Muhammad Ibn Saud Dist, Dammam, Kingdom of Saudi Arabia
+              {t(
+                "Prince Muhammad Ibn Saud Dist, Dammam, Kingdom of Saudi Arabia",
+                "حي الأمير محمد بن سعود، الدمام، المملكة العربية السعودية"
+              )}
             </p>
 
             <div className="mt-7 space-y-3">
@@ -128,15 +176,15 @@ const Footer = () => {
           {/* Link columns */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
             {columns.map((col) => (
-              <nav key={col.title} aria-label={col.title}>
+              <nav key={col.title} aria-label={t(col.title, col.titleAr)}>
                 <h3 className="font-roboto text-sm font-medium text-white">
-                  {col.title}
+                  {t(col.title, col.titleAr)}
                 </h3>
                 <span className="mt-3 mb-5 block h-px w-8 bg-[#2C95D2]/60" />
                 <ul className="space-y-3.5">
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <FooterLink to={l.to}>{l.label}</FooterLink>
+                      <FooterLink to={l.to}>{t(l.label, l.labelAr)}</FooterLink>
                     </li>
                   ))}
                 </ul>
@@ -168,14 +216,17 @@ const Footer = () => {
             <div className="order-3 flex flex-wrap items-center gap-x-5 gap-y-2 md:order-2">
               {legal.map((l) => (
                 <FooterLink key={l.label} to={l.to}>
-                  {l.label}
+                  {t(l.label, l.labelAr)}
                 </FooterLink>
               ))}
             </div>
           </div>
 
           <p className="mt-7 text-[13px] text-white/40">
-            Copyright © 2025 ALFA Technologies. all rights reserved.
+            {t(
+              "Copyright © 2025 ALFA Technologies. all rights reserved.",
+              "حقوق النشر © 2025 ألفا للتقنيات. جميع الحقوق محفوظة."
+            )}
           </p>
         </div>
       </div>

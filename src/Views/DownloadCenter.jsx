@@ -6,40 +6,45 @@ import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 // import AlfaSVG from "../../public/logo.svg";
 // import AlfaPNG from "../../public/logo.png";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 const cardAnimation = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
 };
 const DownloadCenter = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
   }, [embedded]);
   const downloads = [
     {
-      title: "Profile",
-      description: "ALFA & Offshore Division Company Profile",
+      title: t("Profile", "الملف التعريفي"),
+      description: t(
+        "ALFA & Offshore Division Company Profile",
+        "الملف التعريفي لشركة ألفا وقطاع الأعمال البحرية"
+      ),
       icon: <FaFilePdf className="text-green-500 text-3xl mt-1" />,
       buttons: [
         {
-          label: "Download brochure",
+          label: t("Download brochure", "تحميل الكتيّب"),
           // file: "/Downloads/profile.pdf",
           className: "bg-[#20376D]",
         },
       ],
     },
     {
-      title: "Logo",
-      description: "Logo",
+      title: t("Logo", "الشعار"),
+      description: t("Logo", "الشعار"),
       icon: <FaFilePdf className="text-green-500 text-3xl mt-1" />,
       buttons: [
         {
-          label: "Download SVG",
+          label: t("Download SVG", "تحميل SVG"),
           file: "/Downloads/logo.svg",
           className: "bg-[#20376D]",
         },
         {
-          label: "Download PNG",
+          label: t("Download PNG", "تحميل PNG"),
           file: "/Downloads/logo.png",
           className: "bg-[#20376D]",
         },
@@ -64,7 +69,7 @@ const DownloadCenter = ({ embedded }) => {
                 viewport={{ once: false, amount: 0.3 }}
               >
                 <h1 className="text-5xl font-bold text-center">
-                  Download Center
+                  {t("Download Center", "مركز التحميل")}
                 </h1>
               </motion.div>
             </div>
@@ -80,24 +85,22 @@ const DownloadCenter = ({ embedded }) => {
       >
         <div className="w-full py-6 md:py-10">
           <h1
-            className="text-4xl font-roboto font-light mb-4 text-center md:text-left text-white"
+            className="text-4xl font-roboto font-light mb-4 text-center md:text-start text-white"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Download Center
+            {t("Download Center", "مركز التحميل")}
           </h1>
           <p className="text-lg mt-4 text-justify text-white/75">
-            ALFA is a prominent player in the marine, offshore, oil & gas,
-            renewable energy, and defense sectors within Saudi Arabia and
-            beyond, renowned for its expertise and commitment to excellence.
-            Discover more about our innovative approach, diverse range of
-            services, and forward-looking vision by accessing the latest
-            reports, insights, and updates from the ALFA team.
+            {t(
+              "ALFA is a prominent player in the marine, offshore, oil & gas, renewable energy, and defense sectors within Saudi Arabia and beyond, renowned for its expertise and commitment to excellence. Discover more about our innovative approach, diverse range of services, and forward-looking vision by accessing the latest reports, insights, and updates from the ALFA team.",
+              "تُعدّ ألفا من الأسماء البارزة في قطاعات الأعمال البحرية والبحار والنفط والغاز والطاقة المتجددة والدفاع داخل المملكة العربية السعودية وخارجها، وهي معروفة بخبرتها والتزامها بالتميّز. اكتشف المزيد عن نهجنا المبتكر وباقة خدماتنا المتنوعة ورؤيتنا الاستشرافية من خلال الاطلاع على أحدث التقارير والرؤى والمستجدات من فريق ألفا."
+            )}
           </p>
           <h1
-            className="mt-12 text-4xl font-roboto font-light mb-4 text-center md:text-left text-white"
+            className="mt-12 text-4xl font-roboto font-light mb-4 text-center md:text-start text-white"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Digital Media Toolkit
+            {t("Digital Media Toolkit", "حزمة الوسائط الرقمية")}
           </h1>
           <div className="space-y-6 p-4 max-w-md">
             {downloads.map((item, idx) => (

@@ -4,6 +4,7 @@ import profileImg from "../Assets/Images/ceo-image1.jpg";
 import SustainbilityBG from "../Assets/Images/cultureImage.png";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import { Accordion, AccordionItem } from "../Components/Accordion";
+import { useT } from "../i18n/i18n";
 
 const cardAnimation = {
   hidden: { opacity: 0, y: 40 },
@@ -11,6 +12,7 @@ const cardAnimation = {
 };
 
 const OurCulture = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -19,19 +21,27 @@ const OurCulture = ({ embedded }) => {
   const contentSections = [
     {
       heading: "Building a Sustainable Future, Together",
+      headingAr: "بناء مستقبل مستدام، معًا",
       text: `At ALFA, we foster a culture that empowers our employees to innovate and be the best version of themselves. Our working environment is built on a foundation of mutual respect, support, and a strong commitment to teamwork and innovation. Together, we are continuously evolving to meet the demands of the industry, shaping the future marine, offshore, oil & gas, renewable energy, and defense sectors for the better.`,
+      textAr: `في ألفا، نرسّخ ثقافة تمكّن موظفينا من الابتكار ومن أن يكونوا أفضل نسخة من أنفسهم. وتقوم بيئة عملنا على أساس من الاحترام المتبادل والدعم والالتزام القوي بالعمل الجماعي والابتكار. ومعًا، نتطوّر باستمرار لتلبية متطلبات الصناعة، ونشكّل مستقبل قطاعات البحرية والمنشآت البحرية والنفط والغاز والطاقة المتجددة والدفاع نحو الأفضل.`,
     },
     {
       heading: "Culture and Values",
+      headingAr: "الثقافة والقيم",
       text: `ALFA is defined by a strong and cohesive company culture that prioritizes collaboration, sustainability, and responsibility. We strive to create a working environment where everyone can thrive, maintaining a zero-tolerance approach to discrimination while offering limitless training and development opportunities. We take great pride in our people and work hard to nurture their growth and success.\n\nOur core values guide everything we do, ensuring that sustainability and responsibility are embedded into our daily operations, whether on-site, in the office, or in the boardroom. Every decision we make is aligned with our purpose to drive positive change.`,
+      textAr: `تتميّز ألفا بثقافة مؤسسية قوية ومتماسكة تضع التعاون والاستدامة والمسؤولية في مقدمة أولوياتها. ونسعى إلى خلق بيئة عمل يزدهر فيها الجميع، مع تبنّي سياسة عدم التسامح إطلاقًا مع التمييز، وتوفير فرص لا محدودة للتدريب والتطوير. ونفخر كثيرًا بأفرادنا ونعمل جاهدين على رعاية نموّهم ونجاحهم.\n\nتوجّه قيمنا الأساسية كل ما نقوم به، بما يضمن ترسيخ الاستدامة والمسؤولية في عملياتنا اليومية، سواء في الموقع أو في المكتب أو في قاعة الاجتماعات. ويتوافق كل قرار نتخذه مع غايتنا في إحداث تغيير إيجابي.`,
     },
     {
       heading: "For Our Community",
+      headingAr: "من أجل مجتمعنا",
       text: `We are committed to cultivating strong relationships with local partners and organizations, providing our employees with meaningful opportunities to give back through volunteering and community involvement. We also prioritize the employment of KSA nationals, the use of local suppliers, and a range of initiatives designed to support and uplift the communities in which we operate.`,
+      textAr: `نلتزم ببناء علاقات قوية مع الشركاء والمنظمات المحلية، ونوفّر لموظفينا فرصًا هادفة لرد الجميل من خلال العمل التطوعي والمشاركة المجتمعية. كما نولي الأولوية لتوظيف المواطنين السعوديين والاستعانة بالموردين المحليين، إلى جانب مجموعة من المبادرات المصمّمة لدعم المجتمعات التي نعمل فيها والارتقاء بها.`,
     },
     {
       heading: "For Our people",
+      headingAr: "من أجل أفرادنا",
       text: `Our people are the cornerstone of our success, and we are dedicated to providing comprehensive learning and development opportunities that empower everyone to reach their full potential. At ALFA, we believe in equal opportunities for all and respect the diverse backgrounds and perspectives our team members bring. This inclusive environment is key to fostering creativity and ensuring everyone can contribute to our collective success.`,
+      textAr: `يمثّل أفرادنا حجر الأساس في نجاحنا، ونحرص على توفير فرص شاملة للتعلّم والتطوير تمكّن الجميع من بلوغ كامل إمكاناتهم. في ألفا، نؤمن بتكافؤ الفرص للجميع ونحترم تنوّع الخلفيات ووجهات النظر التي يجلبها أعضاء فريقنا. وتُعدّ هذه البيئة الشاملة عاملًا أساسيًا في تعزيز الإبداع وضمان قدرة الجميع على الإسهام في نجاحنا الجماعي.`,
     },
   ];
 
@@ -49,7 +59,7 @@ const OurCulture = ({ embedded }) => {
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h1 className="text-5xl text-white font-roboto font-light" style={{ letterSpacing: "-0.02em" }}>Our <span className="text-[#2C95D2]">Culture</span></h1>
+            <h1 className="text-5xl text-white font-roboto font-light" style={{ letterSpacing: "-0.02em" }}>{t("Our ", "")}<span className="text-[#2C95D2]">{t("Culture", "ثقافتنا")}</span></h1>
           </motion.div>
         </div>
       </SectionWrapperReverse>
@@ -65,9 +75,9 @@ const OurCulture = ({ embedded }) => {
       >
         <Accordion defaultOpen={[0]}>
           {contentSections.map((section, index) => (
-            <AccordionItem key={index} id={index} title={section.heading}>
+            <AccordionItem key={index} id={index} title={t(section.heading, section.headingAr)}>
               <p className="text-white/75 text-justify text-base leading-relaxed whitespace-pre-line">
-                {section.text}
+                {t(section.text, section.textAr)}
               </p>
             </AccordionItem>
           ))}

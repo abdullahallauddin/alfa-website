@@ -4,19 +4,23 @@ import contactuscall from "../Assets/Icons/callus.svg";
 import contactusemail from "../Assets/Icons/emailus.svg";
 import { motion } from "framer-motion";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
+import { useT } from "../i18n/i18n";
 // import AboutUSComp from '../Components/AboutUSComp';
 const WhistleBlowing = ({ embedded }) => {
+  const t = useT();
   const contactusdetails = [
     {
       id: 1,
       logo: contactuscall,
       title: "Call Us",
+      titleAr: "اتصل بنا",
       description: "+966 13 805 2528",
     },
     {
       id: 2,
       logo: contactusemail,
       title: "Mail Us",
+      titleAr: "راسلنا",
       description: "Ethics@alfamarinesa.com",
     },
   ];
@@ -42,7 +46,10 @@ const WhistleBlowing = ({ embedded }) => {
               viewport={{ once: false, amount: 0.3 }}
             >
               <h1 className="text-5xl font-bold text-center text-white font-roboto font-light" style={{ letterSpacing: "-0.02em" }}>
-                Whistle <span className="text-[#2C95D2]">Blowing</span>
+                {t("Whistle ", "الإبلاغ ")}
+                <span className="text-[#2C95D2]">
+                  {t("Blowing", "عن المخالفات")}
+                </span>
               </h1>
             </motion.div>
           </div>
@@ -58,42 +65,58 @@ const WhistleBlowing = ({ embedded }) => {
       >
         <div className="w-full py-6 md:py-10 max-w-6xl mx-auto">
           <h1
-            className="text-4xl font-bold mb-4 text-center md:text-left text-white font-roboto font-light"
+            className="text-4xl font-bold mb-4 text-center md:text-start text-white font-roboto font-light"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Whistle Blowing Helpline
+            {t("Whistle Blowing Helpline", "خط الإبلاغ عن المخالفات")}
           </h1>
           <p className="text-lg mt-4 text-white/75">
-            To ensure a thorough investigation, please provide sufficient
-            details in your concern or complaint, including the following, where
-            applicable:
+            {t(
+              "To ensure a thorough investigation, please provide sufficient details in your concern or complaint, including the following, where applicable:",
+              "لضمان إجراء تحقيق شامل، يُرجى تقديم تفاصيل كافية في بلاغكم أو شكواكم، بما في ذلك ما يلي، حيثما ينطبق:"
+            )}
           </p>
           <ul
             className="list-disc list-inside text-md space-y-1 mt-4 text-white/75 marker:text-[#2C95D2]"
           >
             <li>
-              Your name and contact information (reports may be made
-              anonymously, though please note that anonymity may limit the
-              investigation’s scope)
+              {t(
+                "Your name and contact information (reports may be made anonymously, though please note that anonymity may limit the investigation’s scope)",
+                "اسمك ومعلومات التواصل الخاصة بك (يمكن تقديم البلاغات بصورة مجهولة، مع ملاحظة أنّ إخفاء الهوية قد يحدّ من نطاق التحقيق)"
+              )}
             </li>
-            <li>A detailed description of the improper activity</li>
             <li>
-              Names of individuals, departments, or employees involved or aware
-              of the activity
+              {t(
+                "A detailed description of the improper activity",
+                "وصف مفصّل للنشاط غير السليم"
+              )}
             </li>
-            <li>Approximate or actual dates the activity occurred</li>
-            <li>Supporting documents or evidence</li>
             <li>
-              Any steps you have already taken internally with{" "}
-              <span className="font-bold">ALFA</span> management to report or
-              resolve the concern
+              {t(
+                "Names of individuals, departments, or employees involved or aware of the activity",
+                "أسماء الأفراد أو الإدارات أو الموظفين المتورطين في النشاط أو المطّلعين عليه"
+              )}
+            </li>
+            <li>
+              {t(
+                "Approximate or actual dates the activity occurred",
+                "التواريخ التقريبية أو الفعلية التي وقع فيها النشاط"
+              )}
+            </li>
+            <li>
+              {t("Supporting documents or evidence", "المستندات أو الأدلة الداعمة")}
+            </li>
+            <li>
+              {t("Any steps you have already taken internally with ", "أي خطوات سبق أن اتخذتها داخلياً مع إدارة ")}
+              <span className="font-bold">{t("ALFA", "ألفا")}</span>
+              {t(" management to report or resolve the concern", " للإبلاغ عن البلاغ أو معالجته")}
             </li>
           </ul>
           <p className="mt-8 text-white/75">
-            ALFA strictly prohibits any form of retaliation and will not take any
-            adverse action against individuals who, in good faith, report a
-            concern or complaint, or who participate in the investigation of
-            such matters
+            {t(
+              "ALFA strictly prohibits any form of retaliation and will not take any adverse action against individuals who, in good faith, report a concern or complaint, or who participate in the investigation of such matters",
+              "تحظر ألفا حظراً تاماً أي شكل من أشكال الانتقام، ولن تتّخذ أي إجراء سلبي بحق الأشخاص الذين يبلّغون بحسن نية عن بلاغ أو شكوى، أو الذين يشاركون في التحقيق في مثل هذه الأمور"
+            )}
           </p>
           <div className="flex flex-col items-center justify-center mt-10">
             <div className="container px-4 py-8 flex flex-wrap justify-center gap-12">
@@ -110,20 +133,20 @@ const WhistleBlowing = ({ embedded }) => {
                     }
                     className="bg-white/5 border border-white/10 w-96 p-4 rounded-lg shadow-xl rounded-bl-3xl rounded-tr-3xl cursor-pointer block transition hover:scale-105 hover:bg-white/10"
                   >
-                    <div className="mb-8 flex align-left ml-4 mt-4">
+                    <div className="mb-8 flex align-left ms-4 mt-4">
                       <img
                         src={contactusdetail.logo}
-                        alt={contactusdetail.title}
+                        alt={t(contactusdetail.title, contactusdetail.titleAr)}
                         className="h-8 w-8 brightness-0 invert"
                       />
                     </div>
                     <h3
-                      className="text-xl font-bold mb-2 align-left ml-4 text-white"
+                      className="text-xl font-bold mb-2 align-left ms-4 text-white"
                     >
-                      {contactusdetail.title}
+                      {t(contactusdetail.title, contactusdetail.titleAr)}
                     </h3>
                     <p
-                      className="mt-6 mb-8 align-left ml-4 text-white/75"
+                      className="mt-6 mb-8 align-left ms-4 text-white/75"
                     >
                       {contactusdetail.description}
                     </p>

@@ -2,17 +2,19 @@ import React, {useEffect} from 'react';
 import backgroundImage from "../Assets/Images/contactusbg.jpg";
 import contactuscall from "../Assets/Icons/contactuscall.svg";
 import contactusemail from "../Assets/Icons/contactusemail.svg";
+import { useT } from "../i18n/i18n";
 
 // import ContactUsOurOffic from '../Components/ContactUsOurOffic';
 // import Form from '../Components/Form';
 
 const GetStarted = () => {
+  const t = useT();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const contactusdetails = [
-    { id: 1, logo: contactuscall, title: 'Call Us', description: '(+44) 7883478487' },
-    { id: 2, logo: contactusemail, title: 'Mail Us', description: 'admin@londonsenergy.com' },
+    { id: 1, logo: contactuscall, title: 'Call Us', titleAr: 'اتصل بنا', description: '(+44) 7883478487' },
+    { id: 2, logo: contactusemail, title: 'Mail Us', titleAr: 'راسلنا', description: 'admin@londonsenergy.com' },
   ];
 
   return (
@@ -23,7 +25,7 @@ const GetStarted = () => {
       >
 
         <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-5xl font-roboto font-light mt-24 mb-4" style={{ letterSpacing: "-0.02em" }}>Get <span className="text-[#2C95D2]">Started</span></h1>
+          <h1 className="text-5xl font-roboto font-light mt-24 mb-4" style={{ letterSpacing: "-0.02em" }}>{t("Get ", "ابدأ ")}<span className="text-[#2C95D2]">{t("Started", "الآن")}</span></h1>
         </div>
       </div>
 
@@ -34,15 +36,15 @@ const GetStarted = () => {
               <div
                 className="group w-96 p-4 rounded-lg shadow-xl rounded-bl-3xl rounded-tr-3xl border border-white/10 bg-white/5 backdrop-blur-sm text-white hover:bg-white/[0.08] hover:border-[#2C95D2]/50 hover:-translate-y-1 transition duration-300"
               >
-                <div className="mb-8 flex align-left ml-4 mt-4">
+                <div className="mb-8 flex align-left ms-4 mt-4">
                   <img
                     src={contactusdetail.logo}
-                    alt={contactusdetail.title}
+                    alt={t(contactusdetail.title, contactusdetail.titleAr)}
                     className="h-16 w-16 group-hover:filter group-hover:brightness-0 group-hover:invert"
                   />
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-white align-left ml-4">{contactusdetail.title}</h3>
-                <p className="mt-6 mb-8 text-white align-left ml-4">{contactusdetail.description}</p>
+                <h3 className="text-xl font-bold mb-2 text-white align-left ms-4">{t(contactusdetail.title, contactusdetail.titleAr)}</h3>
+                <p className="mt-6 mb-8 text-white align-left ms-4">{contactusdetail.description}</p>
               </div>
             </div>
           ))}

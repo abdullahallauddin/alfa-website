@@ -1,16 +1,18 @@
 import React from 'react';
 import ServiceCard from './ServiceCard';
+import { useT } from '../i18n/i18n';
 
 const ServiceCopm = () => {
+    const t = useT();
     return (
         <>
             <div className="mt-24 flex items-center justify-center">
                 <div className="container mx-auto px-4 md:px-8 flex flex-col items-center justify-center">
                     <div className="md:w-2/3 text-center">
                         {/* <h5 className="text-lg text-custom-blue font-bold mb-2">OUR SERVICES</h5> */}
-                        <h3 className="font-roboto text-3xl md:text-[2.75rem] font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>Our Services</h3>
+                        <h3 className="font-roboto text-3xl md:text-[2.75rem] font-light mb-4 text-white" style={{ letterSpacing: "-0.02em" }}>{t("Our Services", "خدماتنا")}</h3>
                         <p className="font-roboto font-light text-lg text-white/70">
-                            At London Tradex, we prioritize saving our clients' valuable time and hard-earned money. We understand that securing the most competitive rates for business utilities is crucial.
+                            {t("At London Tradex, we prioritize saving our clients' valuable time and hard-earned money. We understand that securing the most competitive rates for business utilities is crucial.", "في London Tradex، نحرص على توفير وقت عملائنا الثمين وأموالهم التي كسبوها بجهدٍ كبير. وندرك أن الحصول على أكثر الأسعار تنافسية لمرافق الأعمال أمرٌ بالغ الأهمية.")}
                         </p>
                     </div>
                     {/* <div className="md:w-1/3 mt-4 md:mt-0 flex justify-end">

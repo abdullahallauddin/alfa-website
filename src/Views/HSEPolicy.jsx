@@ -17,12 +17,14 @@ import ImprovementIcon from "../Assets/Icons/ImprovementIcon.svg";
 import { CheckCircle, Info } from "lucide-react";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 const cardAnimation = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
 };
 // import AboutUSComp from '../Components/AboutUSComp';
 const HSEPolicy = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -46,7 +48,14 @@ const HSEPolicy = ({ embedded }) => {
             >
               <div className="flex items-center lg:mt-120 md:mt-90 justify-center min-h-screen text-center sm:block">
                 <h1 className="text-5xl font-bold text-white font-roboto font-light" style={{ letterSpacing: "-0.02em" }}>
-                  HSE <span className="text-[#2C95D2]">Policy</span>
+                  {t(
+                    <>
+                      HSE <span className="text-[#2C95D2]">Policy</span>
+                    </>,
+                    <>
+                      سياسة <span className="text-[#2C95D2]">الصحة والسلامة والبيئة</span>
+                    </>
+                  )}
                 </h1>
               </div>
             </motion.div>
@@ -63,24 +72,25 @@ const HSEPolicy = ({ embedded }) => {
       >
         <div className="w-full py-6 md:py-10 max-w-6xl mx-auto">
           <h1
-            className="text-4xl font-bold mb-4 text-center md:text-left text-white font-roboto font-light"
+            className="text-4xl font-bold mb-4 text-center md:text-start text-white font-roboto font-light"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Health, Safety & Environmental (HSE) Policy
+            {t(
+              "Health, Safety & Environmental (HSE) Policy",
+              "سياسة الصحة والسلامة والبيئة"
+            )}
           </h1>
           <p className="text-lg mt-4 text-justify text-white/75">
-            ALFA is dedicated to providing a safe and secure workplace for
-            employees, clients, contractors, suppliers/vendors, and visitors
-            across all facilities and project sites. We believe that through
-            collaboration with clients and partners, occupational risks and
-            environmental impacts can be effectively prevented. ALFA is
-            committed to protecting people, property, and communities,
-            preventing pollution, and upholding the highest industrial standards
-            for safety, health, and environmental sustainability in all its
-            operations.
+            {t(
+              "ALFA is dedicated to providing a safe and secure workplace for employees, clients, contractors, suppliers/vendors, and visitors across all facilities and project sites. We believe that through collaboration with clients and partners, occupational risks and environmental impacts can be effectively prevented. ALFA is committed to protecting people, property, and communities, preventing pollution, and upholding the highest industrial standards for safety, health, and environmental sustainability in all its operations.",
+              "تلتزم شركة ألفا بتوفير بيئة عمل آمنة ومأمونة للموظفين والعملاء والمقاولين والموردين والزوار في جميع المرافق ومواقع المشاريع. ونؤمن بأنه من خلال التعاون مع العملاء والشركاء يمكن منع المخاطر المهنية والآثار البيئية بفاعلية. وتلتزم شركة ألفا بحماية الأشخاص والممتلكات والمجتمعات، ومنع التلوث، والتمسك بأعلى المعايير الصناعية للسلامة والصحة والاستدامة البيئية في جميع عملياتها."
+            )}
           </p>
           <p className="text-lg mt-4 font-bold text-white">
-            To achieve this, the Company pledges to:
+            {t(
+              "To achieve this, the Company pledges to:",
+              "لتحقيق ذلك، تلتزم الشركة بما يلي:"
+            )}
           </p>
 
           <div className="w-full p-4">
@@ -90,84 +100,121 @@ const HSEPolicy = ({ embedded }) => {
                 {
                   icon: AwarenessIcon,
                   title: "Promote Awareness and Accountability",
+                  titleAr: "تعزيز الوعي والمساءلة",
                   bullets: [
                     "Ensure all employees and visitors understand their responsibilities regarding health, safety, and environmental protection.",
                     "Regularly measure and review their performance to maintain compliance and drive improvement.",
+                  ],
+                  bulletsAr: [
+                    "ضمان فهم جميع الموظفين والزوار لمسؤولياتهم تجاه الصحة والسلامة وحماية البيئة.",
+                    "قياس أدائهم ومراجعته بانتظام للحفاظ على الامتثال ودفع عجلة التحسين.",
                   ],
                 },
                 {
                   icon: RiskIcon,
                   title: "Risk Management",
+                  titleAr: "إدارة المخاطر",
                   bullets: [
                     "Identify, assess, and mitigate HSE risks proactively before starting any operation or activity.",
+                  ],
+                  bulletsAr: [
+                    "تحديد مخاطر الصحة والسلامة والبيئة وتقييمها والحد منها بشكل استباقي قبل بدء أي عملية أو نشاط.",
                   ],
                 },
                 {
                   icon: ClearIcon,
                   title: "Clear Communication",
+                  titleAr: "التواصل الواضح",
                   bullets: [
                     "Consistently communicate HSE objectives, policies, and procedures to all employees and stakeholders.",
+                  ],
+                  bulletsAr: [
+                    "التواصل المستمر بأهداف الصحة والسلامة والبيئة وسياساتها وإجراءاتها لجميع الموظفين وأصحاب المصلحة.",
                   ],
                 },
                 {
                   icon: TrainingIcon,
                   title: "Training and Resources",
+                  titleAr: "التدريب والموارد",
                   bullets: [
                     "Equip employees with the necessary training, education, and tools to uphold HSE accountability.",
+                  ],
+                  bulletsAr: [
+                    "تزويد الموظفين بالتدريب والتعليم والأدوات اللازمة للحفاظ على المساءلة في مجال الصحة والسلامة والبيئة.",
                   ],
                 },
                 {
                   icon: SafeIcon,
                   title: "Facility Design Excellence",
+                  titleAr: "التميّز في تصميم المرافق",
                   bullets: [
                     "Design and build facilities using recognized best practices to protect people, property, and the environment.",
+                  ],
+                  bulletsAr: [
+                    "تصميم المرافق وبناؤها باستخدام أفضل الممارسات المعتمدة لحماية الأشخاص والممتلكات والبيئة.",
                   ],
                 },
                 {
                   icon: ThirdIcon,
                   title: "Safe Operations",
+                  titleAr: "العمليات الآمنة",
                   bullets: [
                     "Operate and maintain facilities to safeguard the health and safety of all personnel and visitors.",
+                  ],
+                  bulletsAr: [
+                    "تشغيل المرافق وصيانتها بما يحفظ صحة وسلامة جميع العاملين والزوار.",
                   ],
                 },
                 {
                   icon: EmergencyIcon,
                   title: "Emergency Readiness",
+                  titleAr: "الجاهزية للطوارئ",
                   bullets: [
                     "Maintain preparedness and respond swiftly and effectively to any emergencies or incidents.",
+                  ],
+                  bulletsAr: [
+                    "الحفاظ على الجاهزية والاستجابة السريعة والفعّالة لأي حالات طوارئ أو حوادث.",
                   ],
                 },
                 {
                   icon: CommunityIcon,
                   title: "Incident Management",
+                  titleAr: "إدارة الحوادث",
                   bullets: [
                     "Report, investigate, and analyze all incidents to promote transparency and continuous improvement.",
+                  ],
+                  bulletsAr: [
+                    "الإبلاغ عن جميع الحوادث والتحقيق فيها وتحليلها لتعزيز الشفافية والتحسين المستمر.",
                   ],
                 },
                 {
                   icon: ImprovementIcon,
                   title: "Community Safety",
+                  titleAr: "سلامة المجتمع",
                   bullets: [
                     "Encourage practices that promote health and safety both within the workplace and the wider community.",
                   ],
+                  bulletsAr: [
+                    "تشجيع الممارسات التي تعزز الصحة والسلامة داخل مكان العمل وفي المجتمع الأوسع على حد سواء.",
+                  ],
                 },
-              ].map(({ icon, title, bullets }, idx) => (
+              ].map(({ icon, title, titleAr, bullets, bulletsAr }, idx) => (
                 <div key={idx} className="flex items-start space-x-4">
-                  <img src={icon} alt={title} className="w-9 h-9 mt-1 brightness-0 invert" />
+                  <img src={icon} alt={t(title, titleAr)} className="w-9 h-9 mt-1 brightness-0 invert" />
                   <div>
                     <h3
                       className="font-semibold text-lg mb-1 text-white font-roboto font-light"
                     >
-                      {title}
+                      {t(title, titleAr)}
                     </h3>
                     <ul className="text-white/75 text-sm space-y-1">
                       {bullets.map((text, i) => (
                         <li key={i} className="flex items-start">
                           <CheckCircle
                             size={20}
-                            className="text-green-500 mr-2 mt-1"
+                            className="text-green-500 me-2 mt-1"
                           />
-                          <span className="text-white/75">{text}</span>
+                          <span className="text-white/75">{t(text, bulletsAr[i])}</span>
                         </li>
                       ))}
                     </ul>

@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import backgroundImage from "../Assets/Images/supplier.png";
 import { motion } from "framer-motion";
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
+import { useT } from "../i18n/i18n";
 
 // import AboutUSComp from '../Components/AboutUSComp';
 const Supplier = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -27,7 +29,8 @@ const Supplier = ({ embedded }) => {
               viewport={{ once: false, amount: 0.3 }}
             >
               <h1 className="text-5xl font-roboto font-light text-center text-white" style={{ letterSpacing: "-0.02em" }}>
-                Become a <span className="text-[#2C95D2]">Supplier</span>
+                {t("Become a ", "كن ")}
+                <span className="text-[#2C95D2]">{t("Supplier", "مورّداً")}</span>
               </h1>
             </motion.div>
           </div>
@@ -43,23 +46,26 @@ const Supplier = ({ embedded }) => {
       >
         <div className="w-full py-6 md:py-10">
           <h1
-            className="text-4xl font-roboto font-light mb-4 text-center md:text-left text-white"
+            className="text-4xl font-roboto font-light mb-4 text-center md:text-start text-white"
             style={{ letterSpacing: "-0.02em" }}
           >
-            Become a <span className="text-[#2C95D2]">Supplier</span>
+            {t("Become a ", "كن ")}
+            <span className="text-[#2C95D2]">{t("Supplier", "مورّداً")}</span>
           </h1>
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/[0.08] hover:border-[#2C95D2]/50 transition">
           <p className="text-lg mt-4 text-justify text-white/75">
-            Maintaining a robust and dependable supplier network is integral to
-            our continued success. At ALFA, we foster long lasting relationships
-            with our partners and strive to create an ecosystem where everyone
-            can thrive together. Join us to unlock boundless opportunities in
-            the Middle East region and worldwide and propel your future growth.
+            {t(
+              "Maintaining a robust and dependable supplier network is integral to our continued success. At ALFA, we foster long lasting relationships with our partners and strive to create an ecosystem where everyone can thrive together. Join us to unlock boundless opportunities in the Middle East region and worldwide and propel your future growth.",
+              "إنّ الحفاظ على شبكة موردين قوية وموثوقة جزء أساسي من نجاحنا المستمر. في ألفا، نحرص على بناء علاقات طويلة الأمد مع شركائنا ونسعى إلى إيجاد منظومة يزدهر فيها الجميع معاً. انضمّوا إلينا لاكتشاف فرص لا حدود لها في منطقة الشرق الأوسط وحول العالم، ولدفع نموكم المستقبلي قُدماً."
+            )}
           </p>
           <p className="text-lg mt-4 text-justify text-white/75">
-            These documents must be filled in and attached to the{" "}
+            {t("These documents must be filled in and attached to the ", "يجب تعبئة هذه المستندات وإرفاقها بـ")}{" "}
             <span className="font-bold text-white">
-              ALFA Supplier Registration Portal.
+              {t(
+                "ALFA Supplier Registration Portal.",
+                "بوابة تسجيل موردي ألفا."
+              )}
             </span>
           </p>
           <a
@@ -70,11 +76,11 @@ const Supplier = ({ embedded }) => {
     text-white bg-[#2196F3] transition-all duration-500 cursor-pointer group overflow-hidden"
           >
             <span className="relative z-10 group-hover:text-[#2196F3] transition duration-500">
-              Supplier Portal
+              {t("Supplier Portal", "بوابة الموردين")}
             </span>
             <svg
               xmlns="https://www.w3.org/2000/svg"
-              className="w-4 h-4 relative z-10 group-hover:text-[#2196F3] transition duration-500"
+              className="w-4 h-4 relative z-10 group-hover:text-[#2196F3] transition duration-500 rtl-flip"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

@@ -1,10 +1,13 @@
+import { useT } from "../i18n/i18n";
+
 const WhatsAppButton = () => {
+  const t = useT();
   return (
     <a
       href="https://wa.me/966581042918"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label={t("Chat on WhatsApp", "تحدّث معنا عبر واتساب")}
       className="fixed bottom-24 right-6 w-12 h-12 rounded-full cursor-pointer z-50 flex items-center justify-center shadow-lg hover:scale-105 transition-transform"
       style={{ backgroundColor: "#25D366" }}
     >

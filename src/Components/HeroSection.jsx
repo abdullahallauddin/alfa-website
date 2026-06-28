@@ -1,7 +1,9 @@
 import React from "react";
 import bg1 from "../Assets/Images/main-background.jpg";
+import { useT } from "../i18n/i18n";
 
 const HeroSection = () => {
+  const t = useT();
   return (
     <>
       <div
@@ -19,7 +21,7 @@ const HeroSection = () => {
             loop
             muted
             playsInline
-            title="ALFA GROUP INTRO VIDEO"
+            title={t("ALFA GROUP INTRO VIDEO", "فيديو تعريفي لمجموعة ألفا")}
           />
         </div>
 

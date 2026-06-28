@@ -7,7 +7,9 @@ import OurDivisionsComponent from "../Components/OurDivisionsComponent";
 // import Form from '../Components/Form';
 import SectionWrapperReverse from "../Components/SectionWrapperReverse";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 const GroupOverview = ({ embedded }) => {
+  const t = useT();
   useEffect(() => {
     if (embedded) return;
     window.scrollTo(0, 0);
@@ -31,7 +33,7 @@ const GroupOverview = ({ embedded }) => {
             viewport={{ once: false, amount: 0.3 }}
           >
 
-            <h1 className="text-5xl font-roboto font-light text-white" style={{ letterSpacing: "-0.02em" }}>Group <span className="text-[#2C95D2]">Overview</span></h1>
+            <h1 className="text-5xl font-roboto font-light text-white" style={{ letterSpacing: "-0.02em" }}>{t("Group ", "نبذة عن ")}<span className="text-[#2C95D2]">{t("Overview", "المجموعة")}</span></h1>
           </motion.div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/i18n";
 
 // Import logos
 import logo2 from "../Assets/Images/logo2.png";
@@ -42,6 +43,7 @@ const logos = [
 const EASE = [0.22, 1, 0.36, 1];
 
 const OurClients = () => {
+  const t = useT();
   return (
     <section
       id="clients"
@@ -59,7 +61,8 @@ const OurClients = () => {
             className="font-roboto font-light text-[clamp(2.25rem,5vw,3.25rem)] text-[#13294a]"
             style={{ letterSpacing: "-0.02em" }}
           >
-            <span className="text-[#2C95D2]">OUR</span> CLIENTS
+            <span className="text-[#2C95D2]">{t("OUR", "عملاؤنا")}</span>{" "}
+            {t("CLIENTS", "")}
           </h1>
           <span className="mt-5 mx-auto block h-px w-16 bg-[#2C95D2]" />
         </motion.div>
